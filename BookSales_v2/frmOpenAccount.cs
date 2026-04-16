@@ -236,7 +236,7 @@ namespace BookSalesSys
                 OracleCommand cmd = new OracleCommand(sql,conn);
                 cmd.Parameters.Add(":fn", txtForename.Text);
                 cmd.Parameters.Add(":sn", txtSurname.Text);
-                cmd.Parameters.Add(":dob", dtpDOB.Value);
+                cmd.Parameters.Add(":dob", dtpDOB.Value.Date);
                 cmd.Parameters.Add(":email", txtEmail.Text);
                 cmd.Parameters.Add(":pwd", txtPassword.Text);
                 cmd.Parameters.Add(":phone", txtPhone.Text);
@@ -280,6 +280,16 @@ namespace BookSalesSys
 
         }
 
-
+        private void chbPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chbPassword.CheckState == CheckState.Checked)
+            {
+                txtPassword.UseSystemPasswordChar = true;
+            }
+            else
+            {
+                txtPassword.UseSystemPasswordChar = false;
+            }
+        }
     }
 }

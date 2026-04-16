@@ -8,12 +8,15 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Oracle.ManagedDataAccess.Client;
 
 namespace BookSalesSys
 {
     public partial class frmUpdateAccountDetails : Form
     {
         frmMainMenu Parent;
+
+        private int _accountID;
 
         // Variable to hold original values
         private string originalForename;
@@ -218,11 +221,94 @@ namespace BookSalesSys
 
 
             // Save Data
+            try
+            {
+                OracleConnection conn = DBConnection.GetConnection();
+                conn.Open();
+                string sql = @"UPDATE Accounts SET Forename=:fn, Surname=:sn, DOB=:dob, Email=:email, Password=:pwd, 
+                                                   Phone=:phone, Street=:street, Town=:town, County=:county, Eircode=:eircode
+                                               WHERE AccountID=:id";
+                OracleCommand cmd = new OracleCommand(sql, conn);
+                cmd.Parameters.Add(":fn", txtForename.Text);
+                cmd.Parameters.Add(":sn", txtSurname.Text);
+                cmd.Parameters.Add(":dob", dtpDOB.Value.Date);
+                cmd.Parameters.Add(":email", txtEmail.Text);
+                cmd.Parameters.Add(":pwd", txtPassword.Text);
+                cmd.Parameters.Add(":phone", txtPhone.Text);
+                cmd.Parameters.Add(":street", txtStreet.Text);
+                cmd.Parameters.Add(":town", txtTown.Text);
+                cmd.Parameters.Add(":county", txtCounty.Text);
+                cmd.Parameters.Add(":eircode", txtEircode.Text);
+                cmd.Parameters.Add(":id", _accountID);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (OracleException ex)
+            {
+                if (ex.Number == 1)
+                    MessageBox.Show("Account with this email already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             // Confirmation Message
             MessageBox.Show("Account Updated", "Confirm", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+
+        private void chbLoginHidePassword_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chbLoginHidePassword.CheckState == CheckState.Checked)
+            {
+                txtLoginPassword.UseSystemPasswordChar = true;
+            }
+            else
+            {
+                txtLoginPassword.UseSystemPasswordChar= false;
+            }
+        }
+
+        private void btnLoadAccountDetails_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // code taken from here: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/retrieving-data-using-a-datareader
+                OracleConnection conn = DBConnection.GetConnection();
+                conn.Open();
+                string sql = "SELECT * FROM Accounts WHERE Email=:email AND Password=:pwd AND Status='A'";
+                OracleCommand cmd = new OracleCommand(sql, conn);
+                cmd.Parameters.Add(":email", txtLoginEmail.Text);
+                cmd.Parameters.Add(":pwd", txtLoginPassword.Text);
+                OracleDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read()) {
+                    _accountID = Convert.ToInt32(dr["AccountID"]);
+                    txtForename.Text = dr["Forename"].ToString();
+                    txtSurname.Text = dr["Surname"].ToString();
+                    dtpDOB.Value = Convert.ToDateTime(dr["DOB"]);
+                    txtEmail.Text = dr["Email"].ToString();
+                    txtPassword.Text = dr["Password"].ToString();
+                    txtPhone.Text = dr["Phone"].ToString();
+                    txtStreet.Text = dr["Street"].ToString();
+                    txtTown.Text = dr["Town"].ToString();
+                    txtCounty.Text = dr["County"].ToString();
+                    txtEircode.Text = dr["Eircode"].ToString();
+                    captureOriginalValues();
+                    grpUpdateAccountDetails.Visible = true;
+                }
+                else
+                {
+                    MessageBox.Show("Account not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                dr.Close();
+                conn.Close();
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         
     }
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.grpUpdateAccountDetails = new System.Windows.Forms.GroupBox();
+            this.btnCloseAccount = new System.Windows.Forms.Button();
             this.dtpDOB = new System.Windows.Forms.DateTimePicker();
             this.txtEircode = new System.Windows.Forms.TextBox();
             this.lblEircode = new System.Windows.Forms.Label();
@@ -67,12 +68,21 @@
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yearlyRevenueAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.genreAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.grpCredentials = new System.Windows.Forms.GroupBox();
+            this.chbLoginHidePassword = new System.Windows.Forms.CheckBox();
+            this.btnLoadAccountDetails = new System.Windows.Forms.Button();
+            this.lblLoginPassword = new System.Windows.Forms.Label();
+            this.lblLoginEmail = new System.Windows.Forms.Label();
+            this.txtLoginPassword = new System.Windows.Forms.TextBox();
+            this.txtLoginEmail = new System.Windows.Forms.TextBox();
             this.grpUpdateAccountDetails.SuspendLayout();
             this.mnuUpdateAccountDetails.SuspendLayout();
+            this.grpCredentials.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpUpdateAccountDetails
             // 
+            this.grpUpdateAccountDetails.Controls.Add(this.btnCloseAccount);
             this.grpUpdateAccountDetails.Controls.Add(this.dtpDOB);
             this.grpUpdateAccountDetails.Controls.Add(this.txtEircode);
             this.grpUpdateAccountDetails.Controls.Add(this.lblEircode);
@@ -95,12 +105,23 @@
             this.grpUpdateAccountDetails.Controls.Add(this.lblSurname);
             this.grpUpdateAccountDetails.Controls.Add(this.lblForename);
             this.grpUpdateAccountDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpUpdateAccountDetails.Location = new System.Drawing.Point(12, 42);
+            this.grpUpdateAccountDetails.Location = new System.Drawing.Point(12, 201);
             this.grpUpdateAccountDetails.Name = "grpUpdateAccountDetails";
-            this.grpUpdateAccountDetails.Size = new System.Drawing.Size(440, 355);
+            this.grpUpdateAccountDetails.Size = new System.Drawing.Size(458, 355);
             this.grpUpdateAccountDetails.TabIndex = 1;
             this.grpUpdateAccountDetails.TabStop = false;
             this.grpUpdateAccountDetails.Text = "Update Details";
+            this.grpUpdateAccountDetails.Visible = false;
+            // 
+            // btnCloseAccount
+            // 
+            this.btnCloseAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCloseAccount.Location = new System.Drawing.Point(239, 312);
+            this.btnCloseAccount.Name = "btnCloseAccount";
+            this.btnCloseAccount.Size = new System.Drawing.Size(146, 29);
+            this.btnCloseAccount.TabIndex = 22;
+            this.btnCloseAccount.Text = "Close Account";
+            this.btnCloseAccount.UseVisualStyleBackColor = true;
             // 
             // dtpDOB
             // 
@@ -168,7 +189,7 @@
             // btnUpdateAccountDetails
             // 
             this.btnUpdateAccountDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdateAccountDetails.Location = new System.Drawing.Point(134, 312);
+            this.btnUpdateAccountDetails.Location = new System.Drawing.Point(54, 312);
             this.btnUpdateAccountDetails.Name = "btnUpdateAccountDetails";
             this.btnUpdateAccountDetails.Size = new System.Drawing.Size(146, 29);
             this.btnUpdateAccountDetails.TabIndex = 14;
@@ -305,7 +326,7 @@
             this.adminToolStripMenuItem});
             this.mnuUpdateAccountDetails.Location = new System.Drawing.Point(0, 0);
             this.mnuUpdateAccountDetails.Name = "mnuUpdateAccountDetails";
-            this.mnuUpdateAccountDetails.Size = new System.Drawing.Size(534, 24);
+            this.mnuUpdateAccountDetails.Size = new System.Drawing.Size(512, 24);
             this.mnuUpdateAccountDetails.TabIndex = 6;
             this.mnuUpdateAccountDetails.Text = "Update Account Details Menu";
             // 
@@ -313,7 +334,7 @@
             // 
             this.exitToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -432,11 +453,84 @@
             this.genreAnalysisToolStripMenuItem.Text = "Genre Analysis";
             this.genreAnalysisToolStripMenuItem.Click += new System.EventHandler(this.genreAnalysisToolStripMenuItem_Click);
             // 
+            // grpCredentials
+            // 
+            this.grpCredentials.Controls.Add(this.chbLoginHidePassword);
+            this.grpCredentials.Controls.Add(this.btnLoadAccountDetails);
+            this.grpCredentials.Controls.Add(this.lblLoginPassword);
+            this.grpCredentials.Controls.Add(this.lblLoginEmail);
+            this.grpCredentials.Controls.Add(this.txtLoginPassword);
+            this.grpCredentials.Controls.Add(this.txtLoginEmail);
+            this.grpCredentials.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpCredentials.Location = new System.Drawing.Point(12, 39);
+            this.grpCredentials.Name = "grpCredentials";
+            this.grpCredentials.Size = new System.Drawing.Size(458, 156);
+            this.grpCredentials.TabIndex = 7;
+            this.grpCredentials.TabStop = false;
+            this.grpCredentials.Text = "Enter Credentials";
+            // 
+            // chbLoginHidePassword
+            // 
+            this.chbLoginHidePassword.AutoSize = true;
+            this.chbLoginHidePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbLoginHidePassword.Location = new System.Drawing.Point(323, 70);
+            this.chbLoginHidePassword.Name = "chbLoginHidePassword";
+            this.chbLoginHidePassword.Size = new System.Drawing.Size(118, 20);
+            this.chbLoginHidePassword.TabIndex = 10;
+            this.chbLoginHidePassword.Text = "Hide Password";
+            this.chbLoginHidePassword.UseVisualStyleBackColor = true;
+            this.chbLoginHidePassword.CheckedChanged += new System.EventHandler(this.chbLoginHidePassword_CheckedChanged);
+            // 
+            // btnLoadAccountDetails
+            // 
+            this.btnLoadAccountDetails.Location = new System.Drawing.Point(190, 109);
+            this.btnLoadAccountDetails.Name = "btnLoadAccountDetails";
+            this.btnLoadAccountDetails.Size = new System.Drawing.Size(79, 28);
+            this.btnLoadAccountDetails.TabIndex = 9;
+            this.btnLoadAccountDetails.Text = "Login";
+            this.btnLoadAccountDetails.UseVisualStyleBackColor = true;
+            this.btnLoadAccountDetails.Click += new System.EventHandler(this.btnLoadAccountDetails_Click);
+            // 
+            // lblLoginPassword
+            // 
+            this.lblLoginPassword.AutoSize = true;
+            this.lblLoginPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoginPassword.Location = new System.Drawing.Point(22, 70);
+            this.lblLoginPassword.Name = "lblLoginPassword";
+            this.lblLoginPassword.Size = new System.Drawing.Size(78, 20);
+            this.lblLoginPassword.TabIndex = 8;
+            this.lblLoginPassword.Text = "Password";
+            // 
+            // lblLoginEmail
+            // 
+            this.lblLoginEmail.AutoSize = true;
+            this.lblLoginEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoginEmail.Location = new System.Drawing.Point(22, 38);
+            this.lblLoginEmail.Name = "lblLoginEmail";
+            this.lblLoginEmail.Size = new System.Drawing.Size(48, 20);
+            this.lblLoginEmail.TabIndex = 8;
+            this.lblLoginEmail.Text = "Email";
+            // 
+            // txtLoginPassword
+            // 
+            this.txtLoginPassword.Location = new System.Drawing.Point(134, 67);
+            this.txtLoginPassword.Name = "txtLoginPassword";
+            this.txtLoginPassword.Size = new System.Drawing.Size(183, 26);
+            this.txtLoginPassword.TabIndex = 8;
+            // 
+            // txtLoginEmail
+            // 
+            this.txtLoginEmail.Location = new System.Drawing.Point(134, 35);
+            this.txtLoginEmail.Name = "txtLoginEmail";
+            this.txtLoginEmail.Size = new System.Drawing.Size(275, 26);
+            this.txtLoginEmail.TabIndex = 7;
+            // 
             // frmUpdateAccountDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(534, 450);
+            this.ClientSize = new System.Drawing.Size(512, 568);
+            this.Controls.Add(this.grpCredentials);
             this.Controls.Add(this.mnuUpdateAccountDetails);
             this.Controls.Add(this.grpUpdateAccountDetails);
             this.Name = "frmUpdateAccountDetails";
@@ -445,6 +539,8 @@
             this.grpUpdateAccountDetails.PerformLayout();
             this.mnuUpdateAccountDetails.ResumeLayout(false);
             this.mnuUpdateAccountDetails.PerformLayout();
+            this.grpCredentials.ResumeLayout(false);
+            this.grpCredentials.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -491,5 +587,13 @@
         private System.Windows.Forms.ToolStripMenuItem yearlyRevenueAnalysisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem genreAnalysisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.GroupBox grpCredentials;
+        private System.Windows.Forms.Label lblLoginEmail;
+        private System.Windows.Forms.TextBox txtLoginPassword;
+        private System.Windows.Forms.TextBox txtLoginEmail;
+        private System.Windows.Forms.Label lblLoginPassword;
+        private System.Windows.Forms.Button btnCloseAccount;
+        private System.Windows.Forms.Button btnLoadAccountDetails;
+        private System.Windows.Forms.CheckBox chbLoginHidePassword;
     }
 }

@@ -67,12 +67,14 @@
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yearlyRevenueAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.genreAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chbPassword = new System.Windows.Forms.CheckBox();
             this.grpOpenAccount.SuspendLayout();
             this.mnuOpenAccount.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpOpenAccount
             // 
+            this.grpOpenAccount.Controls.Add(this.chbPassword);
             this.grpOpenAccount.Controls.Add(this.dtpDOB);
             this.grpOpenAccount.Controls.Add(this.txtEircode);
             this.grpOpenAccount.Controls.Add(this.lblEircode);
@@ -97,7 +99,7 @@
             this.grpOpenAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpOpenAccount.Location = new System.Drawing.Point(12, 36);
             this.grpOpenAccount.Name = "grpOpenAccount";
-            this.grpOpenAccount.Size = new System.Drawing.Size(419, 343);
+            this.grpOpenAccount.Size = new System.Drawing.Size(444, 343);
             this.grpOpenAccount.TabIndex = 0;
             this.grpOpenAccount.TabStop = false;
             this.grpOpenAccount.Text = "Open Account";
@@ -192,7 +194,7 @@
             this.txtPassword.Location = new System.Drawing.Point(134, 138);
             this.txtPassword.MaxLength = 30;
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(279, 26);
+            this.txtPassword.Size = new System.Drawing.Size(159, 26);
             this.txtPassword.TabIndex = 11;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
@@ -294,7 +296,7 @@
             this.adminToolStripMenuItem});
             this.mnuOpenAccount.Location = new System.Drawing.Point(0, 0);
             this.mnuOpenAccount.Name = "mnuOpenAccount";
-            this.mnuOpenAccount.Size = new System.Drawing.Size(505, 24);
+            this.mnuOpenAccount.Size = new System.Drawing.Size(529, 24);
             this.mnuOpenAccount.TabIndex = 5;
             this.mnuOpenAccount.Text = "Open Account Menu";
             // 
@@ -421,11 +423,23 @@
             this.genreAnalysisToolStripMenuItem.Text = "Genre Analysis";
             this.genreAnalysisToolStripMenuItem.Click += new System.EventHandler(this.genreAnalysisToolStripMenuItem_Click);
             // 
+            // chbPassword
+            // 
+            this.chbPassword.AutoSize = true;
+            this.chbPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbPassword.Location = new System.Drawing.Point(299, 142);
+            this.chbPassword.Name = "chbPassword";
+            this.chbPassword.Size = new System.Drawing.Size(118, 20);
+            this.chbPassword.TabIndex = 22;
+            this.chbPassword.Text = "Hide Password";
+            this.chbPassword.UseVisualStyleBackColor = true;
+            this.chbPassword.CheckedChanged += new System.EventHandler(this.chbPassword_CheckedChanged);
+            // 
             // frmOpenAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 391);
+            this.ClientSize = new System.Drawing.Size(529, 391);
             this.Controls.Add(this.mnuOpenAccount);
             this.Controls.Add(this.grpOpenAccount);
             this.Name = "frmOpenAccount";
@@ -480,5 +494,6 @@
         private System.Windows.Forms.ToolStripMenuItem yearlyRevenueAnalysisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem genreAnalysisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.CheckBox chbPassword;
     }
 }
