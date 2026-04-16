@@ -13,7 +13,7 @@ BEGIN
 END;
 /
 
-//code taken from here: https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/CREATE-SEQUENCE.html
+-- Code taken from: https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/CREATE-SEQUENCE.html
 PROMPT
 PROMPT DROPPING Sequences
 PROMPT
@@ -70,23 +70,6 @@ CREATE TABLE Books
  CONSTRAINT fk_Books_Genres FOREIGN KEY (GenreCode) REFERENCES Genres,
  CONSTRAINT ck_Books_Price CHECK (Price > 0),
  CONSTRAINT ck_Books_Stock CHECK (StockAmount >= 0));
- 
- PROMPT
-PROMPT POPULATING Table Accounts (sample customer)
-PROMPT
-INSERT INTO Accounts VALUES (accounts_seq.NEXTVAL,'Jane','Doe',
-  TO_DATE('07-11-2006','DD-MM-YYYY'),'jane@email.com','Password1!',
-  '0871234567','Ocean Drive 123','Tralee','Kerry','V12NX34','A');
-
-PROMPT
-PROMPT POPULATING Table Books
-PROMPT
-INSERT INTO Books VALUES('Running Grave','Robert Galbraith','DE',18.99,97,'A');
-INSERT INTO Books VALUES('American Gods','Neil Gaiman','FA',12.99,101,'A');
-INSERT INTO Books VALUES('Sapiens','Yuval Noah Harari','HI',14.99,55,'A');
-INSERT INTO Books VALUES('Project Hail Mary','Andy Weir','SF',16.99,43,'A');
-INSERT INTO Books VALUES('Normal People','Sally Rooney','RO',11.99,62,'A');
-
 
 PROMPT
 PROMPT CREATING Table Orders
@@ -113,22 +96,6 @@ CREATE TABLE OrderedBooks
  CONSTRAINT fk_OrderedBooks_Books  FOREIGN KEY (BookTitle) REFERENCES Books,
  CONSTRAINT ck_OrderedBooks_Qty    CHECK (QtyOrdered > 0),
  CONSTRAINT ck_OrderedBooks_Price  CHECK (OrderPrice >= 0));
- 
-PROMPT
-PROMPT POPULATING Sample Orders
-PROMPT
-INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,30.98,TO_DATE('15-01-2025','DD-MM-YYYY'));
-INSERT INTO OrderedBooks VALUES(1,'Running Grave',1,18.99);
-INSERT INTO OrderedBooks VALUES(1,'American Gods',1,12.99);
-
-INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,14.99,TO_DATE('20-03-2025','DD-MM-YYYY'));
-INSERT INTO OrderedBooks VALUES(2,'Sapiens',1,14.99);
-
-INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,16.99,TO_DATE('10-06-2025','DD-MM-YYYY'));
-INSERT INTO OrderedBooks VALUES(3,'Project Hail Mary',1,16.99);
-
-INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,23.98,TO_DATE('05-09-2025','DD-MM-YYYY'));
-INSERT INTO OrderedBooks VALUES(4,'Normal People',2,11.99);
 
 PROMPT
 PROMPT CREATING Table ReturnedBooks
@@ -145,6 +112,12 @@ CREATE TABLE ReturnedBooks
  CONSTRAINT ck_ReturnedBooks_Refund CHECK (RefundAmount >= 0));
 
 PROMPT
+PROMPT CREATING Sequences
+PROMPT
+CREATE SEQUENCE accounts_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE orders_seq   START WITH 1 INCREMENT BY 1;
+
+PROMPT
 PROMPT POPULATING Table Genres
 PROMPT
 INSERT INTO Genres VALUES('DE', 'Detective');
@@ -157,10 +130,36 @@ INSERT INTO Genres VALUES('BI', 'Biography');
 INSERT INTO Genres VALUES('NF', 'Non-fiction');
 
 PROMPT
-PROMPT CREATING Sequences
+PROMPT CREATING A TEST CUSTOMER
 PROMPT
-CREATE SEQUENCE accounts_seq START WITH 1 INCREMENT BY 1;
-CREATE SEQUENCE orders_seq   START WITH 1 INCREMENT BY 1;
+INSERT INTO Accounts VALUES (accounts_seq.NEXTVAL,'Jane','Doe',
+  TO_DATE('07-11-2006','DD-MM-YYYY'),'jane@email.com','pass',
+  '0871234567','Ocean Drive 123','Tralee','Kerry','V12NX34','A');
+
+PROMPT
+PROMPT POPULATING Table Books
+PROMPT
+INSERT INTO Books VALUES('Running Grave','Robert Galbraith','DE',18,97,'A');
+INSERT INTO Books VALUES('American Gods','Neil Gaiman','FA',12,101,'A');
+INSERT INTO Books VALUES('Sapiens','Yuval Noah Harari','HI',14,55,'A');
+INSERT INTO Books VALUES('Project Hail Mary','Andy Weir','SF',16,43,'A');
+INSERT INTO Books VALUES('Normal People','Sally Rooney','RO',11,62,'A');
+
+PROMPT
+PROMPT POPULATING Table Orders and OrderedBooks
+PROMPT
+INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,30,TO_DATE('15-01-2025','DD-MM-YYYY'));
+INSERT INTO OrderedBooks VALUES(1,'Running Grave',1,18);
+INSERT INTO OrderedBooks VALUES(1,'American Gods',1,12);
+
+INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,14,TO_DATE('20-03-2025','DD-MM-YYYY'));
+INSERT INTO OrderedBooks VALUES(2,'Sapiens',1,14);
+
+INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,16.99,TO_DATE('10-06-2025','DD-MM-YYYY'));
+INSERT INTO OrderedBooks VALUES(3,'Project Hail Mary',1,16);
+
+INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,22,TO_DATE('05-09-2025','DD-MM-YYYY'));
+INSERT INTO OrderedBooks VALUES(4,'Normal People',2,11);
 
 COMMIT;
 
