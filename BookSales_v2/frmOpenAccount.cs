@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Oracle.ManagedDataAccess.Client;
 
 namespace BookSalesSys
 {
@@ -28,6 +29,16 @@ namespace BookSalesSys
             this.Parent = parent;
 
             dtpDOB.Value = dtpDOB.Value.AddYears(-18);
+
+            SetPlaceholder(txtForename, "e.g. John");
+            SetPlaceholder(txtSurname, "e.g. Doe");
+            SetPlaceholder(txtEmail, "e.g. john@email.com");
+            SetPlaceholder(txtPassword, "e.g. pass1");
+            SetPlaceholder(txtPhone, "e.g. 0871234567");
+            SetPlaceholder(txtStreet, "e.g. Test Street");
+            SetPlaceholder(txtTown, "e.g. Tralee");
+            SetPlaceholder(txtCounty, "e.g. Kerry");
+            SetPlaceholder(txtEircode, "e.g. V92AB12");
         }
 
         private void updateAccountDetailsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -105,6 +116,19 @@ namespace BookSalesSys
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        // Placeholder for fields entry
+        private void SetPlaceholder(TextBox txt, string hint)
+        {
+            txt.Text = hint;
+            txt.ForeColor = Color.Gray;
+            txt.GotFocus += (s, e) => {
+                if (txt.Text == hint) { txt.Text = ""; txt.ForeColor = Color.Black; }
+            };
+            txt.LostFocus += (s, e) => {
+                if (txt.Text == "") { txt.Text = hint; txt.ForeColor = Color.Gray; }
+            };
         }
 
 
@@ -192,8 +216,53 @@ namespace BookSalesSys
                 return;
             }
 
+            // age validation
+            if ((DateTime.Today - dtpDOB.Value.Date).TotalDays < 365 * 18)
+            {
+                MessageBox.Show("You must be over 18 to open an account.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             // Save Data
+            try
+            {
+                // code taken from: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.parameters?view=netframework-4.8.1
+                // and here: https://csharpforums.net/threads/sql-command-parameters.8459/
+                OracleConnection conn = DBConnection.GetConnection();
+                conn.Open();
+                string sql = @"INSERT INTO Accounts (AccountID,Forename,Surname,DOB,Email,Password,Phone,Street,Town,County,Eircode,Status)
+                               VALUES (accounts_seq.NEXTVAL,:fn,:sn,:dob,:email,:pwd,:phone,:street,:towm,:county,:eircode,'A')";
+                OracleCommand cmd = new OracleCommand(sql,conn);
+                cmd.Parameters.Add(":fn", txtForename.Text);
+                cmd.Parameters.Add(":sn", txtSurname.Text);
+                cmd.Parameters.Add(":dob", dtpDOB.Value);
+                cmd.Parameters.Add(":email", txtEmail.Text);
+                cmd.Parameters.Add(":pwd", txtPassword.Text);
+                cmd.Parameters.Add(":phone", txtPhone.Text);
+                cmd.Parameters.Add(":street", txtStreet.Text);
+                cmd.Parameters.Add(":town", txtTown.Text);
+                cmd.Parameters.Add(":county", txtCounty.Text);
+                cmd.Parameters.Add(":eircode", txtEircode.Text);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (OracleException ex) 
+            {
+                if (ex.Number == 1)
+                {
+                    MessageBox.Show("Account with this email already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+                else
+                {
+                    MessageBox.Show("Database error." + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+                return;
+
+            }
+
 
             // Confirmation Message
             MessageBox.Show("Account Created", "Confirm", MessageBoxButtons.OK, MessageBoxIcon.Information);

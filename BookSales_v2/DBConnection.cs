@@ -15,6 +15,7 @@ namespace BookSalesSys
         // connection test
         public static bool TestConnection()
         {
+            // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using
             try
             {
                 using (OracleConnection conn = new OracleConnection(connStr))
