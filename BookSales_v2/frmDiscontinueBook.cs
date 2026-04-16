@@ -42,12 +42,6 @@ namespace BookSalesSys
             nextForm.Show();
         }
 
-        private void closeAccountToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-            frmCloseAccount nextForm = new frmCloseAccount();
-            nextForm.Show();
-        }
 
         private void addBookToolStripMenuItem_Click(object sender, EventArgs e)
         {

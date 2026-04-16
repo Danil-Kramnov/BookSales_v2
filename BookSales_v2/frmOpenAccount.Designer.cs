@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.grpOpenAccount = new System.Windows.Forms.GroupBox();
+            this.chbPassword = new System.Windows.Forms.CheckBox();
             this.dtpDOB = new System.Windows.Forms.DateTimePicker();
             this.txtEircode = new System.Windows.Forms.TextBox();
             this.lblEircode = new System.Windows.Forms.Label();
@@ -56,7 +57,6 @@
             this.customersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateAccountDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catalogueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateBookDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,7 +67,6 @@
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yearlyRevenueAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.genreAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chbPassword = new System.Windows.Forms.CheckBox();
             this.grpOpenAccount.SuspendLayout();
             this.mnuOpenAccount.SuspendLayout();
             this.SuspendLayout();
@@ -103,6 +102,18 @@
             this.grpOpenAccount.TabIndex = 0;
             this.grpOpenAccount.TabStop = false;
             this.grpOpenAccount.Text = "Open Account";
+            // 
+            // chbPassword
+            // 
+            this.chbPassword.AutoSize = true;
+            this.chbPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbPassword.Location = new System.Drawing.Point(299, 142);
+            this.chbPassword.Name = "chbPassword";
+            this.chbPassword.Size = new System.Drawing.Size(118, 20);
+            this.chbPassword.TabIndex = 22;
+            this.chbPassword.Text = "Hide Password";
+            this.chbPassword.UseVisualStyleBackColor = true;
+            this.chbPassword.CheckedChanged += new System.EventHandler(this.chbPassword_CheckedChanged);
             // 
             // dtpDOB
             // 
@@ -320,8 +331,7 @@
             // 
             this.customersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openAccountToolStripMenuItem,
-            this.updateAccountDetailsToolStripMenuItem,
-            this.closeAccountToolStripMenuItem});
+            this.updateAccountDetailsToolStripMenuItem});
             this.customersToolStripMenuItem.Name = "customersToolStripMenuItem";
             this.customersToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.customersToolStripMenuItem.Text = "Customers";
@@ -338,13 +348,6 @@
             this.updateAccountDetailsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.updateAccountDetailsToolStripMenuItem.Text = "Update Account Details";
             this.updateAccountDetailsToolStripMenuItem.Click += new System.EventHandler(this.updateAccountDetailsToolStripMenuItem_Click);
-            // 
-            // closeAccountToolStripMenuItem
-            // 
-            this.closeAccountToolStripMenuItem.Name = "closeAccountToolStripMenuItem";
-            this.closeAccountToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.closeAccountToolStripMenuItem.Text = "Close Account";
-            this.closeAccountToolStripMenuItem.Click += new System.EventHandler(this.closeAccountToolStripMenuItem_Click);
             // 
             // catalogueToolStripMenuItem
             // 
@@ -423,18 +426,6 @@
             this.genreAnalysisToolStripMenuItem.Text = "Genre Analysis";
             this.genreAnalysisToolStripMenuItem.Click += new System.EventHandler(this.genreAnalysisToolStripMenuItem_Click);
             // 
-            // chbPassword
-            // 
-            this.chbPassword.AutoSize = true;
-            this.chbPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chbPassword.Location = new System.Drawing.Point(299, 142);
-            this.chbPassword.Name = "chbPassword";
-            this.chbPassword.Size = new System.Drawing.Size(118, 20);
-            this.chbPassword.TabIndex = 22;
-            this.chbPassword.Text = "Hide Password";
-            this.chbPassword.UseVisualStyleBackColor = true;
-            this.chbPassword.CheckedChanged += new System.EventHandler(this.chbPassword_CheckedChanged);
-            // 
             // frmOpenAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -482,7 +473,6 @@
         private System.Windows.Forms.ToolStripMenuItem customersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openAccountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateAccountDetailsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem closeAccountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem catalogueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateBookDetailsToolStripMenuItem;

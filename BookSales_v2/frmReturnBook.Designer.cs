@@ -34,7 +34,6 @@
             this.customersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateAccountDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catalogueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateBookDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,7 +79,7 @@
             // 
             this.exitToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -96,8 +95,7 @@
             // 
             this.customersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openAccountToolStripMenuItem,
-            this.updateAccountDetailsToolStripMenuItem,
-            this.closeAccountToolStripMenuItem});
+            this.updateAccountDetailsToolStripMenuItem});
             this.customersToolStripMenuItem.Name = "customersToolStripMenuItem";
             this.customersToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.customersToolStripMenuItem.Text = "Customers";
@@ -115,13 +113,6 @@
             this.updateAccountDetailsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.updateAccountDetailsToolStripMenuItem.Text = "Update Account Details";
             this.updateAccountDetailsToolStripMenuItem.Click += new System.EventHandler(this.updateAccountDetailsToolStripMenuItem_Click);
-            // 
-            // closeAccountToolStripMenuItem
-            // 
-            this.closeAccountToolStripMenuItem.Name = "closeAccountToolStripMenuItem";
-            this.closeAccountToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.closeAccountToolStripMenuItem.Text = "Close Account";
-            this.closeAccountToolStripMenuItem.Click += new System.EventHandler(this.closeAccountToolStripMenuItem_Click);
             // 
             // catalogueToolStripMenuItem
             // 
@@ -281,21 +272,25 @@
             // 
             this.ID.HeaderText = "Book Title";
             this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
             // 
             // Author
             // 
             this.Author.HeaderText = "Author";
             this.Author.Name = "Author";
+            this.Author.ReadOnly = true;
             // 
             // Price
             // 
             this.Price.HeaderText = "Price";
             this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
             // 
             // Qty
             // 
             this.Qty.HeaderText = "Qty";
             this.Qty.Name = "Qty";
+            this.Qty.ReadOnly = true;
             // 
             // frmReturnBook
             // 
@@ -328,7 +323,6 @@
         private System.Windows.Forms.ToolStripMenuItem customersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openAccountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateAccountDetailsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem closeAccountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem catalogueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateBookDetailsToolStripMenuItem;

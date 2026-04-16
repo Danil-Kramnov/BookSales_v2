@@ -28,17 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.mnuYearlyRevenueAnalysis = new System.Windows.Forms.MenuStrip();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuBackClick = new System.Windows.Forms.ToolStripMenuItem();
             this.customersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateAccountDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catalogueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateBookDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,7 +74,7 @@
             // 
             this.exitToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -91,8 +90,7 @@
             // 
             this.customersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openAccountToolStripMenuItem,
-            this.updateAccountDetailsToolStripMenuItem,
-            this.closeAccountToolStripMenuItem});
+            this.updateAccountDetailsToolStripMenuItem});
             this.customersToolStripMenuItem.Name = "customersToolStripMenuItem";
             this.customersToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.customersToolStripMenuItem.Text = "Customers";
@@ -110,13 +108,6 @@
             this.updateAccountDetailsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.updateAccountDetailsToolStripMenuItem.Text = "Update Account Details";
             this.updateAccountDetailsToolStripMenuItem.Click += new System.EventHandler(this.updateAccountDetailsToolStripMenuItem_Click);
-            // 
-            // closeAccountToolStripMenuItem
-            // 
-            this.closeAccountToolStripMenuItem.Name = "closeAccountToolStripMenuItem";
-            this.closeAccountToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.closeAccountToolStripMenuItem.Text = "Close Account";
-            this.closeAccountToolStripMenuItem.Click += new System.EventHandler(this.closeAccountToolStripMenuItem_Click);
             // 
             // catalogueToolStripMenuItem
             // 
@@ -196,22 +187,22 @@
             // 
             // chtRevenueAnalysis
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chtRevenueAnalysis.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chtRevenueAnalysis.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.chtRevenueAnalysis.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chtRevenueAnalysis.Legends.Add(legend1);
             this.chtRevenueAnalysis.Location = new System.Drawing.Point(39, 89);
             this.chtRevenueAnalysis.Name = "chtRevenueAnalysis";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Revenue";
-            this.chtRevenueAnalysis.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Revenue";
+            this.chtRevenueAnalysis.Series.Add(series1);
             this.chtRevenueAnalysis.Size = new System.Drawing.Size(913, 323);
             this.chtRevenueAnalysis.TabIndex = 30;
             this.chtRevenueAnalysis.Text = "Yearly Genre Analysis";
-            title3.Name = "YearlyRevenueAnalysis";
-            title3.Text = "Yearly Revenue Analysis";
-            this.chtRevenueAnalysis.Titles.Add(title3);
+            title1.Name = "YearlyRevenueAnalysis";
+            title1.Text = "Yearly Revenue Analysis";
+            this.chtRevenueAnalysis.Titles.Add(title1);
             this.chtRevenueAnalysis.Visible = false;
             // 
             // lblSelectYearRevenueAnalysis
@@ -268,7 +259,6 @@
         private System.Windows.Forms.ToolStripMenuItem customersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openAccountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateAccountDetailsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem closeAccountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem catalogueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateBookDetailsToolStripMenuItem;

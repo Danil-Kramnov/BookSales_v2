@@ -96,12 +96,6 @@
     <Compile Include="frmAddBook.Designer.cs">
       <DependentUpon>frmAddBook.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmCloseAccount.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmCloseAccount.Designer.cs">
-      <DependentUpon>frmCloseAccount.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmDiscontinueBook.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,9 +154,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmAddBook.resx">
       <DependentUpon>frmAddBook.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmCloseAccount.resx">
-      <DependentUpon>frmCloseAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDiscontinueBook.resx">
       <DependentUpon>frmDiscontinueBook.cs</DependentUpon>

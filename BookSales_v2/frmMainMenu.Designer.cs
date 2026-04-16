@@ -32,7 +32,6 @@
             this.customersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateAccountDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateBookDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,8 +66,7 @@
             // 
             this.customersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.createAccountToolStripMenuItem,
-            this.updateAccountDetailsToolStripMenuItem,
-            this.closeAccountToolStripMenuItem});
+            this.updateAccountDetailsToolStripMenuItem});
             this.customersToolStripMenuItem.Name = "customersToolStripMenuItem";
             this.customersToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.customersToolStripMenuItem.Text = "Customers";
@@ -86,13 +84,6 @@
             this.updateAccountDetailsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.updateAccountDetailsToolStripMenuItem.Text = "Update Account Details";
             this.updateAccountDetailsToolStripMenuItem.Click += new System.EventHandler(this.updateAccountDetailsToolStripMenuItem_Click);
-            // 
-            // closeAccountToolStripMenuItem
-            // 
-            this.closeAccountToolStripMenuItem.Name = "closeAccountToolStripMenuItem";
-            this.closeAccountToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.closeAccountToolStripMenuItem.Text = "Close Account";
-            this.closeAccountToolStripMenuItem.Click += new System.EventHandler(this.closeAccountToolStripMenuItem_Click);
             // 
             // salesToolStripMenuItem
             // 
@@ -230,7 +221,6 @@
         private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem createAccountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateAccountDetailsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem closeAccountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateBookDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem discontinueBookToolStripMenuItem;

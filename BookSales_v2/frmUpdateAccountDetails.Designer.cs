@@ -57,7 +57,6 @@
             this.customersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateAccountDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catalogueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateBookDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -351,8 +350,7 @@
             // 
             this.customersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openAccountToolStripMenuItem,
-            this.updateAccountDetailsToolStripMenuItem,
-            this.closeAccountToolStripMenuItem});
+            this.updateAccountDetailsToolStripMenuItem});
             this.customersToolStripMenuItem.Name = "customersToolStripMenuItem";
             this.customersToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.customersToolStripMenuItem.Text = "Customers";
@@ -370,13 +368,6 @@
             this.updateAccountDetailsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.updateAccountDetailsToolStripMenuItem.Text = "Update Account Details";
             // 
-            // closeAccountToolStripMenuItem
-            // 
-            this.closeAccountToolStripMenuItem.Name = "closeAccountToolStripMenuItem";
-            this.closeAccountToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.closeAccountToolStripMenuItem.Text = "Close Account";
-            this.closeAccountToolStripMenuItem.Click += new System.EventHandler(this.closeAccountToolStripMenuItem_Click);
-            // 
             // catalogueToolStripMenuItem
             // 
             this.catalogueToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -392,7 +383,6 @@
             this.addBookToolStripMenuItem.Name = "addBookToolStripMenuItem";
             this.addBookToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addBookToolStripMenuItem.Text = "Add Book";
-            this.addBookToolStripMenuItem.Click += new System.EventHandler(this.addBookToolStripMenuItem_Click);
             // 
             // updateBookDetailsToolStripMenuItem
             // 
@@ -576,7 +566,6 @@
         private System.Windows.Forms.ToolStripMenuItem customersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openAccountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateAccountDetailsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem closeAccountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem catalogueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateBookDetailsToolStripMenuItem;
