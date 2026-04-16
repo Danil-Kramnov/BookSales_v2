@@ -44,6 +44,8 @@
             this.produceYearlyRevenueAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.produceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.picMainMenu = new System.Windows.Forms.PictureBox();
+            this.btnConnect = new System.Windows.Forms.Button();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.mnuMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMainMenu)).BeginInit();
             this.SuspendLayout();
@@ -179,11 +181,34 @@
             this.picMainMenu.TabIndex = 2;
             this.picMainMenu.TabStop = false;
             // 
+            // btnConnect
+            // 
+            this.btnConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConnect.Location = new System.Drawing.Point(674, 39);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(107, 41);
+            this.btnConnect.TabIndex = 4;
+            this.btnConnect.Text = "CONNECT";
+            this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.Location = new System.Drawing.Point(615, 52);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(44, 16);
+            this.lblStatus.TabIndex = 5;
+            this.lblStatus.Text = "label1";
+            // 
             // frmMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(793, 450);
+            this.Controls.Add(this.lblStatus);
+            this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.picMainMenu);
             this.Controls.Add(this.mnuMainMenu);
             this.MainMenuStrip = this.mnuMainMenu;
@@ -214,6 +239,8 @@
         private System.Windows.Forms.ToolStripMenuItem produceYearlyRevenueAnalysisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem produceToolStripMenuItem;
         private System.Windows.Forms.PictureBox picMainMenu;
+        private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.Label lblStatus;
     }
 }
 
