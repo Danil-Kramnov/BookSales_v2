@@ -13,7 +13,21 @@ BEGIN
 END;
 /
 
-
+//code taken from here: https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/CREATE-SEQUENCE.html
+PROMPT
+PROMPT DROPPING Sequences
+PROMPT
+BEGIN
+    FOR s IN (SELECT sequence_name FROM user_sequences) LOOP
+        BEGIN
+            EXECUTE IMMEDIATE 'DROP SEQUENCE "' || s.sequence_name || '"';
+        EXCEPTION
+            WHEN OTHERS THEN
+                DBMS_OUTPUT.PUT_LINE('Failed to drop sequence ' || s.sequence_name || ': ' || SQLERRM);
+        END;
+    END LOOP;
+END;
+/
 
 PROMPT
 PROMPT CREATING Table Genres
@@ -97,8 +111,6 @@ CREATE TABLE ReturnedBooks
  CONSTRAINT ck_ReturnedBooks_Qty    CHECK (QtyReturned > 0),
  CONSTRAINT ck_ReturnedBooks_Refund CHECK (RefundAmount >= 0));
 
-
-
 PROMPT
 PROMPT POPULATING Table Genres
 PROMPT
@@ -110,6 +122,12 @@ INSERT INTO Genres VALUES('RO', 'Romance');
 INSERT INTO Genres VALUES('PO', 'Poems');
 INSERT INTO Genres VALUES('BI', 'Biography');
 INSERT INTO Genres VALUES('NF', 'Non-fiction');
+
+PROMPT
+PROMPT CREATING Sequences
+PROMPT
+CREATE SEQUENCE accounts_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE orders_seq   START WITH 1 INCREMENT BY 1;
 
 COMMIT;
 
