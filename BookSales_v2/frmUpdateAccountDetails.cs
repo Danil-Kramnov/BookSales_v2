@@ -309,6 +309,31 @@ namespace BookSalesSys
                 MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
+        private void btnCloseAccount_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to close your account?", "Confirm", 
+                                                  MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    OracleConnection conn = DBConnection.GetConnection();
+                    conn.Open();
+                    string sql = "UPDATE Accounts SET Status='C' WHERE AccountID=:id";
+                    OracleCommand cmd = new OracleCommand(sql, conn);
+                    cmd.Parameters.Add(":id", _accountID);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    MessageBox.Show("Account Closed.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    grpUpdateAccountDetails.Visible = false;
+                }
+                catch (OracleException ex)
+                {
+                    MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }

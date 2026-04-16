@@ -122,6 +122,7 @@
             this.btnCloseAccount.TabIndex = 22;
             this.btnCloseAccount.Text = "Close Account";
             this.btnCloseAccount.UseVisualStyleBackColor = true;
+            this.btnCloseAccount.Click += new System.EventHandler(this.btnCloseAccount_Click);
             // 
             // dtpDOB
             // 
