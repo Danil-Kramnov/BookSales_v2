@@ -142,14 +142,14 @@ namespace BookSalesSys
             }
 
             // Forename Validation
-            if (txtForename.Text.Length > 30 || !Regex.IsMatch(txtForename.Text, @"^[a-zA-Z]+$"))
+            if (txtForename.Text.Length > 30 || !Regex.IsMatch(txtForename.Text, @"^[a-zA-Z' -]+$"))
             {
                 MessageBox.Show("Forename must be up to 30 characters and contain only letters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             // Surname Validation
-            if (txtSurname.Text.Length > 30 || !Regex.IsMatch(txtSurname.Text, @"^[a-zA-Z]+$"))
+            if (txtSurname.Text.Length > 30 || !Regex.IsMatch(txtSurname.Text, @"^[a-zA-Z' -]+$"))
             {
                 MessageBox.Show("Surname must be up to 30 characters and contain only letters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -157,17 +157,17 @@ namespace BookSalesSys
 
 
             // Email Validation
-            if (txtEmail.Text.Length > 30)
+            if (txtEmail.Text.Length > 30 || !Regex.IsMatch(txtEmail.Text, @"^[^@\s]+@[^@\s]+\.(com|ie|net|org|edu)$"))
             {
-                MessageBox.Show("Email must be up to 30 characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a valid email address.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
 
             // Password Validation
-            if (txtPassword.Text.Length > 30)
+            if (txtPassword.Text.Length > 30 || !Regex.IsMatch(txtPassword.Text, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$"))
             {
-                MessageBox.Show("Password must be up to 30 characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Password must be 8-30 characters and include at least 1 uppercase, 1 lowercase and 1 special character.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -203,6 +203,14 @@ namespace BookSalesSys
             if (txtEircode.Text.Length > 7 || !Regex.IsMatch(txtEircode.Text, "^[a-zA-Z0-9]*$"))
             {
                 MessageBox.Show("Eircode must be up to 7 characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // age validation
+            if ((DateTime.Today - dtpDOB.Value.Date).TotalDays < 365.25 * 18)
+            {
+                MessageBox.Show("You must be over 18 to open an account.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

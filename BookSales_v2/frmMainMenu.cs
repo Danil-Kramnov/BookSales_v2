@@ -83,30 +83,6 @@ namespace BookSalesSys
             nextForm.Show();
         }
 
-        private void btnConnect_Click(object sender, EventArgs e)
-        {
-            if (DBConnection.IsConnected)
-            {
-                DBConnection.IsConnected = false;
-                lblStatus.Text = "Offline";
-                lblStatus.ForeColor = System.Drawing.Color.Red;
-                btnConnect.Text = "Connect";
-            }
-            else
-            {
-                if (DBConnection.TestConnection())
-                {
-                    lblStatus.Text = "Online";
-                    lblStatus.ForeColor = Color.Green;
-                }
-                else
-                {
-                    lblStatus.Text = "Offline";
-                    lblStatus.ForeColor = Color.Red;
-                }
-            }
-            
-
-        }
+       
     }
 }
