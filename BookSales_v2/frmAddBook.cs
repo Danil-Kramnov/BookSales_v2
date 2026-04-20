@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Oracle.ManagedDataAccess.Client;
 
 namespace BookSalesSys
 {
@@ -140,16 +141,84 @@ namespace BookSalesSys
             }
 
             // Save Data
+            
+            string genreCode = cmbGenre.Text.Substring(0, 2);
 
-            // Confirmation Message
+            // set status Available, save to Books table
+            try
+            {
+                OracleConnection conn = DBConnection.GetConnection();
+                conn.Open();
+                string sql = @"INSERT INTO Books (BookTitle, Author, GenreCode, Price, StockAmount, BookStatus)
+                                           VALUES(:title, :author, :genre, :price, :stock, 'A')";
+                OracleCommand cmd = new OracleCommand(sql, conn);
+                cmd.Parameters.Add("title", txtBookTitle.Text);
+                cmd.Parameters.Add("author", txtAuthor.Text);
+                cmd.Parameters.Add("genre", genreCode);
+                cmd.Parameters.Add("price", price);
+                cmd.Parameters.Add("stock", stockAmount);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (OracleException ex)
+            {
+                if (ex.Number == 1)
+                {
+                    MessageBox.Show("A book with this title already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return;
+            }
+
+            // confirmation message
             MessageBox.Show("Book Added", "Confirm", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            // Reset UI
+            // reset UI
             txtAuthor.Clear();
             txtBookTitle.Clear();
             txtPrice.Clear();
             txtStockAmount.Clear();
             cmbGenre.SelectedIndex = -1;
+        }
+
+        private void btnAdminLogin_Click(object sender, EventArgs e)
+        {
+            if (txtAdminPassword.Text != "admin")
+            {
+                MessageBox.Show("Invalid admin password.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // load genres from Genres table
+            OracleConnection conn = DBConnection.GetConnection();
+            conn.Open();
+            string sql = "SELECT GenreCode, Description FROM Genres";
+            OracleCommand cmd = new OracleCommand(sql, conn);
+            OracleDataReader dr = cmd.ExecuteReader();
+            cmbGenre.Items.Clear();
+            while (dr.Read())
+            {
+                cmbGenre.Items.Add(dr["GenreCode"].ToString() + " - " + dr["Description"].ToString());
+            }
+            dr.Close();
+            conn.Close();
+            grpAddBook.Visible = true;
+        }
+
+        private void chbAdminHidePassword_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chbAdminHidePassword.CheckState == CheckState.Checked)
+            {
+                txtAdminPassword.UseSystemPasswordChar = true;
+            }
+            else
+            {
+                txtAdminPassword.UseSystemPasswordChar = false;
+            }
         }
     }
 }

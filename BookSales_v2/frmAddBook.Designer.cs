@@ -56,8 +56,16 @@
             this.lblGenre = new System.Windows.Forms.Label();
             this.lblAuthor = new System.Windows.Forms.Label();
             this.lblBookTitle = new System.Windows.Forms.Label();
+            this.grpAdminLogin = new System.Windows.Forms.GroupBox();
+            this.chbAdminHidePassword = new System.Windows.Forms.CheckBox();
+            this.btnAdminLogin = new System.Windows.Forms.Button();
+            this.lblAdminPassword = new System.Windows.Forms.Label();
+            this.lblAdminEmail = new System.Windows.Forms.Label();
+            this.txtAdminPassword = new System.Windows.Forms.TextBox();
+            this.txtLoginEmail = new System.Windows.Forms.TextBox();
             this.mnuAddBook.SuspendLayout();
             this.grpAddBook.SuspendLayout();
+            this.grpAdminLogin.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnuAddBook
@@ -71,7 +79,7 @@
             this.adminToolStripMenuItem});
             this.mnuAddBook.Location = new System.Drawing.Point(0, 0);
             this.mnuAddBook.Name = "mnuAddBook";
-            this.mnuAddBook.Size = new System.Drawing.Size(504, 24);
+            this.mnuAddBook.Size = new System.Drawing.Size(488, 24);
             this.mnuAddBook.TabIndex = 6;
             this.mnuAddBook.Text = "Add Book Menu";
             // 
@@ -204,12 +212,13 @@
             this.grpAddBook.Controls.Add(this.lblAuthor);
             this.grpAddBook.Controls.Add(this.lblBookTitle);
             this.grpAddBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpAddBook.Location = new System.Drawing.Point(12, 27);
+            this.grpAddBook.Location = new System.Drawing.Point(12, 223);
             this.grpAddBook.Name = "grpAddBook";
             this.grpAddBook.Size = new System.Drawing.Size(419, 231);
             this.grpAddBook.TabIndex = 7;
             this.grpAddBook.TabStop = false;
             this.grpAddBook.Text = "Enter Book Details";
+            this.grpAddBook.Visible = false;
             // 
             // cmbGenre
             // 
@@ -317,11 +326,85 @@
             this.lblBookTitle.TabIndex = 0;
             this.lblBookTitle.Text = "Title";
             // 
+            // grpAdminLogin
+            // 
+            this.grpAdminLogin.Controls.Add(this.chbAdminHidePassword);
+            this.grpAdminLogin.Controls.Add(this.btnAdminLogin);
+            this.grpAdminLogin.Controls.Add(this.lblAdminPassword);
+            this.grpAdminLogin.Controls.Add(this.lblAdminEmail);
+            this.grpAdminLogin.Controls.Add(this.txtAdminPassword);
+            this.grpAdminLogin.Controls.Add(this.txtLoginEmail);
+            this.grpAdminLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpAdminLogin.Location = new System.Drawing.Point(12, 42);
+            this.grpAdminLogin.Name = "grpAdminLogin";
+            this.grpAdminLogin.Size = new System.Drawing.Size(419, 138);
+            this.grpAdminLogin.TabIndex = 8;
+            this.grpAdminLogin.TabStop = false;
+            this.grpAdminLogin.Text = "Admin Login";
+            // 
+            // chbAdminHidePassword
+            // 
+            this.chbAdminHidePassword.AutoSize = true;
+            this.chbAdminHidePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbAdminHidePassword.Location = new System.Drawing.Point(276, 70);
+            this.chbAdminHidePassword.Name = "chbAdminHidePassword";
+            this.chbAdminHidePassword.Size = new System.Drawing.Size(118, 20);
+            this.chbAdminHidePassword.TabIndex = 10;
+            this.chbAdminHidePassword.Text = "Hide Password";
+            this.chbAdminHidePassword.UseVisualStyleBackColor = true;
+            this.chbAdminHidePassword.CheckedChanged += new System.EventHandler(this.chbAdminHidePassword_CheckedChanged);
+            // 
+            // btnAdminLogin
+            // 
+            this.btnAdminLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminLogin.Location = new System.Drawing.Point(134, 99);
+            this.btnAdminLogin.Name = "btnAdminLogin";
+            this.btnAdminLogin.Size = new System.Drawing.Size(79, 28);
+            this.btnAdminLogin.TabIndex = 9;
+            this.btnAdminLogin.Text = "Login";
+            this.btnAdminLogin.UseVisualStyleBackColor = true;
+            this.btnAdminLogin.Click += new System.EventHandler(this.btnAdminLogin_Click);
+            // 
+            // lblAdminPassword
+            // 
+            this.lblAdminPassword.AutoSize = true;
+            this.lblAdminPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminPassword.Location = new System.Drawing.Point(22, 68);
+            this.lblAdminPassword.Name = "lblAdminPassword";
+            this.lblAdminPassword.Size = new System.Drawing.Size(78, 20);
+            this.lblAdminPassword.TabIndex = 8;
+            this.lblAdminPassword.Text = "Password";
+            // 
+            // lblAdminEmail
+            // 
+            this.lblAdminEmail.AutoSize = true;
+            this.lblAdminEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminEmail.Location = new System.Drawing.Point(22, 38);
+            this.lblAdminEmail.Name = "lblAdminEmail";
+            this.lblAdminEmail.Size = new System.Drawing.Size(48, 20);
+            this.lblAdminEmail.TabIndex = 8;
+            this.lblAdminEmail.Text = "Email";
+            // 
+            // txtAdminPassword
+            // 
+            this.txtAdminPassword.Location = new System.Drawing.Point(134, 67);
+            this.txtAdminPassword.Name = "txtAdminPassword";
+            this.txtAdminPassword.Size = new System.Drawing.Size(136, 26);
+            this.txtAdminPassword.TabIndex = 8;
+            // 
+            // txtLoginEmail
+            // 
+            this.txtLoginEmail.Location = new System.Drawing.Point(134, 35);
+            this.txtLoginEmail.Name = "txtLoginEmail";
+            this.txtLoginEmail.Size = new System.Drawing.Size(279, 26);
+            this.txtLoginEmail.TabIndex = 7;
+            // 
             // frmAddBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(504, 313);
+            this.ClientSize = new System.Drawing.Size(488, 500);
+            this.Controls.Add(this.grpAdminLogin);
             this.Controls.Add(this.grpAddBook);
             this.Controls.Add(this.mnuAddBook);
             this.Name = "frmAddBook";
@@ -330,6 +413,8 @@
             this.mnuAddBook.PerformLayout();
             this.grpAddBook.ResumeLayout(false);
             this.grpAddBook.PerformLayout();
+            this.grpAdminLogin.ResumeLayout(false);
+            this.grpAdminLogin.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -364,5 +449,12 @@
         private System.Windows.Forms.Label lblAuthor;
         private System.Windows.Forms.Label lblBookTitle;
         private System.Windows.Forms.ComboBox cmbGenre;
+        private System.Windows.Forms.GroupBox grpAdminLogin;
+        private System.Windows.Forms.CheckBox chbAdminHidePassword;
+        private System.Windows.Forms.Button btnAdminLogin;
+        private System.Windows.Forms.Label lblAdminPassword;
+        private System.Windows.Forms.Label lblAdminEmail;
+        private System.Windows.Forms.TextBox txtAdminPassword;
+        private System.Windows.Forms.TextBox txtLoginEmail;
     }
 }
