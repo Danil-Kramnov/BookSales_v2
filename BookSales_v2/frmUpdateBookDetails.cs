@@ -7,12 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Oracle.ManagedDataAccess.Client;
 
 namespace BookSalesSys
 {
     public partial class frmUpdateBookDetails : Form
     {
         frmMainMenu Parent;
+
+        private string _originalTitle;
+
         public frmUpdateBookDetails()
         {
             InitializeComponent();
@@ -94,25 +98,8 @@ namespace BookSalesSys
             Application.Exit();
         }
 
-        // Adding rows to my data grid (taken from https://stackoverflow.com/questions/15965043/how-to-add-rows-to-datagridview-winforms)
-        private void btnSearchBar_Click(object sender, EventArgs e)
-        {
-
-            // Check if search string not empty
-            if (string.IsNullOrWhiteSpace(txtSearchBarUpdate.Text))
-            {
-                MessageBox.Show("Please enter a title (or part of) to search for", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            dgvBookListUpdate.Visible = true;
-            dgvBookListUpdate.Rows.Clear();
-            dgvBookListUpdate.Rows.Add("Running Grave", "Robert Galbraith", "[DT] Detective", "€18", "97");
-            dgvBookListUpdate.Rows.Add("The Graveyard Book", "Neil Gaiman", "[SC] Science Fiction", "€12", "101");
-            dgvBookListUpdate.Rows.Add("Grave Intentions", "Harith Athreya", "[HR] History", "€23", "202");
-
-
-        }
+        
+        
 
         // Variables to hold original values
         private string originalTitle;
@@ -151,7 +138,7 @@ namespace BookSalesSys
                 string.IsNullOrWhiteSpace(txtBookTitle.Text) ||
                 string.IsNullOrWhiteSpace(txtPrice.Text) ||
                 string.IsNullOrWhiteSpace(txtStockAmount.Text) ||
-                string.IsNullOrWhiteSpace(cmbGenre.Text))
+                cmbGenre.SelectedIndex == -1)
             {
                 MessageBox.Show("All fields must be entered.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -178,7 +165,9 @@ namespace BookSalesSys
                 return;
             }
 
-            if (!decimal.TryParse(txtStockAmount.Text, out decimal stockAmount) || stockAmount <= 0)
+            // stock amount validation
+
+            if (!int.TryParse(txtStockAmount.Text, out int stockAmount) || stockAmount < 0)
             {
                 MessageBox.Show("Stock Amount must be a positive value.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -186,31 +175,209 @@ namespace BookSalesSys
 
             // Save Data
 
+
+
+            // save updated book details to Books table
+            string genreCode = cmbGenre.Text.Substring(0, 2);
+
+            try
+            {
+                OracleConnection conn = DBConnection.GetConnection();
+                conn.Open();
+                string sql = @"UPDATE Books SET Author=:author, GenreCode=:genre,Price=:price, StockAmount=:stock
+                                            WHERE BookTitle=:title";
+                OracleCommand cmd = new OracleCommand(sql, conn);
+                cmd.Parameters.Add("author", txtAuthor.Text);
+                cmd.Parameters.Add("genre", genreCode);
+                cmd.Parameters.Add("price", price);
+                cmd.Parameters.Add("stock", stockAmount);
+                cmd.Parameters.Add("title", _originalTitle);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // update the row in the grid to show changes
+            dgvBookListUpdate.Rows[dgvBookListUpdate.CurrentCell.RowIndex].SetValues(txtBookTitle.Text,
+                                                                                     txtAuthor.Text,
+                                                                                     genreCode,
+                                                                                     txtPrice.Text,
+                                                                                     txtStockAmount.Text);
+
             // Confirmation Message
             MessageBox.Show("Book Updated", "Confirm", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        
+
+        private void btnAdminLogin_Click(object sender, EventArgs e)
+        {
+            if (txtAdminLogin.Text != "admin" || txtAdminPassword.Text != "admin")
+            {
+                MessageBox.Show("Invalid admin credentials.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            grpSearchBook.Visible = true;
+            LoadBooks("");
+        }
+
+        // load all books on admin login
+        private void LoadBooks(string search)
+        {
+            try
+            {
+                OracleConnection conn = DBConnection.GetConnection();
+                conn.Open();
+                // retrieve active books matching search
+                string sql = @"SELECT BookTitle, Author, GenreCode, Price, StockAmount 
+                               FROM Books WHERE UPPER(BookTitle) LIKE '%' || UPPER(:search) || '%' 
+                               AND BookStatus='A'";
+                OracleCommand cmd = new OracleCommand(sql, conn);
+                cmd.Parameters.Add("search", search);
+                OracleDataReader dr = cmd.ExecuteReader();
+                dgvBookListUpdate.Rows.Clear();
+                dgvBookListUpdate.Visible = true;
+                while (dr.Read())
+                {
+                    dgvBookListUpdate.Rows.Add(dr["BookTitle"].ToString(),
+                                               dr["Author"].ToString(),
+                                               dr["GenreCode"].ToString(),
+                                               dr["Price"].ToString(),
+                                               dr["StockAmount"].ToString());
+                }
+                    
+                if (dgvBookListUpdate.Rows.Count == 0)
+                {
+                    MessageBox.Show("No books found.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                dr.Close();
+                conn.Close();
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSearchBook_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearchBook.Text))
+            {
+                MessageBox.Show("Please enter a title (or part of) to search for", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            LoadBooks(txtSearchBook.Text);
+            // Adding rows to my data grid (taken from https://stackoverflow.com/questions/15965043/how-to-add-rows-to-datagridview-winforms)
+            try
+            {
+                OracleConnection conn = DBConnection.GetConnection();
+                conn.Open();
+                // retrieve active books matching search title
+                string sql = @"SELECT BookTitle, Author, GenreCode, Price, StockAmount 
+                               FROM Books WHERE UPPER(BookTitle) LIKE '%' || UPPER(:searchTitle) || '%' 
+                               AND BookStatus='A'";
+                OracleCommand cmd = new OracleCommand(sql, conn);
+                cmd.Parameters.Add("searchTitle", txtSearchBook.Text);
+                OracleDataReader dr = cmd.ExecuteReader();
+                dgvBookListUpdate.Rows.Clear();
+                dgvBookListUpdate.Visible = true;
+                while (dr.Read())
+                {
+                    dgvBookListUpdate.Rows.Add(dr["BookTitle"].ToString(),
+                                               dr["Author"].ToString(),
+                                               dr["GenreCode"].ToString(),
+                                               dr["Price"].ToString(),
+                                               dr["StockAmount"].ToString());
+                }
+                    
+                if (dgvBookListUpdate.Rows.Count == 0)
+                {
+                    MessageBox.Show("Book not found.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                dr.Close();
+                conn.Close();
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void dgvBookListUpdate_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) return;
             grpUpdateBookDetails.Visible = true;
-            
 
             int rowIndex = e.RowIndex;
+            txtBookTitle.Text = dgvBookListUpdate.Rows[rowIndex].Cells[0].Value.ToString();
+            txtAuthor.Text = dgvBookListUpdate.Rows[rowIndex].Cells[1].Value.ToString();
+            txtPrice.Text = dgvBookListUpdate.Rows[rowIndex].Cells[3].Value.ToString();
+            txtStockAmount.Text = dgvBookListUpdate.Rows[rowIndex].Cells[4].Value.ToString();
 
-            string title = dgvBookListUpdate.Rows[rowIndex].Cells[0].Value.ToString();
-            string author = dgvBookListUpdate.Rows[rowIndex].Cells[1].Value.ToString();
-            string genre = dgvBookListUpdate.Rows[rowIndex].Cells[2].Value.ToString();
-            string price = dgvBookListUpdate.Rows[rowIndex].Cells[3].Value.ToString();
-            string stockAmount = dgvBookListUpdate.Rows[rowIndex].Cells[4].Value.ToString();
+            // load genres from db and set current genre
+            OracleConnection conn = DBConnection.GetConnection();
+            conn.Open();
+            string sql = "SELECT GenreCode, Description FROM Genres";
+            OracleCommand cmd = new OracleCommand(sql, conn);
+            OracleDataReader dr = cmd.ExecuteReader();
+            cmbGenre.Items.Clear();
+            string currentGenre = dgvBookListUpdate.Rows[rowIndex].Cells[2].Value.ToString();
+            while (dr.Read())
+            {
+                string item = dr["GenreCode"].ToString() + " - " + dr["Description"].ToString();
+                cmbGenre.Items.Add(item);
+                if (dr["GenreCode"].ToString() == currentGenre)
+                {
+                    cmbGenre.SelectedItem = item;
+                }
+            }
+            dr.Close();
+            conn.Close();
 
-            txtBookTitle.Text = title;
-            txtAuthor.Text = author;
-            cmbGenre.Text = genre;
-            txtPrice.Text = price;
-            txtStockAmount.Text = stockAmount;
-
+            _originalTitle = txtBookTitle.Text;
             captureOriginalValues();
         }
 
+        private void btnAdminLogout_Click(object sender, EventArgs e)
+        {
+            grpSearchBook.Visible = false;
+            grpUpdateBookDetails.Visible = false;
+            txtAdminLogin.Clear();
+            txtAdminPassword.Clear();
+            dgvBookListUpdate.Rows.Clear();
+        }
+
+        private void btnDiscontinueBook_Click(object sender, EventArgs e)
+        {
+            // set BookStatus to Discontinued (soft delete)
+            DialogResult result = MessageBox.Show("Are you sure you want to discontinue this book?", "Confirm", 
+                                                   MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    OracleConnection conn = DBConnection.GetConnection();
+                    conn.Open();
+                    string sql = "UPDATE Books SET BookStatus='D' WHERE BookTitle=:title";
+                    OracleCommand cmd = new OracleCommand(sql, conn);
+                    cmd.Parameters.Add("title", _originalTitle);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    MessageBox.Show("Book Discontinued.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dgvBookListUpdate.Rows.RemoveAt(dgvBookListUpdate.CurrentCell.RowIndex);
+                    grpUpdateBookDetails.Visible = false;
+                    LoadBooks("");
+                }
+                catch (OracleException ex)
+                {
+                    MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }

@@ -56,18 +56,30 @@
             this.lblPrice = new System.Windows.Forms.Label();
             this.lblAuthor = new System.Windows.Forms.Label();
             this.lblBookTitle = new System.Windows.Forms.Label();
-            this.txtSearchBarUpdate = new System.Windows.Forms.TextBox();
-            this.lblSearchBarUpdate = new System.Windows.Forms.Label();
-            this.btnSearchBarUpdate = new System.Windows.Forms.Button();
             this.dgvBookListUpdate = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Genre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StockAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grpAdminLogin = new System.Windows.Forms.GroupBox();
+            this.btnAdminLogout = new System.Windows.Forms.Button();
+            this.chbAdminHidePassword = new System.Windows.Forms.CheckBox();
+            this.btnAdminLogin = new System.Windows.Forms.Button();
+            this.lblAdminPassword = new System.Windows.Forms.Label();
+            this.lblAdminLogin = new System.Windows.Forms.Label();
+            this.txtAdminPassword = new System.Windows.Forms.TextBox();
+            this.txtAdminLogin = new System.Windows.Forms.TextBox();
+            this.btnDiscontinueBook = new System.Windows.Forms.Button();
+            this.grpSearchBook = new System.Windows.Forms.GroupBox();
+            this.btnSearchBook = new System.Windows.Forms.Button();
+            this.lblSearchBook = new System.Windows.Forms.Label();
+            this.txtSearchBook = new System.Windows.Forms.TextBox();
             this.mnuUpdateBookDetails.SuspendLayout();
             this.grpUpdateBookDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBookListUpdate)).BeginInit();
+            this.grpAdminLogin.SuspendLayout();
+            this.grpSearchBook.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnuUpdateBookDetails
@@ -81,7 +93,7 @@
             this.adminToolStripMenuItem});
             this.mnuUpdateBookDetails.Location = new System.Drawing.Point(0, 0);
             this.mnuUpdateBookDetails.Name = "mnuUpdateBookDetails";
-            this.mnuUpdateBookDetails.Size = new System.Drawing.Size(584, 24);
+            this.mnuUpdateBookDetails.Size = new System.Drawing.Size(665, 24);
             this.mnuUpdateBookDetails.TabIndex = 6;
             this.mnuUpdateBookDetails.Text = "Update Book Details Menu";
             // 
@@ -202,6 +214,7 @@
             // 
             // grpUpdateBookDetails
             // 
+            this.grpUpdateBookDetails.Controls.Add(this.btnDiscontinueBook);
             this.grpUpdateBookDetails.Controls.Add(this.cmbGenre);
             this.grpUpdateBookDetails.Controls.Add(this.txtStockAmount);
             this.grpUpdateBookDetails.Controls.Add(this.lblStockAmount);
@@ -214,9 +227,9 @@
             this.grpUpdateBookDetails.Controls.Add(this.lblAuthor);
             this.grpUpdateBookDetails.Controls.Add(this.lblBookTitle);
             this.grpUpdateBookDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpUpdateBookDetails.Location = new System.Drawing.Point(52, 309);
+            this.grpUpdateBookDetails.Location = new System.Drawing.Point(86, 363);
             this.grpUpdateBookDetails.Name = "grpUpdateBookDetails";
-            this.grpUpdateBookDetails.Size = new System.Drawing.Size(451, 227);
+            this.grpUpdateBookDetails.Size = new System.Drawing.Size(419, 227);
             this.grpUpdateBookDetails.TabIndex = 8;
             this.grpUpdateBookDetails.TabStop = false;
             this.grpUpdateBookDetails.Text = "Book Details";
@@ -270,7 +283,7 @@
             // btnUpdateBookDetails
             // 
             this.btnUpdateBookDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdateBookDetails.Location = new System.Drawing.Point(134, 192);
+            this.btnUpdateBookDetails.Location = new System.Drawing.Point(64, 192);
             this.btnUpdateBookDetails.Name = "btnUpdateBookDetails";
             this.btnUpdateBookDetails.Size = new System.Drawing.Size(146, 29);
             this.btnUpdateBookDetails.TabIndex = 14;
@@ -333,35 +346,6 @@
             this.lblBookTitle.TabIndex = 0;
             this.lblBookTitle.Text = "Title";
             // 
-            // txtSearchBarUpdate
-            // 
-            this.txtSearchBarUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchBarUpdate.Location = new System.Drawing.Point(213, 65);
-            this.txtSearchBarUpdate.Name = "txtSearchBarUpdate";
-            this.txtSearchBarUpdate.Size = new System.Drawing.Size(146, 26);
-            this.txtSearchBarUpdate.TabIndex = 16;
-            // 
-            // lblSearchBarUpdate
-            // 
-            this.lblSearchBarUpdate.AutoSize = true;
-            this.lblSearchBarUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearchBarUpdate.Location = new System.Drawing.Point(118, 68);
-            this.lblSearchBarUpdate.Name = "lblSearchBarUpdate";
-            this.lblSearchBarUpdate.Size = new System.Drawing.Size(81, 20);
-            this.lblSearchBarUpdate.TabIndex = 17;
-            this.lblSearchBarUpdate.Text = "Enter Title";
-            // 
-            // btnSearchBarUpdate
-            // 
-            this.btnSearchBarUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchBarUpdate.Location = new System.Drawing.Point(378, 65);
-            this.btnSearchBarUpdate.Name = "btnSearchBarUpdate";
-            this.btnSearchBarUpdate.Size = new System.Drawing.Size(75, 26);
-            this.btnSearchBarUpdate.TabIndex = 18;
-            this.btnSearchBarUpdate.Text = "Search";
-            this.btnSearchBarUpdate.UseVisualStyleBackColor = true;
-            this.btnSearchBarUpdate.Click += new System.EventHandler(this.btnSearchBar_Click);
-            // 
             // dgvBookListUpdate
             // 
             this.dgvBookListUpdate.AllowUserToAddRows = false;
@@ -372,10 +356,10 @@
             this.Genre,
             this.Price,
             this.StockAmount});
-            this.dgvBookListUpdate.Location = new System.Drawing.Point(26, 147);
+            this.dgvBookListUpdate.Location = new System.Drawing.Point(26, 242);
             this.dgvBookListUpdate.Name = "dgvBookListUpdate";
             this.dgvBookListUpdate.ReadOnly = true;
-            this.dgvBookListUpdate.Size = new System.Drawing.Size(546, 115);
+            this.dgvBookListUpdate.Size = new System.Drawing.Size(608, 115);
             this.dgvBookListUpdate.TabIndex = 19;
             this.dgvBookListUpdate.Visible = false;
             this.dgvBookListUpdate.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBookListUpdate_CellClick);
@@ -410,15 +394,150 @@
             this.StockAmount.Name = "StockAmount";
             this.StockAmount.ReadOnly = true;
             // 
+            // grpAdminLogin
+            // 
+            this.grpAdminLogin.Controls.Add(this.btnAdminLogout);
+            this.grpAdminLogin.Controls.Add(this.chbAdminHidePassword);
+            this.grpAdminLogin.Controls.Add(this.btnAdminLogin);
+            this.grpAdminLogin.Controls.Add(this.lblAdminPassword);
+            this.grpAdminLogin.Controls.Add(this.lblAdminLogin);
+            this.grpAdminLogin.Controls.Add(this.txtAdminPassword);
+            this.grpAdminLogin.Controls.Add(this.txtAdminLogin);
+            this.grpAdminLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpAdminLogin.Location = new System.Drawing.Point(86, 25);
+            this.grpAdminLogin.Name = "grpAdminLogin";
+            this.grpAdminLogin.Size = new System.Drawing.Size(419, 138);
+            this.grpAdminLogin.TabIndex = 20;
+            this.grpAdminLogin.TabStop = false;
+            this.grpAdminLogin.Text = "Admin Login";
+            // 
+            // btnAdminLogout
+            // 
+            this.btnAdminLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminLogout.Location = new System.Drawing.Point(235, 99);
+            this.btnAdminLogout.Name = "btnAdminLogout";
+            this.btnAdminLogout.Size = new System.Drawing.Size(79, 28);
+            this.btnAdminLogout.TabIndex = 11;
+            this.btnAdminLogout.Text = "Logout";
+            this.btnAdminLogout.UseVisualStyleBackColor = true;
+            this.btnAdminLogout.Click += new System.EventHandler(this.btnAdminLogout_Click);
+            // 
+            // chbAdminHidePassword
+            // 
+            this.chbAdminHidePassword.AutoSize = true;
+            this.chbAdminHidePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbAdminHidePassword.Location = new System.Drawing.Point(276, 70);
+            this.chbAdminHidePassword.Name = "chbAdminHidePassword";
+            this.chbAdminHidePassword.Size = new System.Drawing.Size(118, 20);
+            this.chbAdminHidePassword.TabIndex = 10;
+            this.chbAdminHidePassword.Text = "Hide Password";
+            this.chbAdminHidePassword.UseVisualStyleBackColor = true;
+            // 
+            // btnAdminLogin
+            // 
+            this.btnAdminLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminLogin.Location = new System.Drawing.Point(134, 99);
+            this.btnAdminLogin.Name = "btnAdminLogin";
+            this.btnAdminLogin.Size = new System.Drawing.Size(79, 28);
+            this.btnAdminLogin.TabIndex = 9;
+            this.btnAdminLogin.Text = "Login";
+            this.btnAdminLogin.UseVisualStyleBackColor = true;
+            this.btnAdminLogin.Click += new System.EventHandler(this.btnAdminLogin_Click);
+            // 
+            // lblAdminPassword
+            // 
+            this.lblAdminPassword.AutoSize = true;
+            this.lblAdminPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminPassword.Location = new System.Drawing.Point(22, 68);
+            this.lblAdminPassword.Name = "lblAdminPassword";
+            this.lblAdminPassword.Size = new System.Drawing.Size(78, 20);
+            this.lblAdminPassword.TabIndex = 8;
+            this.lblAdminPassword.Text = "Password";
+            // 
+            // lblAdminLogin
+            // 
+            this.lblAdminLogin.AutoSize = true;
+            this.lblAdminLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminLogin.Location = new System.Drawing.Point(22, 38);
+            this.lblAdminLogin.Name = "lblAdminLogin";
+            this.lblAdminLogin.Size = new System.Drawing.Size(48, 20);
+            this.lblAdminLogin.TabIndex = 8;
+            this.lblAdminLogin.Text = "Login";
+            // 
+            // txtAdminPassword
+            // 
+            this.txtAdminPassword.Location = new System.Drawing.Point(134, 67);
+            this.txtAdminPassword.Name = "txtAdminPassword";
+            this.txtAdminPassword.Size = new System.Drawing.Size(136, 26);
+            this.txtAdminPassword.TabIndex = 8;
+            // 
+            // txtAdminLogin
+            // 
+            this.txtAdminLogin.Location = new System.Drawing.Point(134, 35);
+            this.txtAdminLogin.Name = "txtAdminLogin";
+            this.txtAdminLogin.Size = new System.Drawing.Size(279, 26);
+            this.txtAdminLogin.TabIndex = 7;
+            // 
+            // btnDiscontinueBook
+            // 
+            this.btnDiscontinueBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDiscontinueBook.Location = new System.Drawing.Point(239, 192);
+            this.btnDiscontinueBook.Name = "btnDiscontinueBook";
+            this.btnDiscontinueBook.Size = new System.Drawing.Size(156, 29);
+            this.btnDiscontinueBook.TabIndex = 20;
+            this.btnDiscontinueBook.Text = "Discontinue";
+            this.btnDiscontinueBook.UseVisualStyleBackColor = true;
+            this.btnDiscontinueBook.Click += new System.EventHandler(this.btnDiscontinueBook_Click);
+            // 
+            // grpSearchBook
+            // 
+            this.grpSearchBook.Controls.Add(this.btnSearchBook);
+            this.grpSearchBook.Controls.Add(this.lblSearchBook);
+            this.grpSearchBook.Controls.Add(this.txtSearchBook);
+            this.grpSearchBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpSearchBook.Location = new System.Drawing.Point(86, 169);
+            this.grpSearchBook.Name = "grpSearchBook";
+            this.grpSearchBook.Size = new System.Drawing.Size(419, 67);
+            this.grpSearchBook.TabIndex = 21;
+            this.grpSearchBook.TabStop = false;
+            this.grpSearchBook.Visible = false;
+            // 
+            // btnSearchBook
+            // 
+            this.btnSearchBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchBook.Location = new System.Drawing.Point(326, 25);
+            this.btnSearchBook.Name = "btnSearchBook";
+            this.btnSearchBook.Size = new System.Drawing.Size(79, 28);
+            this.btnSearchBook.TabIndex = 9;
+            this.btnSearchBook.Text = "Search";
+            this.btnSearchBook.UseVisualStyleBackColor = true;
+            this.btnSearchBook.Click += new System.EventHandler(this.btnSearchBook_Click);
+            // 
+            // lblSearchBook
+            // 
+            this.lblSearchBook.AutoSize = true;
+            this.lblSearchBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSearchBook.Location = new System.Drawing.Point(19, 28);
+            this.lblSearchBook.Name = "lblSearchBook";
+            this.lblSearchBook.Size = new System.Drawing.Size(101, 20);
+            this.lblSearchBook.TabIndex = 8;
+            this.lblSearchBook.Text = "Search Book";
+            // 
+            // txtSearchBook
+            // 
+            this.txtSearchBook.Location = new System.Drawing.Point(131, 25);
+            this.txtSearchBook.Name = "txtSearchBook";
+            this.txtSearchBook.Size = new System.Drawing.Size(175, 26);
+            this.txtSearchBook.TabIndex = 7;
+            // 
             // frmUpdateBookDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 561);
+            this.ClientSize = new System.Drawing.Size(665, 665);
+            this.Controls.Add(this.grpSearchBook);
+            this.Controls.Add(this.grpAdminLogin);
             this.Controls.Add(this.dgvBookListUpdate);
-            this.Controls.Add(this.btnSearchBarUpdate);
-            this.Controls.Add(this.lblSearchBarUpdate);
-            this.Controls.Add(this.txtSearchBarUpdate);
             this.Controls.Add(this.grpUpdateBookDetails);
             this.Controls.Add(this.mnuUpdateBookDetails);
             this.Name = "frmUpdateBookDetails";
@@ -428,6 +547,10 @@
             this.grpUpdateBookDetails.ResumeLayout(false);
             this.grpUpdateBookDetails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBookListUpdate)).EndInit();
+            this.grpAdminLogin.ResumeLayout(false);
+            this.grpAdminLogin.PerformLayout();
+            this.grpSearchBook.ResumeLayout(false);
+            this.grpSearchBook.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -459,9 +582,6 @@
         private System.Windows.Forms.Label lblPrice;
         private System.Windows.Forms.Label lblAuthor;
         private System.Windows.Forms.Label lblBookTitle;
-        private System.Windows.Forms.TextBox txtSearchBarUpdate;
-        private System.Windows.Forms.Label lblSearchBarUpdate;
-        private System.Windows.Forms.Button btnSearchBarUpdate;
         private System.Windows.Forms.DataGridView dgvBookListUpdate;
         private System.Windows.Forms.ComboBox cmbGenre;
         private System.Windows.Forms.TextBox txtStockAmount;
@@ -472,5 +592,18 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Genre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn StockAmount;
+        private System.Windows.Forms.Button btnDiscontinueBook;
+        private System.Windows.Forms.GroupBox grpAdminLogin;
+        private System.Windows.Forms.Button btnAdminLogout;
+        private System.Windows.Forms.CheckBox chbAdminHidePassword;
+        private System.Windows.Forms.Button btnAdminLogin;
+        private System.Windows.Forms.Label lblAdminPassword;
+        private System.Windows.Forms.Label lblAdminLogin;
+        private System.Windows.Forms.TextBox txtAdminPassword;
+        private System.Windows.Forms.TextBox txtAdminLogin;
+        private System.Windows.Forms.GroupBox grpSearchBook;
+        private System.Windows.Forms.Button btnSearchBook;
+        private System.Windows.Forms.Label lblSearchBook;
+        private System.Windows.Forms.TextBox txtSearchBook;
     }
 }

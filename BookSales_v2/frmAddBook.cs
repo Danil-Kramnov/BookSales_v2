@@ -106,7 +106,6 @@ namespace BookSalesSys
                 string.IsNullOrWhiteSpace(txtBookTitle.Text) ||
                 string.IsNullOrWhiteSpace(txtPrice.Text) ||
                 string.IsNullOrWhiteSpace(txtStockAmount.Text) ||
-                string.IsNullOrWhiteSpace(cmbGenre.Text) ||
                 cmbGenre.SelectedIndex == -1)
             {
                 MessageBox.Show("All fields must be entered.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -135,7 +134,7 @@ namespace BookSalesSys
             }
 
             // Stock Amount Validation
-            if (!int.TryParse(txtStockAmount.Text, out int stockAmount) || stockAmount <= 0)
+            if (!int.TryParse(txtStockAmount.Text, out int stockAmount) || stockAmount < 0)
             {
                 MessageBox.Show("Stock amount must be a positive integer.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
