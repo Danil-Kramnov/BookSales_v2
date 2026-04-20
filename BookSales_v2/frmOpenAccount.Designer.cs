@@ -60,7 +60,6 @@
             this.catalogueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateBookDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.discontinueBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ordersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.placeOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -353,8 +352,7 @@
             // 
             this.catalogueToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addBookToolStripMenuItem,
-            this.updateBookDetailsToolStripMenuItem,
-            this.discontinueBookToolStripMenuItem});
+            this.updateBookDetailsToolStripMenuItem});
             this.catalogueToolStripMenuItem.Name = "catalogueToolStripMenuItem";
             this.catalogueToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
             this.catalogueToolStripMenuItem.Text = "Catalogue";
@@ -372,13 +370,6 @@
             this.updateBookDetailsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.updateBookDetailsToolStripMenuItem.Text = "Update Book Details";
             this.updateBookDetailsToolStripMenuItem.Click += new System.EventHandler(this.updateBookDetailsToolStripMenuItem_Click);
-            // 
-            // discontinueBookToolStripMenuItem
-            // 
-            this.discontinueBookToolStripMenuItem.Name = "discontinueBookToolStripMenuItem";
-            this.discontinueBookToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.discontinueBookToolStripMenuItem.Text = "Discontinue Book";
-            this.discontinueBookToolStripMenuItem.Click += new System.EventHandler(this.discontinueBookToolStripMenuItem_Click);
             // 
             // ordersToolStripMenuItem
             // 
@@ -476,7 +467,6 @@
         private System.Windows.Forms.ToolStripMenuItem catalogueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateBookDetailsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem discontinueBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ordersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem placeOrderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem returnBookToolStripMenuItem;

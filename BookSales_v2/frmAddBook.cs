@@ -51,12 +51,6 @@ namespace BookSalesSys
             frm.Show();
         }
 
-        private void discontinueBookToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-            frmDiscontinueBook frm = new frmDiscontinueBook();
-            frm.Show();
-        }
 
         private void placeOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {

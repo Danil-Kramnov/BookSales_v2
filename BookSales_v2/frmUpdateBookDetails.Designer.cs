@@ -37,7 +37,6 @@
             this.catalogueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateBookDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.discontinueBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ordersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.placeOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,6 +44,7 @@
             this.yearlyRevenueAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.genreAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grpUpdateBookDetails = new System.Windows.Forms.GroupBox();
+            this.btnDiscontinueBook = new System.Windows.Forms.Button();
             this.cmbGenre = new System.Windows.Forms.ComboBox();
             this.txtStockAmount = new System.Windows.Forms.TextBox();
             this.lblStockAmount = new System.Windows.Forms.Label();
@@ -70,7 +70,6 @@
             this.lblAdminLogin = new System.Windows.Forms.Label();
             this.txtAdminPassword = new System.Windows.Forms.TextBox();
             this.txtAdminLogin = new System.Windows.Forms.TextBox();
-            this.btnDiscontinueBook = new System.Windows.Forms.Button();
             this.grpSearchBook = new System.Windows.Forms.GroupBox();
             this.btnSearchBook = new System.Windows.Forms.Button();
             this.lblSearchBook = new System.Windows.Forms.Label();
@@ -140,8 +139,7 @@
             // 
             this.catalogueToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addBookToolStripMenuItem,
-            this.updateBookDetailsToolStripMenuItem,
-            this.discontinueBookToolStripMenuItem});
+            this.updateBookDetailsToolStripMenuItem});
             this.catalogueToolStripMenuItem.Name = "catalogueToolStripMenuItem";
             this.catalogueToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
             this.catalogueToolStripMenuItem.Text = "Catalogue";
@@ -158,13 +156,6 @@
             this.updateBookDetailsToolStripMenuItem.Name = "updateBookDetailsToolStripMenuItem";
             this.updateBookDetailsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.updateBookDetailsToolStripMenuItem.Text = "Update Book Details";
-            // 
-            // discontinueBookToolStripMenuItem
-            // 
-            this.discontinueBookToolStripMenuItem.Name = "discontinueBookToolStripMenuItem";
-            this.discontinueBookToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.discontinueBookToolStripMenuItem.Text = "Discontinue Book";
-            this.discontinueBookToolStripMenuItem.Click += new System.EventHandler(this.discontinueBookToolStripMenuItem_Click);
             // 
             // ordersToolStripMenuItem
             // 
@@ -234,6 +225,17 @@
             this.grpUpdateBookDetails.TabStop = false;
             this.grpUpdateBookDetails.Text = "Book Details";
             this.grpUpdateBookDetails.Visible = false;
+            // 
+            // btnDiscontinueBook
+            // 
+            this.btnDiscontinueBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDiscontinueBook.Location = new System.Drawing.Point(239, 192);
+            this.btnDiscontinueBook.Name = "btnDiscontinueBook";
+            this.btnDiscontinueBook.Size = new System.Drawing.Size(156, 29);
+            this.btnDiscontinueBook.TabIndex = 20;
+            this.btnDiscontinueBook.Text = "Discontinue";
+            this.btnDiscontinueBook.UseVisualStyleBackColor = true;
+            this.btnDiscontinueBook.Click += new System.EventHandler(this.btnDiscontinueBook_Click);
             // 
             // cmbGenre
             // 
@@ -314,6 +316,7 @@
             this.txtBookTitle.Location = new System.Drawing.Point(134, 34);
             this.txtBookTitle.MaxLength = 30;
             this.txtBookTitle.Name = "txtBookTitle";
+            this.txtBookTitle.ReadOnly = true;
             this.txtBookTitle.Size = new System.Drawing.Size(279, 26);
             this.txtBookTitle.TabIndex = 7;
             this.txtBookTitle.Tag = "";
@@ -478,17 +481,6 @@
             this.txtAdminLogin.Size = new System.Drawing.Size(279, 26);
             this.txtAdminLogin.TabIndex = 7;
             // 
-            // btnDiscontinueBook
-            // 
-            this.btnDiscontinueBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDiscontinueBook.Location = new System.Drawing.Point(239, 192);
-            this.btnDiscontinueBook.Name = "btnDiscontinueBook";
-            this.btnDiscontinueBook.Size = new System.Drawing.Size(156, 29);
-            this.btnDiscontinueBook.TabIndex = 20;
-            this.btnDiscontinueBook.Text = "Discontinue";
-            this.btnDiscontinueBook.UseVisualStyleBackColor = true;
-            this.btnDiscontinueBook.Click += new System.EventHandler(this.btnDiscontinueBook_Click);
-            // 
             // grpSearchBook
             // 
             this.grpSearchBook.Controls.Add(this.btnSearchBook);
@@ -567,7 +559,6 @@
         private System.Windows.Forms.ToolStripMenuItem catalogueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateBookDetailsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem discontinueBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ordersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem placeOrderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem returnBookToolStripMenuItem;

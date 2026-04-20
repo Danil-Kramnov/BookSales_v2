@@ -37,7 +37,6 @@
             this.catalogueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateBookDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.discontinueBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ordersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.placeOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,13 +56,13 @@
             this.lblAuthor = new System.Windows.Forms.Label();
             this.lblBookTitle = new System.Windows.Forms.Label();
             this.grpAdminLogin = new System.Windows.Forms.GroupBox();
+            this.btnAdminLogout = new System.Windows.Forms.Button();
             this.chbAdminHidePassword = new System.Windows.Forms.CheckBox();
             this.btnAdminLogin = new System.Windows.Forms.Button();
             this.lblAdminPassword = new System.Windows.Forms.Label();
             this.lblAdminLogin = new System.Windows.Forms.Label();
             this.txtAdminPassword = new System.Windows.Forms.TextBox();
             this.txtAdminLogin = new System.Windows.Forms.TextBox();
-            this.btnAdminLogout = new System.Windows.Forms.Button();
             this.mnuAddBook.SuspendLayout();
             this.grpAddBook.SuspendLayout();
             this.grpAdminLogin.SuspendLayout();
@@ -127,8 +126,7 @@
             // 
             this.catalogueToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addBookToolStripMenuItem,
-            this.updateBookDetailsToolStripMenuItem,
-            this.discontinueBookToolStripMenuItem});
+            this.updateBookDetailsToolStripMenuItem});
             this.catalogueToolStripMenuItem.Name = "catalogueToolStripMenuItem";
             this.catalogueToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
             this.catalogueToolStripMenuItem.Text = "Catalogue";
@@ -145,13 +143,6 @@
             this.updateBookDetailsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.updateBookDetailsToolStripMenuItem.Text = "Update Book Details";
             this.updateBookDetailsToolStripMenuItem.Click += new System.EventHandler(this.updateBookDetailsToolStripMenuItem_Click);
-            // 
-            // discontinueBookToolStripMenuItem
-            // 
-            this.discontinueBookToolStripMenuItem.Name = "discontinueBookToolStripMenuItem";
-            this.discontinueBookToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.discontinueBookToolStripMenuItem.Text = "Discontinue Book";
-            this.discontinueBookToolStripMenuItem.Click += new System.EventHandler(this.discontinueBookToolStripMenuItem_Click);
             // 
             // ordersToolStripMenuItem
             // 
@@ -344,6 +335,17 @@
             this.grpAdminLogin.TabStop = false;
             this.grpAdminLogin.Text = "Admin Login";
             // 
+            // btnAdminLogout
+            // 
+            this.btnAdminLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminLogout.Location = new System.Drawing.Point(235, 99);
+            this.btnAdminLogout.Name = "btnAdminLogout";
+            this.btnAdminLogout.Size = new System.Drawing.Size(79, 28);
+            this.btnAdminLogout.TabIndex = 11;
+            this.btnAdminLogout.Text = "Logout";
+            this.btnAdminLogout.UseVisualStyleBackColor = true;
+            this.btnAdminLogout.Click += new System.EventHandler(this.btnAdminLogout_Click);
+            // 
             // chbAdminHidePassword
             // 
             this.chbAdminHidePassword.AutoSize = true;
@@ -401,17 +403,6 @@
             this.txtAdminLogin.Size = new System.Drawing.Size(279, 26);
             this.txtAdminLogin.TabIndex = 7;
             // 
-            // btnAdminLogout
-            // 
-            this.btnAdminLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdminLogout.Location = new System.Drawing.Point(235, 99);
-            this.btnAdminLogout.Name = "btnAdminLogout";
-            this.btnAdminLogout.Size = new System.Drawing.Size(79, 28);
-            this.btnAdminLogout.TabIndex = 11;
-            this.btnAdminLogout.Text = "Logout";
-            this.btnAdminLogout.UseVisualStyleBackColor = true;
-            this.btnAdminLogout.Click += new System.EventHandler(this.btnAdminLogout_Click);
-            // 
             // frmAddBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -443,7 +434,6 @@
         private System.Windows.Forms.ToolStripMenuItem catalogueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateBookDetailsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem discontinueBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ordersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem placeOrderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem returnBookToolStripMenuItem;

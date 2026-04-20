@@ -48,12 +48,6 @@ namespace BookSalesSys
             nextForm.Show();
         }
 
-        private void discontinueBookToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Hide();
-            frmDiscontinueBook nextForm = new frmDiscontinueBook(this);
-            nextForm.Show();
-        }
 
         private void placeSaleToolStripMenuItem_Click(object sender, EventArgs e)
         {

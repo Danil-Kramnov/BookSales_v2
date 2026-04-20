@@ -35,7 +35,6 @@
             this.salesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateBookDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.discontinueBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.placeSaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,8 +86,7 @@
             // 
             this.salesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addBookToolStripMenuItem,
-            this.updateBookDetailsToolStripMenuItem,
-            this.discontinueBookToolStripMenuItem});
+            this.updateBookDetailsToolStripMenuItem});
             this.salesToolStripMenuItem.Name = "salesToolStripMenuItem";
             this.salesToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
             this.salesToolStripMenuItem.Text = "Catalogue";
@@ -107,13 +105,6 @@
             this.updateBookDetailsToolStripMenuItem.Text = "Update Book Details";
             this.updateBookDetailsToolStripMenuItem.Click += new System.EventHandler(this.updateBookDetailsToolStripMenuItem_Click);
             // 
-            // discontinueBookToolStripMenuItem
-            // 
-            this.discontinueBookToolStripMenuItem.Name = "discontinueBookToolStripMenuItem";
-            this.discontinueBookToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.discontinueBookToolStripMenuItem.Text = "Discontinue Book";
-            this.discontinueBookToolStripMenuItem.Click += new System.EventHandler(this.discontinueBookToolStripMenuItem_Click);
-            // 
             // adminToolStripMenuItem
             // 
             this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -126,14 +117,14 @@
             // placeSaleToolStripMenuItem
             // 
             this.placeSaleToolStripMenuItem.Name = "placeSaleToolStripMenuItem";
-            this.placeSaleToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.placeSaleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.placeSaleToolStripMenuItem.Text = "Place Order";
             this.placeSaleToolStripMenuItem.Click += new System.EventHandler(this.placeSaleToolStripMenuItem_Click);
             // 
             // returnBookToolStripMenuItem
             // 
             this.returnBookToolStripMenuItem.Name = "returnBookToolStripMenuItem";
-            this.returnBookToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.returnBookToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.returnBookToolStripMenuItem.Text = "Return Book";
             this.returnBookToolStripMenuItem.Click += new System.EventHandler(this.returnBookToolStripMenuItem_Click);
             // 
@@ -149,14 +140,14 @@
             // produceYearlyRevenueAnalysisToolStripMenuItem
             // 
             this.produceYearlyRevenueAnalysisToolStripMenuItem.Name = "produceYearlyRevenueAnalysisToolStripMenuItem";
-            this.produceYearlyRevenueAnalysisToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.produceYearlyRevenueAnalysisToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.produceYearlyRevenueAnalysisToolStripMenuItem.Text = "Yearly Revenue";
             this.produceYearlyRevenueAnalysisToolStripMenuItem.Click += new System.EventHandler(this.produceYearlyRevenueAnalysisToolStripMenuItem_Click);
             // 
             // produceToolStripMenuItem
             // 
             this.produceToolStripMenuItem.Name = "produceToolStripMenuItem";
-            this.produceToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.produceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.produceToolStripMenuItem.Text = "Genre Analysis";
             this.produceToolStripMenuItem.Click += new System.EventHandler(this.produceToolStripMenuItem_Click);
             // 
@@ -198,7 +189,6 @@
         private System.Windows.Forms.ToolStripMenuItem updateAccountDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateBookDetailsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem discontinueBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem placeSaleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem returnBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem produceYearlyRevenueAnalysisToolStripMenuItem;
