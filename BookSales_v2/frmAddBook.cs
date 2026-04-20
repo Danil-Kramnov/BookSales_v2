@@ -106,7 +106,8 @@ namespace BookSalesSys
                 string.IsNullOrWhiteSpace(txtBookTitle.Text) ||
                 string.IsNullOrWhiteSpace(txtPrice.Text) ||
                 string.IsNullOrWhiteSpace(txtStockAmount.Text) ||
-                string.IsNullOrWhiteSpace(cmbGenre.Text))
+                string.IsNullOrWhiteSpace(cmbGenre.Text) ||
+                cmbGenre.SelectedIndex == -1)
             {
                 MessageBox.Show("All fields must be entered.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -186,10 +187,9 @@ namespace BookSalesSys
 
         private void btnAdminLogin_Click(object sender, EventArgs e)
         {
-            if (txtAdminPassword.Text != "admin")
+            if (txtAdminLogin.Text != "admin" || txtAdminPassword.Text != "admin")
             {
-                MessageBox.Show("Invalid admin password.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Invalid admin password.", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -219,6 +219,13 @@ namespace BookSalesSys
             {
                 txtAdminPassword.UseSystemPasswordChar = false;
             }
+        }
+
+        private void btnAdminLogout_Click(object sender, EventArgs e)
+        {
+            grpAddBook.Visible = false;
+            txtAdminLogin.Clear();
+            txtAdminPassword.Clear();
         }
     }
 }
