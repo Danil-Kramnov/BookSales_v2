@@ -324,5 +324,10 @@ namespace BookSalesSys
                 }
             }
         }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            grpUpdateAccountDetails.Visible = false;
+        }
     }
 }

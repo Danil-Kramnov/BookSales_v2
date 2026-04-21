@@ -73,6 +73,7 @@
             this.lblLoginEmail = new System.Windows.Forms.Label();
             this.txtLoginPassword = new System.Windows.Forms.TextBox();
             this.txtLoginEmail = new System.Windows.Forms.TextBox();
+            this.btnLogout = new System.Windows.Forms.Button();
             this.grpUpdateAccountDetails.SuspendLayout();
             this.mnuUpdateAccountDetails.SuspendLayout();
             this.grpCredentials.SuspendLayout();
@@ -437,6 +438,7 @@
             // 
             // grpCredentials
             // 
+            this.grpCredentials.Controls.Add(this.btnLogout);
             this.grpCredentials.Controls.Add(this.chbLoginHidePassword);
             this.grpCredentials.Controls.Add(this.btnLoadAccountDetails);
             this.grpCredentials.Controls.Add(this.lblLoginPassword);
@@ -449,7 +451,7 @@
             this.grpCredentials.Size = new System.Drawing.Size(458, 156);
             this.grpCredentials.TabIndex = 7;
             this.grpCredentials.TabStop = false;
-            this.grpCredentials.Text = "Enter Credentials";
+            this.grpCredentials.Text = "Customer Login";
             // 
             // chbLoginHidePassword
             // 
@@ -465,7 +467,7 @@
             // 
             // btnLoadAccountDetails
             // 
-            this.btnLoadAccountDetails.Location = new System.Drawing.Point(190, 109);
+            this.btnLoadAccountDetails.Location = new System.Drawing.Point(134, 99);
             this.btnLoadAccountDetails.Name = "btnLoadAccountDetails";
             this.btnLoadAccountDetails.Size = new System.Drawing.Size(79, 28);
             this.btnLoadAccountDetails.TabIndex = 9;
@@ -506,6 +508,16 @@
             this.txtLoginEmail.Name = "txtLoginEmail";
             this.txtLoginEmail.Size = new System.Drawing.Size(275, 26);
             this.txtLoginEmail.TabIndex = 7;
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Location = new System.Drawing.Point(238, 99);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(79, 28);
+            this.btnLogout.TabIndex = 11;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // frmUpdateAccountDetails
             // 
@@ -575,5 +587,6 @@
         private System.Windows.Forms.Button btnCloseAccount;
         private System.Windows.Forms.Button btnLoadAccountDetails;
         private System.Windows.Forms.CheckBox chbLoginHidePassword;
+        private System.Windows.Forms.Button btnLogout;
     }
 }

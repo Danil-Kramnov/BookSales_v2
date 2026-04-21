@@ -10,13 +10,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using Microsoft.VisualBasic;
+using Oracle.ManagedDataAccess.Client;
 
 namespace BookSalesSys
 {
     public partial class frmPlaceOrder : Form
     {
         frmMainMenu Parent;
-        
+
+        private int _customerID;
+
         public frmPlaceOrder()
         {
             InitializeComponent();
@@ -94,48 +97,37 @@ namespace BookSalesSys
             Application.Exit();
         }
 
-        private void btnSearchBarOrder_Click(object sender, EventArgs e)
-        {
-            // Check if search string not empty
-            if (string.IsNullOrWhiteSpace(txtSearchBarOrder.Text))
-            {
-                MessageBox.Show("Please enter a title (or part of) to search for", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            grpPlaceOrderSelectBook.Visible = true;
-            dgvPlaceOrderSelectBook.Rows.Clear();
-            dgvPlaceOrderSelectBook.Rows.Add("Running Grave", "Rober Galbraith", "€18");
-            dgvPlaceOrderSelectBook.Rows.Add("The Graveyard Book", "Neil Gaiman", "€12");
-            dgvPlaceOrderSelectBook.Rows.Add("Grave Intentions", "Harith Athreya", "€23");
-        }
 
         private void dgvPlaceOrderSelectBook_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Pops up window to ask about how many of this book you want to order for each click (taken from https://stackoverflow.com/questions/16463599/popup-window-in-winform-c-sharp)
-            string prompt = Interaction.InputBox("How many books you want to order?", "Quantity", "1", 0,0);
-            
-            if(int.TryParse(prompt,out int numericPrompt) && numericPrompt > 0)
+            if (e.RowIndex < 0) return;
+
+            // Pops up window to ask about how many of this book you want to order
+            // (taken from https://stackoverflow.com/questions/16463599/popup-window-in-winform-c-sharp)
+            string prompt = Interaction.InputBox("How many books you want to order?", "Quantity", "1", 0, 0);
+
+            if (int.TryParse(prompt, out int numericPrompt) && numericPrompt > 0)
             {
                 int rowIndex = e.RowIndex;
-
-                string author = dgvPlaceOrderSelectBook.Rows[rowIndex].Cells[0].Value.ToString();
-                string title = dgvPlaceOrderSelectBook.Rows[rowIndex].Cells[1].Value.ToString();
+                string title = dgvPlaceOrderSelectBook.Rows[rowIndex].Cells[0].Value.ToString();
+                string author = dgvPlaceOrderSelectBook.Rows[rowIndex].Cells[1].Value.ToString();
                 string price = dgvPlaceOrderSelectBook.Rows[rowIndex].Cells[2].Value.ToString();
 
-
-                dgvPlaceOrderCart.Rows.Add(author, title, price, prompt, "X");
-
-                if (dgvPlaceOrderCart.Rows.Count > 0)
+                // validate quantity against stock
+                int stock = int.Parse(dgvPlaceOrderSelectBook.Rows[rowIndex].Cells[3].Value.ToString());
+                if (numericPrompt > stock)
                 {
-                    grpPlaceOrderCart.Visible = true;
+                    MessageBox.Show("Insufficient stock. Only " + stock + " available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
+
+                dgvPlaceOrderCart.Rows.Add(title, author, price, prompt, "X");
+                grpPlaceOrderCart.Visible = true;
             }
             else
             {
-                MessageBox.Show("Please enter the positive whole number", "Confirm", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a positive whole number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
 
@@ -153,7 +145,7 @@ namespace BookSalesSys
             decimal bookPrice;
             decimal totalPrice = 0;
 
-            //Add new rows for each click (referencing this source https://learn.microsoft.com/en-us/dotnet/api/system.string.substring?view=net-9.0)
+            // add new rows for each click (referencing this source https://learn.microsoft.com/en-us/dotnet/api/system.string.substring?view=net-9.0)
             for (int i = 0; dgvPlaceOrderCart.Rows.Count > i; i++)
             {
                 title = dgvPlaceOrderCart.Rows[i].Cells[0].Value.ToString();
@@ -174,12 +166,74 @@ namespace BookSalesSys
 
         private void btnPlaceOrderBuy_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Thank you for your order", "Confirm", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            grpPlaceOrderCart.Visible=false;
-            grpPlaceOrderCheckout.Visible=false;
-            dgvPlaceOrderCart.Rows.Clear();
-            dgvPlaceOrderCheckout.Rows.Clear();
-            dgvPlaceOrderTotalPrice.Rows.Clear();
+            // transaction basics: https://medium.com/bytehide/transactions-in-dotnet-b469826575a0
+            OracleConnection conn = DBConnection.GetConnection();
+            OracleTransaction transaction = null;
+            try
+            {
+                conn.Open();
+                transaction = conn.BeginTransaction();
+
+                // get next OrderID and insert into Orders
+                string getID = "SELECT orders_seq.NEXTVAL FROM dual"; // needed OrderID before inserting OrderedBooks rows: https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/Selecting-from-the-DUAL-Table.html
+                OracleCommand idCmd = new OracleCommand(getID, conn);
+                int orderID = Convert.ToInt32(idCmd.ExecuteScalar()); // needed one value from the query: https://learn.microsoft.com/en-us/dotnet/api/system.data.oracleclient.oraclecommand.executescalar?view=netframework-4.8.1
+
+                decimal totalPrice = decimal.Parse(dgvPlaceOrderTotalPrice.Rows[0].Cells[0].Value.ToString().Substring(1));
+
+                string orderSql = @"INSERT INTO Orders (OrderID, AccountID, TotalPrice, DateOrdered)
+                                    VALUES(:orderID, :accountID, :totalPrice, SYSDATE)";
+                OracleCommand orderCmd = new OracleCommand(orderSql, conn);
+                orderCmd.Parameters.Add("orderID", orderID);
+                orderCmd.Parameters.Add("accountID", _customerID);
+                orderCmd.Parameters.Add("totalPrice", totalPrice);
+                orderCmd.ExecuteNonQuery();
+
+                // for each cart item insert OrderedBooks + reduce stock
+                for (int i = 0; i < dgvPlaceOrderCart.Rows.Count; i++)
+                {
+                    string title = dgvPlaceOrderCart.Rows[i].Cells[0].Value.ToString();
+                    decimal price = decimal.Parse(dgvPlaceOrderCart.Rows[i].Cells[2].Value.ToString().Substring(1));
+                    int qty = int.Parse(dgvPlaceOrderCart.Rows[i].Cells[3].Value.ToString());
+
+                    string obSql = @"INSERT INTO OrderedBooks (OrderID, BookTitle, QtyOrdered, OrderPrice)
+                                     VALUES(:orderID, :title, :qty, :price)";
+                    OracleCommand orderedbooksCmd = new OracleCommand(obSql, conn);
+                    orderedbooksCmd.Parameters.Add("orderID", orderID);
+                    orderedbooksCmd.Parameters.Add("title", title);
+                    orderedbooksCmd.Parameters.Add("qty", qty);
+                    orderedbooksCmd.Parameters.Add("price", price * qty);
+                    orderedbooksCmd.ExecuteNonQuery();
+
+                    // reduce stock
+                    string stockSql = @"UPDATE Books SET StockAmount = StockAmount - :qty
+                                        WHERE BookTitle = :title";
+                    OracleCommand stockCmd = new OracleCommand(stockSql, conn);
+                    stockCmd.Parameters.Add("qty", qty);
+                    stockCmd.Parameters.Add("title", title);
+                    stockCmd.ExecuteNonQuery();
+                }
+
+                transaction.Commit();
+                MessageBox.Show("Thank you for your order!", "Confirm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // reset UI
+                grpPlaceOrderCart.Visible = false;
+                grpPlaceOrderCheckout.Visible = false;
+                dgvPlaceOrderCart.Rows.Clear();
+                dgvPlaceOrderCheckout.Rows.Clear();
+                dgvPlaceOrderTotalPrice.Rows.Clear();
+                LoadBooks("");
+            }
+            catch (Exception ex)
+            {
+                transaction?.Rollback(); // fix null reference exception: https://stackoverflow.com/questions/4660142/what-is-a-nullreferenceexception-and-how-do-i-fix-it
+                MessageBox.Show("Order failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         private void dgvPlaceOrderCart_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -226,6 +280,108 @@ namespace BookSalesSys
                     
                 }
             }
+        }
+
+        
+
+        private void btnLoadCustomer_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtOrderEmail.Text) || string.IsNullOrWhiteSpace(txtOrderPassword.Text))
+            {
+                MessageBox.Show("Please enter email and password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                OracleConnection conn = DBConnection.GetConnection();
+                conn.Open();
+                string sql = @"SELECT AccountID FROM Accounts 
+                               WHERE Email=:email
+                               AND Password=:pwd 
+                               AND Status='A'";
+                OracleCommand cmd = new OracleCommand(sql, conn);
+                cmd.Parameters.Add("email", txtOrderEmail.Text);
+                cmd.Parameters.Add("pwd", txtOrderPassword.Text);
+                OracleDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    _customerID = Convert.ToInt32(dr["AccountID"]);
+                    dr.Close();
+                    conn.Close();
+                    grpOrderSearch.Visible = true;
+                    LoadBooks("");
+                }
+                else
+                {
+                    dr.Close();
+                    conn.Close();
+                    MessageBox.Show("Account not found or already closed.", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadBooks(string search)
+        {
+            try
+            {
+                OracleConnection conn = DBConnection.GetConnection();
+                conn.Open();
+                // retrieve active books matching search
+                string sql = @"SELECT BookTitle, Author, Price, StockAmount 
+                               FROM Books WHERE UPPER(BookTitle) LIKE '%' || UPPER(:search) || '%'
+                               AND BookStatus='A'";
+                OracleCommand cmd = new OracleCommand(sql, conn);
+                cmd.Parameters.Add("search", search);
+                OracleDataReader dr = cmd.ExecuteReader();
+                grpPlaceOrderSelectBook.Visible = true;
+                dgvPlaceOrderSelectBook.Rows.Clear();
+                while (dr.Read())
+                {
+                    dgvPlaceOrderSelectBook.Rows.Add(dr["BookTitle"].ToString(),
+                                                     dr["Author"].ToString(),
+                                                     "€" + dr["Price"].ToString(),
+                                                     dr["StockAmount"].ToString());
+                }
+                    
+                dr.Close();
+                conn.Close();
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            _customerID = 0;
+            grpOrderSearch.Visible = false;
+            grpPlaceOrderSelectBook.Visible = false;
+            grpPlaceOrderCart.Visible = false;
+            grpPlaceOrderCheckout.Visible = false;
+            txtOrderEmail.Clear();
+            txtOrderPassword.Clear();
+            dgvPlaceOrderCart.Rows.Clear();
+            dgvPlaceOrderCheckout.Rows.Clear();
+            dgvPlaceOrderTotalPrice.Rows.Clear();
+        }
+
+        private void btnOrderSearch_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtOrderSearch.Text))
+            {
+                LoadBooks("");
+                return;
+            }
+            LoadBooks(txtOrderSearch.Text);
         }
     }
 }

@@ -47,11 +47,7 @@
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnSearchBarPlaceOrder = new System.Windows.Forms.Button();
-            this.lblSearchBarOrder = new System.Windows.Forms.Label();
-            this.txtSearchBarOrder = new System.Windows.Forms.TextBox();
-            this.lblAccountIdOrder = new System.Windows.Forms.Label();
-            this.txtAccountIdOrder = new System.Windows.Forms.TextBox();
+            this.StockAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvPlaceOrderCart = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,6 +66,18 @@
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnPlaceOrderBuy = new System.Windows.Forms.Button();
+            this.grpCustomerLogin = new System.Windows.Forms.GroupBox();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.chbOrderHidePassword = new System.Windows.Forms.CheckBox();
+            this.btnLoadCustomer = new System.Windows.Forms.Button();
+            this.lblLoginPassword = new System.Windows.Forms.Label();
+            this.lblLoginEmail = new System.Windows.Forms.Label();
+            this.txtOrderPassword = new System.Windows.Forms.TextBox();
+            this.txtOrderEmail = new System.Windows.Forms.TextBox();
+            this.grpOrderSearch = new System.Windows.Forms.GroupBox();
+            this.btnOrderSearch = new System.Windows.Forms.Button();
+            this.lblOrderSearch = new System.Windows.Forms.Label();
+            this.txtOrderSearch = new System.Windows.Forms.TextBox();
             this.mnuPlaceOrder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderSelectBook)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderCart)).BeginInit();
@@ -78,6 +86,8 @@
             this.grpPlaceOrderCheckout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderTotalPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderCheckout)).BeginInit();
+            this.grpCustomerLogin.SuspendLayout();
+            this.grpOrderSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnuPlaceOrder
@@ -91,7 +101,7 @@
             this.adminToolStripMenuItem});
             this.mnuPlaceOrder.Location = new System.Drawing.Point(0, 0);
             this.mnuPlaceOrder.Name = "mnuPlaceOrder";
-            this.mnuPlaceOrder.Size = new System.Drawing.Size(1171, 24);
+            this.mnuPlaceOrder.Size = new System.Drawing.Size(941, 24);
             this.mnuPlaceOrder.TabIndex = 6;
             this.mnuPlaceOrder.Text = "Place Order Menu";
             // 
@@ -169,13 +179,13 @@
             // placeOrderToolStripMenuItem
             // 
             this.placeOrderToolStripMenuItem.Name = "placeOrderToolStripMenuItem";
-            this.placeOrderToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.placeOrderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.placeOrderToolStripMenuItem.Text = "Place Order";
             // 
             // returnBookToolStripMenuItem
             // 
             this.returnBookToolStripMenuItem.Name = "returnBookToolStripMenuItem";
-            this.returnBookToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.returnBookToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.returnBookToolStripMenuItem.Text = "Return Book";
             this.returnBookToolStripMenuItem.Click += new System.EventHandler(this.returnBookToolStripMenuItem_Click);
             // 
@@ -209,12 +219,13 @@
             this.dgvPlaceOrderSelectBook.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.Author,
-            this.Price});
+            this.Price,
+            this.StockAmount});
             this.dgvPlaceOrderSelectBook.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.dgvPlaceOrderSelectBook.Location = new System.Drawing.Point(6, 37);
             this.dgvPlaceOrderSelectBook.Name = "dgvPlaceOrderSelectBook";
             this.dgvPlaceOrderSelectBook.ReadOnly = true;
-            this.dgvPlaceOrderSelectBook.Size = new System.Drawing.Size(293, 115);
+            this.dgvPlaceOrderSelectBook.Size = new System.Drawing.Size(399, 115);
             this.dgvPlaceOrderSelectBook.TabIndex = 23;
             this.dgvPlaceOrderSelectBook.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlaceOrderSelectBook_CellContentClick);
             // 
@@ -237,55 +248,12 @@
             this.Price.ReadOnly = true;
             this.Price.Width = 50;
             // 
-            // btnSearchBarPlaceOrder
+            // StockAmount
             // 
-            this.btnSearchBarPlaceOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchBarPlaceOrder.Location = new System.Drawing.Point(272, 67);
-            this.btnSearchBarPlaceOrder.Name = "btnSearchBarPlaceOrder";
-            this.btnSearchBarPlaceOrder.Size = new System.Drawing.Size(75, 26);
-            this.btnSearchBarPlaceOrder.TabIndex = 22;
-            this.btnSearchBarPlaceOrder.Text = "Search";
-            this.btnSearchBarPlaceOrder.UseVisualStyleBackColor = true;
-            this.btnSearchBarPlaceOrder.Click += new System.EventHandler(this.btnSearchBarOrder_Click);
-            // 
-            // lblSearchBarOrder
-            // 
-            this.lblSearchBarOrder.AutoSize = true;
-            this.lblSearchBarOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearchBarOrder.Location = new System.Drawing.Point(12, 70);
-            this.lblSearchBarOrder.Name = "lblSearchBarOrder";
-            this.lblSearchBarOrder.Size = new System.Drawing.Size(81, 20);
-            this.lblSearchBarOrder.TabIndex = 21;
-            this.lblSearchBarOrder.Text = "Enter Title";
-            // 
-            // txtSearchBarOrder
-            // 
-            this.txtSearchBarOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchBarOrder.Location = new System.Drawing.Point(107, 67);
-            this.txtSearchBarOrder.Name = "txtSearchBarOrder";
-            this.txtSearchBarOrder.Size = new System.Drawing.Size(146, 26);
-            this.txtSearchBarOrder.TabIndex = 20;
-            // 
-            // lblAccountIdOrder
-            // 
-            this.lblAccountIdOrder.AutoSize = true;
-            this.lblAccountIdOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAccountIdOrder.Location = new System.Drawing.Point(496, 30);
-            this.lblAccountIdOrder.Name = "lblAccountIdOrder";
-            this.lblAccountIdOrder.Size = new System.Drawing.Size(89, 20);
-            this.lblAccountIdOrder.TabIndex = 25;
-            this.lblAccountIdOrder.Text = "Account ID";
-            // 
-            // txtAccountIdOrder
-            // 
-            this.txtAccountIdOrder.Enabled = false;
-            this.txtAccountIdOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAccountIdOrder.Location = new System.Drawing.Point(591, 27);
-            this.txtAccountIdOrder.Name = "txtAccountIdOrder";
-            this.txtAccountIdOrder.ReadOnly = true;
-            this.txtAccountIdOrder.Size = new System.Drawing.Size(146, 26);
-            this.txtAccountIdOrder.TabIndex = 24;
-            this.txtAccountIdOrder.Text = "001";
+            this.StockAmount.HeaderText = "Stock";
+            this.StockAmount.Name = "StockAmount";
+            this.StockAmount.ReadOnly = true;
+            this.StockAmount.Visible = false;
             // 
             // dgvPlaceOrderCart
             // 
@@ -300,7 +268,7 @@
             this.dgvPlaceOrderCart.Location = new System.Drawing.Point(6, 37);
             this.dgvPlaceOrderCart.Name = "dgvPlaceOrderCart";
             this.dgvPlaceOrderCart.ReadOnly = true;
-            this.dgvPlaceOrderCart.Size = new System.Drawing.Size(450, 115);
+            this.dgvPlaceOrderCart.Size = new System.Drawing.Size(450, 161);
             this.dgvPlaceOrderCart.TabIndex = 26;
             this.dgvPlaceOrderCart.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlaceOrderCart_CellClick);
             // 
@@ -340,10 +308,10 @@
             // 
             this.grpPlaceOrderCart.Controls.Add(this.btnPlaceOrderCheckout);
             this.grpPlaceOrderCart.Controls.Add(this.dgvPlaceOrderCart);
-            this.grpPlaceOrderCart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpPlaceOrderCart.Location = new System.Drawing.Point(323, 128);
+            this.grpPlaceOrderCart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpPlaceOrderCart.Location = new System.Drawing.Point(12, 294);
             this.grpPlaceOrderCart.Name = "grpPlaceOrderCart";
-            this.grpPlaceOrderCart.Size = new System.Drawing.Size(465, 217);
+            this.grpPlaceOrderCart.Size = new System.Drawing.Size(465, 299);
             this.grpPlaceOrderCart.TabIndex = 27;
             this.grpPlaceOrderCart.TabStop = false;
             this.grpPlaceOrderCart.Text = "Cart";
@@ -351,10 +319,10 @@
             // 
             // btnPlaceOrderCheckout
             // 
-            this.btnPlaceOrderCheckout.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPlaceOrderCheckout.Location = new System.Drawing.Point(177, 158);
+            this.btnPlaceOrderCheckout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPlaceOrderCheckout.Location = new System.Drawing.Point(166, 204);
             this.btnPlaceOrderCheckout.Name = "btnPlaceOrderCheckout";
-            this.btnPlaceOrderCheckout.Size = new System.Drawing.Size(122, 26);
+            this.btnPlaceOrderCheckout.Size = new System.Drawing.Size(122, 76);
             this.btnPlaceOrderCheckout.TabIndex = 25;
             this.btnPlaceOrderCheckout.Text = "Go Checkout";
             this.btnPlaceOrderCheckout.UseVisualStyleBackColor = true;
@@ -363,10 +331,10 @@
             // grpPlaceOrderSelectBook
             // 
             this.grpPlaceOrderSelectBook.Controls.Add(this.dgvPlaceOrderSelectBook);
-            this.grpPlaceOrderSelectBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpPlaceOrderSelectBook.Location = new System.Drawing.Point(12, 128);
+            this.grpPlaceOrderSelectBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpPlaceOrderSelectBook.Location = new System.Drawing.Point(494, 105);
             this.grpPlaceOrderSelectBook.Name = "grpPlaceOrderSelectBook";
-            this.grpPlaceOrderSelectBook.Size = new System.Drawing.Size(305, 217);
+            this.grpPlaceOrderSelectBook.Size = new System.Drawing.Size(419, 178);
             this.grpPlaceOrderSelectBook.TabIndex = 28;
             this.grpPlaceOrderSelectBook.TabStop = false;
             this.grpPlaceOrderSelectBook.Text = "Select Book";
@@ -377,10 +345,10 @@
             this.grpPlaceOrderCheckout.Controls.Add(this.dgvPlaceOrderTotalPrice);
             this.grpPlaceOrderCheckout.Controls.Add(this.dgvPlaceOrderCheckout);
             this.grpPlaceOrderCheckout.Controls.Add(this.btnPlaceOrderBuy);
-            this.grpPlaceOrderCheckout.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpPlaceOrderCheckout.Location = new System.Drawing.Point(794, 128);
+            this.grpPlaceOrderCheckout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpPlaceOrderCheckout.Location = new System.Drawing.Point(500, 294);
             this.grpPlaceOrderCheckout.Name = "grpPlaceOrderCheckout";
-            this.grpPlaceOrderCheckout.Size = new System.Drawing.Size(366, 217);
+            this.grpPlaceOrderCheckout.Size = new System.Drawing.Size(413, 299);
             this.grpPlaceOrderCheckout.TabIndex = 29;
             this.grpPlaceOrderCheckout.TabStop = false;
             this.grpPlaceOrderCheckout.Text = "Checkout";
@@ -392,10 +360,10 @@
             this.dgvPlaceOrderTotalPrice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPlaceOrderTotalPrice.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.TotalPrice});
-            this.dgvPlaceOrderTotalPrice.Location = new System.Drawing.Point(6, 125);
+            this.dgvPlaceOrderTotalPrice.Location = new System.Drawing.Point(17, 204);
             this.dgvPlaceOrderTotalPrice.Name = "dgvPlaceOrderTotalPrice";
             this.dgvPlaceOrderTotalPrice.ReadOnly = true;
-            this.dgvPlaceOrderTotalPrice.Size = new System.Drawing.Size(113, 86);
+            this.dgvPlaceOrderTotalPrice.Size = new System.Drawing.Size(109, 76);
             this.dgvPlaceOrderTotalPrice.TabIndex = 29;
             // 
             // TotalPrice
@@ -417,7 +385,7 @@
             this.dgvPlaceOrderCheckout.Location = new System.Drawing.Point(6, 37);
             this.dgvPlaceOrderCheckout.Name = "dgvPlaceOrderCheckout";
             this.dgvPlaceOrderCheckout.ReadOnly = true;
-            this.dgvPlaceOrderCheckout.Size = new System.Drawing.Size(345, 82);
+            this.dgvPlaceOrderCheckout.Size = new System.Drawing.Size(393, 161);
             this.dgvPlaceOrderCheckout.TabIndex = 28;
             // 
             // dataGridViewTextBoxColumn3
@@ -449,27 +417,147 @@
             // btnPlaceOrderBuy
             // 
             this.btnPlaceOrderBuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPlaceOrderBuy.Location = new System.Drawing.Point(268, 133);
+            this.btnPlaceOrderBuy.Location = new System.Drawing.Point(290, 204);
             this.btnPlaceOrderBuy.Name = "btnPlaceOrderBuy";
-            this.btnPlaceOrderBuy.Size = new System.Drawing.Size(83, 51);
+            this.btnPlaceOrderBuy.Size = new System.Drawing.Size(109, 76);
             this.btnPlaceOrderBuy.TabIndex = 27;
             this.btnPlaceOrderBuy.Text = "Buy";
             this.btnPlaceOrderBuy.UseVisualStyleBackColor = true;
             this.btnPlaceOrderBuy.Click += new System.EventHandler(this.btnPlaceOrderBuy_Click);
             // 
+            // grpCustomerLogin
+            // 
+            this.grpCustomerLogin.Controls.Add(this.btnLogout);
+            this.grpCustomerLogin.Controls.Add(this.chbOrderHidePassword);
+            this.grpCustomerLogin.Controls.Add(this.btnLoadCustomer);
+            this.grpCustomerLogin.Controls.Add(this.lblLoginPassword);
+            this.grpCustomerLogin.Controls.Add(this.lblLoginEmail);
+            this.grpCustomerLogin.Controls.Add(this.txtOrderPassword);
+            this.grpCustomerLogin.Controls.Add(this.txtOrderEmail);
+            this.grpCustomerLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpCustomerLogin.Location = new System.Drawing.Point(12, 27);
+            this.grpCustomerLogin.Name = "grpCustomerLogin";
+            this.grpCustomerLogin.Size = new System.Drawing.Size(458, 156);
+            this.grpCustomerLogin.TabIndex = 30;
+            this.grpCustomerLogin.TabStop = false;
+            this.grpCustomerLogin.Text = "Customer Login";
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Location = new System.Drawing.Point(238, 99);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(79, 28);
+            this.btnLogout.TabIndex = 11;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // chbOrderHidePassword
+            // 
+            this.chbOrderHidePassword.AutoSize = true;
+            this.chbOrderHidePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbOrderHidePassword.Location = new System.Drawing.Point(323, 70);
+            this.chbOrderHidePassword.Name = "chbOrderHidePassword";
+            this.chbOrderHidePassword.Size = new System.Drawing.Size(118, 20);
+            this.chbOrderHidePassword.TabIndex = 10;
+            this.chbOrderHidePassword.Text = "Hide Password";
+            this.chbOrderHidePassword.UseVisualStyleBackColor = true;
+            // 
+            // btnLoadCustomer
+            // 
+            this.btnLoadCustomer.Location = new System.Drawing.Point(134, 99);
+            this.btnLoadCustomer.Name = "btnLoadCustomer";
+            this.btnLoadCustomer.Size = new System.Drawing.Size(79, 28);
+            this.btnLoadCustomer.TabIndex = 9;
+            this.btnLoadCustomer.Text = "Login";
+            this.btnLoadCustomer.UseVisualStyleBackColor = true;
+            this.btnLoadCustomer.Click += new System.EventHandler(this.btnLoadCustomer_Click);
+            // 
+            // lblLoginPassword
+            // 
+            this.lblLoginPassword.AutoSize = true;
+            this.lblLoginPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoginPassword.Location = new System.Drawing.Point(22, 70);
+            this.lblLoginPassword.Name = "lblLoginPassword";
+            this.lblLoginPassword.Size = new System.Drawing.Size(78, 20);
+            this.lblLoginPassword.TabIndex = 8;
+            this.lblLoginPassword.Text = "Password";
+            // 
+            // lblLoginEmail
+            // 
+            this.lblLoginEmail.AutoSize = true;
+            this.lblLoginEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoginEmail.Location = new System.Drawing.Point(22, 38);
+            this.lblLoginEmail.Name = "lblLoginEmail";
+            this.lblLoginEmail.Size = new System.Drawing.Size(48, 20);
+            this.lblLoginEmail.TabIndex = 8;
+            this.lblLoginEmail.Text = "Email";
+            // 
+            // txtOrderPassword
+            // 
+            this.txtOrderPassword.Location = new System.Drawing.Point(134, 67);
+            this.txtOrderPassword.Name = "txtOrderPassword";
+            this.txtOrderPassword.Size = new System.Drawing.Size(183, 26);
+            this.txtOrderPassword.TabIndex = 8;
+            // 
+            // txtOrderEmail
+            // 
+            this.txtOrderEmail.Location = new System.Drawing.Point(134, 35);
+            this.txtOrderEmail.Name = "txtOrderEmail";
+            this.txtOrderEmail.Size = new System.Drawing.Size(275, 26);
+            this.txtOrderEmail.TabIndex = 7;
+            // 
+            // grpOrderSearch
+            // 
+            this.grpOrderSearch.Controls.Add(this.btnOrderSearch);
+            this.grpOrderSearch.Controls.Add(this.lblOrderSearch);
+            this.grpOrderSearch.Controls.Add(this.txtOrderSearch);
+            this.grpOrderSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpOrderSearch.Location = new System.Drawing.Point(494, 27);
+            this.grpOrderSearch.Name = "grpOrderSearch";
+            this.grpOrderSearch.Size = new System.Drawing.Size(419, 67);
+            this.grpOrderSearch.TabIndex = 31;
+            this.grpOrderSearch.TabStop = false;
+            this.grpOrderSearch.Visible = false;
+            // 
+            // btnOrderSearch
+            // 
+            this.btnOrderSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOrderSearch.Location = new System.Drawing.Point(326, 25);
+            this.btnOrderSearch.Name = "btnOrderSearch";
+            this.btnOrderSearch.Size = new System.Drawing.Size(79, 28);
+            this.btnOrderSearch.TabIndex = 9;
+            this.btnOrderSearch.Text = "Search";
+            this.btnOrderSearch.UseVisualStyleBackColor = true;
+            this.btnOrderSearch.Click += new System.EventHandler(this.btnOrderSearch_Click);
+            // 
+            // lblOrderSearch
+            // 
+            this.lblOrderSearch.AutoSize = true;
+            this.lblOrderSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderSearch.Location = new System.Drawing.Point(19, 28);
+            this.lblOrderSearch.Name = "lblOrderSearch";
+            this.lblOrderSearch.Size = new System.Drawing.Size(101, 20);
+            this.lblOrderSearch.TabIndex = 8;
+            this.lblOrderSearch.Text = "Search Book";
+            // 
+            // txtOrderSearch
+            // 
+            this.txtOrderSearch.Location = new System.Drawing.Point(131, 25);
+            this.txtOrderSearch.Name = "txtOrderSearch";
+            this.txtOrderSearch.Size = new System.Drawing.Size(175, 26);
+            this.txtOrderSearch.TabIndex = 7;
+            // 
             // frmPlaceOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1171, 364);
+            this.ClientSize = new System.Drawing.Size(941, 672);
+            this.Controls.Add(this.grpOrderSearch);
+            this.Controls.Add(this.grpCustomerLogin);
             this.Controls.Add(this.grpPlaceOrderCheckout);
             this.Controls.Add(this.grpPlaceOrderSelectBook);
             this.Controls.Add(this.grpPlaceOrderCart);
-            this.Controls.Add(this.lblAccountIdOrder);
-            this.Controls.Add(this.txtAccountIdOrder);
-            this.Controls.Add(this.btnSearchBarPlaceOrder);
-            this.Controls.Add(this.lblSearchBarOrder);
-            this.Controls.Add(this.txtSearchBarOrder);
             this.Controls.Add(this.mnuPlaceOrder);
             this.Name = "frmPlaceOrder";
             this.Text = "Book Sales System - [Orders - Place Order]";
@@ -482,6 +570,10 @@
             this.grpPlaceOrderCheckout.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderTotalPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderCheckout)).EndInit();
+            this.grpCustomerLogin.ResumeLayout(false);
+            this.grpCustomerLogin.PerformLayout();
+            this.grpOrderSearch.ResumeLayout(false);
+            this.grpOrderSearch.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -505,11 +597,6 @@
         private System.Windows.Forms.ToolStripMenuItem yearlyRevenueAnalysisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem genreAnalysisToolStripMenuItem;
         private System.Windows.Forms.DataGridView dgvPlaceOrderSelectBook;
-        private System.Windows.Forms.Button btnSearchBarPlaceOrder;
-        private System.Windows.Forms.Label lblSearchBarOrder;
-        private System.Windows.Forms.TextBox txtSearchBarOrder;
-        private System.Windows.Forms.Label lblAccountIdOrder;
-        private System.Windows.Forms.TextBox txtAccountIdOrder;
         private System.Windows.Forms.DataGridView dgvPlaceOrderCart;
         private System.Windows.Forms.GroupBox grpPlaceOrderCart;
         private System.Windows.Forms.GroupBox grpPlaceOrderSelectBook;
@@ -518,9 +605,6 @@
         private System.Windows.Forms.Button btnPlaceOrderBuy;
         private System.Windows.Forms.DataGridView dgvPlaceOrderCheckout;
         private System.Windows.Forms.DataGridView dgvPlaceOrderTotalPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Author;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
@@ -531,5 +615,21 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn Remove;
+        private System.Windows.Forms.GroupBox grpCustomerLogin;
+        private System.Windows.Forms.CheckBox chbOrderHidePassword;
+        private System.Windows.Forms.Button btnLoadCustomer;
+        private System.Windows.Forms.Label lblLoginPassword;
+        private System.Windows.Forms.Label lblLoginEmail;
+        private System.Windows.Forms.TextBox txtOrderPassword;
+        private System.Windows.Forms.TextBox txtOrderEmail;
+        private System.Windows.Forms.GroupBox grpOrderSearch;
+        private System.Windows.Forms.Button btnOrderSearch;
+        private System.Windows.Forms.Label lblOrderSearch;
+        private System.Windows.Forms.TextBox txtOrderSearch;
+        private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Author;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StockAmount;
     }
 }
