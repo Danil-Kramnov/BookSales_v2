@@ -121,8 +121,31 @@ namespace BookSalesSys
                     return;
                 }
 
-                dgvPlaceOrderCart.Rows.Add(title, author, price, prompt, "X");
+                // check if book already in cart
+                bool found = false;
+                for (int i = 0; i < dgvPlaceOrderCart.Rows.Count; i++)
+                {
+                    if (dgvPlaceOrderCart.Rows[i].Cells[0].Value.ToString() == title)
+                    {
+                        // book already in cart
+                        int existingQty = int.Parse(dgvPlaceOrderCart.Rows[i].Cells[3].Value.ToString());
+                        int newQty = existingQty + numericPrompt;
+                        if (newQty > stock)
+                        {
+                            MessageBox.Show("Insufficient stock. Only " + stock + " available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        dgvPlaceOrderCart.Rows[i].SetValues(title, author, price, newQty, "X");
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                {
+                    dgvPlaceOrderCart.Rows.Add(title, author, price, numericPrompt, "X");
+                }
                 grpPlaceOrderCart.Visible = true;
+                UpdateTotal();
             }
             else
             {
@@ -130,39 +153,6 @@ namespace BookSalesSys
             }
         }
 
-
-        private void btnPlaceOrderCheckout_Click(object sender, EventArgs e)
-        {
-            grpPlaceOrderCheckout.Visible=true;
-            dgvPlaceOrderCheckout.Rows.Clear();
-            dgvPlaceOrderTotalPrice.Rows.Clear();
-
-
-            string author;
-            string title;
-            decimal price;
-            int qty;
-            decimal bookPrice;
-            decimal totalPrice = 0;
-
-            // add new rows for each click (referencing this source https://learn.microsoft.com/en-us/dotnet/api/system.string.substring?view=net-9.0)
-            for (int i = 0; dgvPlaceOrderCart.Rows.Count > i; i++)
-            {
-                title = dgvPlaceOrderCart.Rows[i].Cells[0].Value.ToString();
-                author = dgvPlaceOrderCart.Rows[i].Cells[1].Value.ToString();
-                price = decimal.Parse(dgvPlaceOrderCart.Rows[i].Cells[2].Value.ToString().Substring(1));
-                qty = int.Parse(dgvPlaceOrderCart.Rows[i].Cells[3].Value.ToString());
-                bookPrice = qty * price;
-                totalPrice += bookPrice;
-
-
-                dgvPlaceOrderCheckout.Rows.Add(author, title, "€" + price, qty);
-            }
-
-
-            dgvPlaceOrderTotalPrice.Rows.Add("€" + totalPrice);
-
-        }
 
         private void btnPlaceOrderBuy_Click(object sender, EventArgs e)
         {
@@ -179,6 +169,11 @@ namespace BookSalesSys
                 OracleCommand idCmd = new OracleCommand(getID, conn);
                 int orderID = Convert.ToInt32(idCmd.ExecuteScalar()); // needed one value from the query: https://learn.microsoft.com/en-us/dotnet/api/system.data.oracleclient.oraclecommand.executescalar?view=netframework-4.8.1
 
+                if (dgvPlaceOrderCart.Rows.Count == 0)
+                {
+                    MessageBox.Show("Cart is empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 decimal totalPrice = decimal.Parse(dgvPlaceOrderTotalPrice.Rows[0].Cells[0].Value.ToString().Substring(1));
 
                 string orderSql = @"INSERT INTO Orders (OrderID, AccountID, TotalPrice, DateOrdered)
@@ -219,9 +214,9 @@ namespace BookSalesSys
 
                 // reset UI
                 grpPlaceOrderCart.Visible = false;
-                grpPlaceOrderCheckout.Visible = false;
+
                 dgvPlaceOrderCart.Rows.Clear();
-                dgvPlaceOrderCheckout.Rows.Clear();
+
                 dgvPlaceOrderTotalPrice.Rows.Clear();
                 LoadBooks("");
             }
@@ -248,36 +243,31 @@ namespace BookSalesSys
 
             if (colIndex == 4)
             {
-                //dgvPlaceOrderCart.Rows.RemoveAt(rowIndex);
-
                 string prompt = Interaction.InputBox("How many books you want to remove?", "Quantity", "1", 0, 0);
+                int.TryParse(dgvPlaceOrderCart.Rows[rowIndex].Cells[3].Value.ToString(), out int qty);
 
-                if (!int.TryParse(prompt, out int numericPrompt) || numericPrompt < 0)
+                if (!int.TryParse(prompt, out int numericPrompt) || numericPrompt <= 0 || numericPrompt > qty)
                 {
-                    MessageBox.Show("Please enter the positive whole number", "Confirm", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Please enter a number between 1 and " + qty, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    
-
-                    int.TryParse(dgvPlaceOrderCart.Rows[rowIndex].Cells[3].Value.ToString(), out int qty);
-
                     qty -= numericPrompt;
 
                     if (qty <= 0)
                     {
                         dgvPlaceOrderCart.Rows.RemoveAt(rowIndex);
+                        if (dgvPlaceOrderCart.Rows.Count == 0)
+                            grpPlaceOrderCart.Visible = false;
                     }
                     else
                     {
                         title = dgvPlaceOrderCart.Rows[rowIndex].Cells[0].Value.ToString();
                         author = dgvPlaceOrderCart.Rows[rowIndex].Cells[1].Value.ToString();
                         price = decimal.Parse(dgvPlaceOrderCart.Rows[rowIndex].Cells[2].Value.ToString().Substring(1));
-
                         dgvPlaceOrderCart.Rows[rowIndex].SetValues(title, author, "€" + price, qty);
                     }
-
-                    
+                    UpdateTotal();
                 }
             }
         }
@@ -366,11 +356,11 @@ namespace BookSalesSys
             grpOrderSearch.Visible = false;
             grpPlaceOrderSelectBook.Visible = false;
             grpPlaceOrderCart.Visible = false;
-            grpPlaceOrderCheckout.Visible = false;
+
             txtOrderEmail.Clear();
             txtOrderPassword.Clear();
             dgvPlaceOrderCart.Rows.Clear();
-            dgvPlaceOrderCheckout.Rows.Clear();
+
             dgvPlaceOrderTotalPrice.Rows.Clear();
         }
 
@@ -383,5 +373,19 @@ namespace BookSalesSys
             }
             LoadBooks(txtOrderSearch.Text);
         }
+
+        private void UpdateTotal()
+        {
+            decimal total = 0;
+            for (int i = 0; i < dgvPlaceOrderCart.Rows.Count; i++)
+            {
+                decimal price = decimal.Parse(dgvPlaceOrderCart.Rows[i].Cells[2].Value.ToString().Substring(1));
+                int qty = int.Parse(dgvPlaceOrderCart.Rows[i].Cells[3].Value.ToString());
+                total += price * qty;
+            }
+            dgvPlaceOrderTotalPrice.Rows.Clear();
+            dgvPlaceOrderTotalPrice.Rows.Add("€" + total);
+        }
+
     }
 }

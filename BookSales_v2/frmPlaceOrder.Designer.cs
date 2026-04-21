@@ -49,23 +49,11 @@
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StockAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvPlaceOrderCart = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Remove = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpPlaceOrderCart = new System.Windows.Forms.GroupBox();
-            this.btnPlaceOrderCheckout = new System.Windows.Forms.Button();
-            this.grpPlaceOrderSelectBook = new System.Windows.Forms.GroupBox();
-            this.grpPlaceOrderCheckout = new System.Windows.Forms.GroupBox();
             this.dgvPlaceOrderTotalPrice = new System.Windows.Forms.DataGridView();
             this.TotalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvPlaceOrderCheckout = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnPlaceOrderBuy = new System.Windows.Forms.Button();
+            this.grpPlaceOrderSelectBook = new System.Windows.Forms.GroupBox();
             this.grpCustomerLogin = new System.Windows.Forms.GroupBox();
             this.btnLogout = new System.Windows.Forms.Button();
             this.chbOrderHidePassword = new System.Windows.Forms.CheckBox();
@@ -78,14 +66,17 @@
             this.btnOrderSearch = new System.Windows.Forms.Button();
             this.lblOrderSearch = new System.Windows.Forms.Label();
             this.txtOrderSearch = new System.Windows.Forms.TextBox();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Remove = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnuPlaceOrder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderSelectBook)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderCart)).BeginInit();
             this.grpPlaceOrderCart.SuspendLayout();
-            this.grpPlaceOrderSelectBook.SuspendLayout();
-            this.grpPlaceOrderCheckout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderTotalPrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderCheckout)).BeginInit();
+            this.grpPlaceOrderSelectBook.SuspendLayout();
             this.grpCustomerLogin.SuspendLayout();
             this.grpOrderSearch.SuspendLayout();
             this.SuspendLayout();
@@ -272,41 +263,10 @@
             this.dgvPlaceOrderCart.TabIndex = 26;
             this.dgvPlaceOrderCart.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlaceOrderCart_CellClick);
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Book Title";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Author";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Price";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.Width = 50;
-            // 
-            // Qty
-            // 
-            this.Qty.HeaderText = "Qty";
-            this.Qty.Name = "Qty";
-            this.Qty.ReadOnly = true;
-            this.Qty.Width = 50;
-            // 
-            // Remove
-            // 
-            this.Remove.HeaderText = "Remove";
-            this.Remove.Name = "Remove";
-            this.Remove.ReadOnly = true;
-            // 
             // grpPlaceOrderCart
             // 
-            this.grpPlaceOrderCart.Controls.Add(this.btnPlaceOrderCheckout);
+            this.grpPlaceOrderCart.Controls.Add(this.dgvPlaceOrderTotalPrice);
+            this.grpPlaceOrderCart.Controls.Add(this.btnPlaceOrderBuy);
             this.grpPlaceOrderCart.Controls.Add(this.dgvPlaceOrderCart);
             this.grpPlaceOrderCart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpPlaceOrderCart.Location = new System.Drawing.Point(12, 294);
@@ -317,50 +277,13 @@
             this.grpPlaceOrderCart.Text = "Cart";
             this.grpPlaceOrderCart.Visible = false;
             // 
-            // btnPlaceOrderCheckout
-            // 
-            this.btnPlaceOrderCheckout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPlaceOrderCheckout.Location = new System.Drawing.Point(166, 204);
-            this.btnPlaceOrderCheckout.Name = "btnPlaceOrderCheckout";
-            this.btnPlaceOrderCheckout.Size = new System.Drawing.Size(122, 76);
-            this.btnPlaceOrderCheckout.TabIndex = 25;
-            this.btnPlaceOrderCheckout.Text = "Go Checkout";
-            this.btnPlaceOrderCheckout.UseVisualStyleBackColor = true;
-            this.btnPlaceOrderCheckout.Click += new System.EventHandler(this.btnPlaceOrderCheckout_Click);
-            // 
-            // grpPlaceOrderSelectBook
-            // 
-            this.grpPlaceOrderSelectBook.Controls.Add(this.dgvPlaceOrderSelectBook);
-            this.grpPlaceOrderSelectBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpPlaceOrderSelectBook.Location = new System.Drawing.Point(12, 100);
-            this.grpPlaceOrderSelectBook.Name = "grpPlaceOrderSelectBook";
-            this.grpPlaceOrderSelectBook.Size = new System.Drawing.Size(465, 178);
-            this.grpPlaceOrderSelectBook.TabIndex = 28;
-            this.grpPlaceOrderSelectBook.TabStop = false;
-            this.grpPlaceOrderSelectBook.Text = "Select Book to Add to Cart";
-            this.grpPlaceOrderSelectBook.Visible = false;
-            // 
-            // grpPlaceOrderCheckout
-            // 
-            this.grpPlaceOrderCheckout.Controls.Add(this.dgvPlaceOrderTotalPrice);
-            this.grpPlaceOrderCheckout.Controls.Add(this.dgvPlaceOrderCheckout);
-            this.grpPlaceOrderCheckout.Controls.Add(this.btnPlaceOrderBuy);
-            this.grpPlaceOrderCheckout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpPlaceOrderCheckout.Location = new System.Drawing.Point(500, 294);
-            this.grpPlaceOrderCheckout.Name = "grpPlaceOrderCheckout";
-            this.grpPlaceOrderCheckout.Size = new System.Drawing.Size(413, 299);
-            this.grpPlaceOrderCheckout.TabIndex = 29;
-            this.grpPlaceOrderCheckout.TabStop = false;
-            this.grpPlaceOrderCheckout.Text = "Checkout";
-            this.grpPlaceOrderCheckout.Visible = false;
-            // 
             // dgvPlaceOrderTotalPrice
             // 
             this.dgvPlaceOrderTotalPrice.AllowUserToAddRows = false;
             this.dgvPlaceOrderTotalPrice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPlaceOrderTotalPrice.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.TotalPrice});
-            this.dgvPlaceOrderTotalPrice.Location = new System.Drawing.Point(17, 204);
+            this.dgvPlaceOrderTotalPrice.Location = new System.Drawing.Point(6, 204);
             this.dgvPlaceOrderTotalPrice.Name = "dgvPlaceOrderTotalPrice";
             this.dgvPlaceOrderTotalPrice.ReadOnly = true;
             this.dgvPlaceOrderTotalPrice.Size = new System.Drawing.Size(109, 76);
@@ -373,57 +296,28 @@
             this.TotalPrice.ReadOnly = true;
             this.TotalPrice.Width = 50;
             // 
-            // dgvPlaceOrderCheckout
-            // 
-            this.dgvPlaceOrderCheckout.AllowUserToAddRows = false;
-            this.dgvPlaceOrderCheckout.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPlaceOrderCheckout.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn7});
-            this.dgvPlaceOrderCheckout.Location = new System.Drawing.Point(6, 37);
-            this.dgvPlaceOrderCheckout.Name = "dgvPlaceOrderCheckout";
-            this.dgvPlaceOrderCheckout.ReadOnly = true;
-            this.dgvPlaceOrderCheckout.Size = new System.Drawing.Size(393, 161);
-            this.dgvPlaceOrderCheckout.TabIndex = 28;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Book Title";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Author";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Price";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 50;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Qty";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            this.dataGridViewTextBoxColumn7.Width = 50;
-            // 
             // btnPlaceOrderBuy
             // 
             this.btnPlaceOrderBuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPlaceOrderBuy.Location = new System.Drawing.Point(290, 204);
+            this.btnPlaceOrderBuy.Location = new System.Drawing.Point(347, 204);
             this.btnPlaceOrderBuy.Name = "btnPlaceOrderBuy";
             this.btnPlaceOrderBuy.Size = new System.Drawing.Size(109, 76);
             this.btnPlaceOrderBuy.TabIndex = 27;
             this.btnPlaceOrderBuy.Text = "Buy";
             this.btnPlaceOrderBuy.UseVisualStyleBackColor = true;
             this.btnPlaceOrderBuy.Click += new System.EventHandler(this.btnPlaceOrderBuy_Click);
+            // 
+            // grpPlaceOrderSelectBook
+            // 
+            this.grpPlaceOrderSelectBook.Controls.Add(this.dgvPlaceOrderSelectBook);
+            this.grpPlaceOrderSelectBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpPlaceOrderSelectBook.Location = new System.Drawing.Point(12, 100);
+            this.grpPlaceOrderSelectBook.Name = "grpPlaceOrderSelectBook";
+            this.grpPlaceOrderSelectBook.Size = new System.Drawing.Size(465, 178);
+            this.grpPlaceOrderSelectBook.TabIndex = 28;
+            this.grpPlaceOrderSelectBook.TabStop = false;
+            this.grpPlaceOrderSelectBook.Text = "Select Book to Add to Cart";
+            this.grpPlaceOrderSelectBook.Visible = false;
             // 
             // grpCustomerLogin
             // 
@@ -548,6 +442,38 @@
             this.txtOrderSearch.Size = new System.Drawing.Size(240, 26);
             this.txtOrderSearch.TabIndex = 7;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Book Title";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Author";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Price";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 50;
+            // 
+            // Qty
+            // 
+            this.Qty.HeaderText = "Qty";
+            this.Qty.Name = "Qty";
+            this.Qty.ReadOnly = true;
+            this.Qty.Width = 50;
+            // 
+            // Remove
+            // 
+            this.Remove.HeaderText = " ";
+            this.Remove.Name = "Remove";
+            this.Remove.ReadOnly = true;
+            // 
             // frmPlaceOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -555,7 +481,6 @@
             this.ClientSize = new System.Drawing.Size(941, 672);
             this.Controls.Add(this.grpOrderSearch);
             this.Controls.Add(this.grpCustomerLogin);
-            this.Controls.Add(this.grpPlaceOrderCheckout);
             this.Controls.Add(this.grpPlaceOrderSelectBook);
             this.Controls.Add(this.grpPlaceOrderCart);
             this.Controls.Add(this.mnuPlaceOrder);
@@ -566,10 +491,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderSelectBook)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderCart)).EndInit();
             this.grpPlaceOrderCart.ResumeLayout(false);
-            this.grpPlaceOrderSelectBook.ResumeLayout(false);
-            this.grpPlaceOrderCheckout.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderTotalPrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderCheckout)).EndInit();
+            this.grpPlaceOrderSelectBook.ResumeLayout(false);
             this.grpCustomerLogin.ResumeLayout(false);
             this.grpCustomerLogin.PerformLayout();
             this.grpOrderSearch.ResumeLayout(false);
@@ -600,21 +523,9 @@
         private System.Windows.Forms.DataGridView dgvPlaceOrderCart;
         private System.Windows.Forms.GroupBox grpPlaceOrderCart;
         private System.Windows.Forms.GroupBox grpPlaceOrderSelectBook;
-        private System.Windows.Forms.Button btnPlaceOrderCheckout;
-        private System.Windows.Forms.GroupBox grpPlaceOrderCheckout;
         private System.Windows.Forms.Button btnPlaceOrderBuy;
-        private System.Windows.Forms.DataGridView dgvPlaceOrderCheckout;
         private System.Windows.Forms.DataGridView dgvPlaceOrderTotalPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Remove;
         private System.Windows.Forms.GroupBox grpCustomerLogin;
         private System.Windows.Forms.CheckBox chbOrderHidePassword;
         private System.Windows.Forms.Button btnLoadCustomer;
@@ -631,5 +542,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Author;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn StockAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Remove;
     }
 }
