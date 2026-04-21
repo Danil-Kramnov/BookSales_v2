@@ -150,40 +150,6 @@ namespace BookSalesSys
             }
             LoadOrders(txtReturnSearch.Text);
 
-            try
-            {
-                OracleConnection conn = DBConnection.GetConnection();
-                conn.Open();
-                // retrieve books ordered within 14 days matching search
-                string sql = @"SELECT orderedbooks.BookTitle, orderedbooks.QtyOrdered, orderedbooks.OrderPrice, orders.OrderID
-                               FROM Orders orders
-                               JOIN OrderedBooks orderedbooks ON orders.OrderID = orderedbooks.OrderID
-                               WHERE orders.AccountID = :accountID
-                               AND UPPER(orderedbooks.BookTitle) LIKE '%' || UPPER(:search) || '%'
-                               AND orders.DateOrdered >= SYSDATE - 14";
-                OracleCommand cmd = new OracleCommand(sql, conn);
-                cmd.Parameters.Add("accountID", _customerID);
-                cmd.Parameters.Add("search", txtReturnSearch.Text);
-                OracleDataReader dr = cmd.ExecuteReader();
-                dgvReturnBookSelectBook.Rows.Clear();
-                while (dr.Read())
-                    dgvReturnBookSelectBook.Rows.Add(dr["BookTitle"].ToString(),
-                                                     dr["QtyOrdered"].ToString(),
-                                                     "€" + dr["OrderPrice"].ToString(),
-                                                     dr["OrderID"].ToString());
-                if (dgvReturnBookSelectBook.Rows.Count == 0)
-                {
-                    MessageBox.Show("No returns/refunds after 14 days.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                    
-                dr.Close();
-                conn.Close();
-                grpReturnBookSelectBook.Visible = true;
-            }
-            catch (OracleException ex)
-            {
-                MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void dgvReturnBookSelectBook_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -208,66 +174,43 @@ namespace BookSalesSys
 
             decimal refundAmount = result * (price / qty);
 
-            // save return, update stock and order total
-            try
+            // check if already in return cart
+            bool found = false;
+            for (int i = 0; i < dgvReturnCart.Rows.Count; i++)
             {
-                OracleConnection conn = DBConnection.GetConnection();
-                conn.Open();
-
-                // insert into ReturnedBooks
-                string retSql = @"INSERT INTO ReturnedBooks (OrderID, BookTitle, QtyReturned, RefundAmount)
-                                  VALUES(:orderID, :title, :qty, :refundAmount)";
-                OracleCommand retCmd = new OracleCommand(retSql, conn);
-                retCmd.Parameters.Add("orderID", orderID);
-                retCmd.Parameters.Add("title", title);
-                retCmd.Parameters.Add("qty", result);
-                retCmd.Parameters.Add("refundAmount", refundAmount);
-                retCmd.ExecuteNonQuery();
-
-                // restore stock
-                string stockSql = "UPDATE Books SET StockAmount = StockAmount + :qty " +
-                                  "WHERE BookTitle = :title";
-                OracleCommand stockCmd = new OracleCommand(stockSql, conn);
-                stockCmd.Parameters.Add("qty", result);
-                stockCmd.Parameters.Add("title", title);
-                stockCmd.ExecuteNonQuery();
-
-                // reduce order total
-                string orderSql = "UPDATE Orders SET TotalPrice = TotalPrice - :refundAmount " +
-                                  "WHERE OrderID = :orderID";
-                OracleCommand orderCmd = new OracleCommand(orderSql, conn);
-                orderCmd.Parameters.Add("refundAmount", refundAmount);
-                orderCmd.Parameters.Add("orderID", orderID);
-                orderCmd.ExecuteNonQuery();
-
-                conn.Close();
-
-                MessageBox.Show("Book Returned. Refund: €" + refundAmount, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // update grid row
-                qty -= result;
-                if (qty == 0)
+                if (dgvReturnCart.Rows[i].Cells[0].Value.ToString() == title)
                 {
-                    dgvReturnBookSelectBook.Rows.RemoveAt(rowIndex);
+                    int existingQty = int.Parse(dgvReturnCart.Rows[i].Cells[1].Value.ToString());
+                    int newQty = existingQty + result;
+                    if (newQty > qty)
+                    {
+                        MessageBox.Show("Cannot return more than ordered quantity.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    decimal newRefund = newQty * (price / qty);
+                    dgvReturnCart.Rows[i].SetValues(title, newQty, "€" + newRefund, orderID, "X");
+                    found = true;
+                    break;
                 }
-                else
-                {
-                    dgvReturnBookSelectBook.Rows[rowIndex].SetValues(title, qty, "€" + (price - refundAmount), orderID);
-                }    
             }
-            catch (OracleException ex)
+            if (!found)
             {
-                MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                dgvReturnCart.Rows.Add(title, result, "€" + refundAmount, orderID, "X");
             }
+            grpReturnCart.Visible = true;
+            UpdateRefundTotal();
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
             _customerID = 0;
+            grpOrderSearch.Visible = false;
             grpReturnBookSelectBook.Visible = false;
+            grpReturnCart.Visible = false;
             txtReturnEmail.Clear();
             txtReturnPassword.Clear();
             dgvReturnBookSelectBook.Rows.Clear();
+            dgvReturnCart.Rows.Clear();
         }
 
         private void LoadOrders(string searchTerm)
@@ -303,6 +246,94 @@ namespace BookSalesSys
                     
                 dr.Close();
                 conn.Close();
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void UpdateRefundTotal()
+        {
+            decimal total = 0;
+            for (int i = 0; i < dgvReturnCart.Rows.Count; i++)
+            {
+                decimal refund = decimal.Parse(
+                    dgvReturnCart.Rows[i].Cells[2].Value.ToString().Substring(1));
+                total += refund;
+            }
+            lblRefundTotal.Text = "Total Refund: €" + total;
+        }
+
+        private void dgvReturnCart_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            if (e.ColumnIndex == 4)
+            {
+                dgvReturnCart.Rows.RemoveAt(e.RowIndex);
+                if (dgvReturnCart.Rows.Count == 0)
+                {
+                    grpReturnCart.Visible = false;
+                }
+                else
+                    UpdateRefundTotal();
+            }
+        }
+
+        private void btnRefund_Click(object sender, EventArgs e)
+        {
+            if (dgvReturnCart.Rows.Count == 0)
+            {
+                MessageBox.Show("No books in return cart.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                OracleConnection conn = DBConnection.GetConnection();
+                conn.Open();
+
+                for (int i = 0; i < dgvReturnCart.Rows.Count; i++)
+                {
+                    string title = dgvReturnCart.Rows[i].Cells[0].Value.ToString();
+                    int qtyReturned = int.Parse(dgvReturnCart.Rows[i].Cells[1].Value.ToString());
+                    decimal refund = decimal.Parse(dgvReturnCart.Rows[i].Cells[2].Value.ToString().Substring(1));
+                    int orderID = int.Parse(dgvReturnCart.Rows[i].Cells[3].Value.ToString());
+
+                    // insert into ReturnedBooks
+                    string retSql = @"INSERT INTO ReturnedBooks (OrderID, BookTitle, QtyReturned, RefundAmount)
+                                      VALUES(:orderID, :title, :qty, :refundAmount)";
+                    OracleCommand retCmd = new OracleCommand(retSql, conn);
+                    retCmd.Parameters.Add("orderID", orderID);
+                    retCmd.Parameters.Add("title", title);
+                    retCmd.Parameters.Add("qty", qtyReturned);
+                    retCmd.Parameters.Add("refundAmount", refund);
+                    retCmd.ExecuteNonQuery();
+
+                    // restore stock
+                    string stockSql = "UPDATE Books SET StockAmount = StockAmount + :qty " +
+                                      "WHERE BookTitle = :title";
+                    OracleCommand stockCmd = new OracleCommand(stockSql, conn);
+                    stockCmd.Parameters.Add("qty", qtyReturned);
+                    stockCmd.Parameters.Add("title", title);
+                    stockCmd.ExecuteNonQuery();
+
+                    // reduce order total
+                    string orderSql = "UPDATE Orders SET TotalPrice = TotalPrice - :refundAmount " +
+                                      "WHERE OrderID = :orderID";
+                    OracleCommand orderCmd = new OracleCommand(orderSql, conn);
+                    orderCmd.Parameters.Add("refundAmount", refund);
+                    orderCmd.Parameters.Add("orderID", orderID);
+                    orderCmd.ExecuteNonQuery();
+                }
+
+                conn.Close();
+                MessageBox.Show("Books Returned Successfully.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // reset UI
+                grpReturnCart.Visible = false;
+                dgvReturnCart.Rows.Clear();
+                LoadOrders("");
             }
             catch (OracleException ex)
             {

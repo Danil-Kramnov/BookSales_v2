@@ -45,6 +45,10 @@
             this.genreAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grpReturnBookSelectBook = new System.Windows.Forms.GroupBox();
             this.dgvReturnBookSelectBook = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QtyOrdered = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrderPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpCustomerLogin = new System.Windows.Forms.GroupBox();
             this.btnLogout = new System.Windows.Forms.Button();
             this.chbOrderHidePassword = new System.Windows.Forms.CheckBox();
@@ -57,15 +61,21 @@
             this.btnOrderSearch = new System.Windows.Forms.Button();
             this.lblOrderSearch = new System.Windows.Forms.Label();
             this.txtReturnSearch = new System.Windows.Forms.TextBox();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QtyOrdered = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrderPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grpReturnCart = new System.Windows.Forms.GroupBox();
+            this.lblRefundTotal = new System.Windows.Forms.Label();
+            this.btnRefund = new System.Windows.Forms.Button();
+            this.dgvReturnCart = new System.Windows.Forms.DataGridView();
+            this.BookTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QtyRetuned = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrderIDCart = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnuReturnBook.SuspendLayout();
             this.grpReturnBookSelectBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReturnBookSelectBook)).BeginInit();
             this.grpCustomerLogin.SuspendLayout();
             this.grpOrderSearch.SuspendLayout();
+            this.grpReturnCart.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReturnCart)).BeginInit();
             this.SuspendLayout();
             // 
             // mnuReturnBook
@@ -194,9 +204,9 @@
             // 
             this.grpReturnBookSelectBook.Controls.Add(this.dgvReturnBookSelectBook);
             this.grpReturnBookSelectBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpReturnBookSelectBook.Location = new System.Drawing.Point(12, 202);
+            this.grpReturnBookSelectBook.Location = new System.Drawing.Point(12, 101);
             this.grpReturnBookSelectBook.Name = "grpReturnBookSelectBook";
-            this.grpReturnBookSelectBook.Size = new System.Drawing.Size(458, 302);
+            this.grpReturnBookSelectBook.Size = new System.Drawing.Size(458, 222);
             this.grpReturnBookSelectBook.TabIndex = 31;
             this.grpReturnBookSelectBook.TabStop = false;
             this.grpReturnBookSelectBook.Text = "Select Book to Return";
@@ -218,6 +228,31 @@
             this.dgvReturnBookSelectBook.TabIndex = 23;
             this.dgvReturnBookSelectBook.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReturnBookSelectBook_CellClick);
             // 
+            // ID
+            // 
+            this.ID.HeaderText = "Book Title";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // QtyOrdered
+            // 
+            this.QtyOrdered.HeaderText = "QtyOrdered";
+            this.QtyOrdered.Name = "QtyOrdered";
+            this.QtyOrdered.ReadOnly = true;
+            // 
+            // OrderPrice
+            // 
+            this.OrderPrice.HeaderText = "OrderPrice";
+            this.OrderPrice.Name = "OrderPrice";
+            this.OrderPrice.ReadOnly = true;
+            // 
+            // OrderID
+            // 
+            this.OrderID.HeaderText = "OrderID";
+            this.OrderID.Name = "OrderID";
+            this.OrderID.ReadOnly = true;
+            this.OrderID.Visible = false;
+            // 
             // grpCustomerLogin
             // 
             this.grpCustomerLogin.Controls.Add(this.btnLogout);
@@ -228,7 +263,7 @@
             this.grpCustomerLogin.Controls.Add(this.txtReturnPassword);
             this.grpCustomerLogin.Controls.Add(this.txtReturnEmail);
             this.grpCustomerLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpCustomerLogin.Location = new System.Drawing.Point(12, 27);
+            this.grpCustomerLogin.Location = new System.Drawing.Point(476, 101);
             this.grpCustomerLogin.Name = "grpCustomerLogin";
             this.grpCustomerLogin.Size = new System.Drawing.Size(458, 156);
             this.grpCustomerLogin.TabIndex = 32;
@@ -306,7 +341,7 @@
             this.grpOrderSearch.Controls.Add(this.lblOrderSearch);
             this.grpOrderSearch.Controls.Add(this.txtReturnSearch);
             this.grpOrderSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpOrderSearch.Location = new System.Drawing.Point(502, 76);
+            this.grpOrderSearch.Location = new System.Drawing.Point(12, 27);
             this.grpOrderSearch.Name = "grpOrderSearch";
             this.grpOrderSearch.Size = new System.Drawing.Size(419, 67);
             this.grpOrderSearch.TabIndex = 33;
@@ -341,36 +376,88 @@
             this.txtReturnSearch.Size = new System.Drawing.Size(175, 26);
             this.txtReturnSearch.TabIndex = 7;
             // 
-            // ID
+            // grpReturnCart
             // 
-            this.ID.HeaderText = "Book Title";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
+            this.grpReturnCart.Controls.Add(this.lblRefundTotal);
+            this.grpReturnCart.Controls.Add(this.btnRefund);
+            this.grpReturnCart.Controls.Add(this.dgvReturnCart);
+            this.grpReturnCart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpReturnCart.Location = new System.Drawing.Point(12, 329);
+            this.grpReturnCart.Name = "grpReturnCart";
+            this.grpReturnCart.Size = new System.Drawing.Size(458, 275);
+            this.grpReturnCart.TabIndex = 34;
+            this.grpReturnCart.TabStop = false;
+            this.grpReturnCart.Text = "Return Cart";
+            this.grpReturnCart.Visible = false;
             // 
-            // QtyOrdered
+            // lblRefundTotal
             // 
-            this.QtyOrdered.HeaderText = "QtyOrdered";
-            this.QtyOrdered.Name = "QtyOrdered";
-            this.QtyOrdered.ReadOnly = true;
+            this.lblRefundTotal.AutoSize = true;
+            this.lblRefundTotal.Location = new System.Drawing.Point(19, 220);
+            this.lblRefundTotal.Name = "lblRefundTotal";
+            this.lblRefundTotal.Size = new System.Drawing.Size(101, 20);
+            this.lblRefundTotal.TabIndex = 30;
+            this.lblRefundTotal.Text = "Total Refund";
             // 
-            // OrderPrice
+            // btnRefund
             // 
-            this.OrderPrice.HeaderText = "OrderPrice";
-            this.OrderPrice.Name = "OrderPrice";
-            this.OrderPrice.ReadOnly = true;
+            this.btnRefund.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefund.Location = new System.Drawing.Point(347, 192);
+            this.btnRefund.Name = "btnRefund";
+            this.btnRefund.Size = new System.Drawing.Size(109, 76);
+            this.btnRefund.TabIndex = 27;
+            this.btnRefund.Text = "Refund";
+            this.btnRefund.UseVisualStyleBackColor = true;
+            this.btnRefund.Click += new System.EventHandler(this.btnRefund_Click);
             // 
-            // OrderID
+            // dgvReturnCart
             // 
-            this.OrderID.HeaderText = "OrderID";
-            this.OrderID.Name = "OrderID";
-            this.OrderID.ReadOnly = true;
-            this.OrderID.Visible = false;
+            this.dgvReturnCart.AllowUserToAddRows = false;
+            this.dgvReturnCart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvReturnCart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.BookTitle,
+            this.QtyRetuned,
+            this.RefundAmount,
+            this.OrderIDCart});
+            this.dgvReturnCart.Location = new System.Drawing.Point(6, 25);
+            this.dgvReturnCart.Name = "dgvReturnCart";
+            this.dgvReturnCart.ReadOnly = true;
+            this.dgvReturnCart.Size = new System.Drawing.Size(450, 161);
+            this.dgvReturnCart.TabIndex = 26;
+            this.dgvReturnCart.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReturnCart_CellClick);
+            // 
+            // BookTitle
+            // 
+            this.BookTitle.HeaderText = "Book Title";
+            this.BookTitle.Name = "BookTitle";
+            this.BookTitle.ReadOnly = true;
+            // 
+            // QtyRetuned
+            // 
+            this.QtyRetuned.HeaderText = "Qty Retuned";
+            this.QtyRetuned.Name = "QtyRetuned";
+            this.QtyRetuned.ReadOnly = true;
+            this.QtyRetuned.Width = 50;
+            // 
+            // RefundAmount
+            // 
+            this.RefundAmount.HeaderText = "Refund Amount";
+            this.RefundAmount.Name = "RefundAmount";
+            this.RefundAmount.ReadOnly = true;
+            // 
+            // OrderIDCart
+            // 
+            this.OrderIDCart.HeaderText = "Order ID";
+            this.OrderIDCart.Name = "OrderIDCart";
+            this.OrderIDCart.ReadOnly = true;
+            this.OrderIDCart.Width = 50;
             // 
             // frmReturnBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(942, 611);
+            this.Controls.Add(this.grpReturnCart);
             this.Controls.Add(this.grpOrderSearch);
             this.Controls.Add(this.grpCustomerLogin);
             this.Controls.Add(this.grpReturnBookSelectBook);
@@ -385,6 +472,9 @@
             this.grpCustomerLogin.PerformLayout();
             this.grpOrderSearch.ResumeLayout(false);
             this.grpOrderSearch.PerformLayout();
+            this.grpReturnCart.ResumeLayout(false);
+            this.grpReturnCart.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReturnCart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -425,5 +515,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn QtyOrdered;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderID;
+        private System.Windows.Forms.GroupBox grpReturnCart;
+        private System.Windows.Forms.Button btnRefund;
+        private System.Windows.Forms.DataGridView dgvReturnCart;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BookTitle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QtyRetuned;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RefundAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrderIDCart;
+        private System.Windows.Forms.Label lblRefundTotal;
     }
 }
