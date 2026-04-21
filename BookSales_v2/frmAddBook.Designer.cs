@@ -328,7 +328,7 @@
             this.grpAdminLogin.Controls.Add(this.txtAdminPassword);
             this.grpAdminLogin.Controls.Add(this.txtAdminLogin);
             this.grpAdminLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpAdminLogin.Location = new System.Drawing.Point(12, 42);
+            this.grpAdminLogin.Location = new System.Drawing.Point(12, 44);
             this.grpAdminLogin.Name = "grpAdminLogin";
             this.grpAdminLogin.Size = new System.Drawing.Size(419, 138);
             this.grpAdminLogin.TabIndex = 8;

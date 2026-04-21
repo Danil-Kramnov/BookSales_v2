@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Oracle.ManagedDataAccess.Client;
 
 namespace BookSalesSys
 {
@@ -96,23 +97,100 @@ namespace BookSalesSys
             Application.Exit();
         }
 
+        
+
+        private void btnAdminLogin_Click(object sender, EventArgs e)
+        {
+            if (txtAdminLogin.Text != "admin" || txtAdminPassword.Text != "admin")
+            {
+                MessageBox.Show("Invalid admin credentials.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            grpSelectYearAnalysis.Visible = true;
+            lblSelectYearRevenueAnalysis.Visible = true;
+
+            // populate year dropdown from Orders table
+            try
+            {
+                OracleConnection conn = DBConnection.GetConnection();
+                conn.Open();
+                string sql = "SELECT DISTINCT EXTRACT(YEAR FROM DateOrdered) AS Year " +
+                             "FROM Orders ORDER BY Year";
+                OracleCommand cmd = new OracleCommand(sql, conn);
+                OracleDataReader dr = cmd.ExecuteReader();
+                cmbSelectYearRevenueAnalysis.Items.Clear();
+                while (dr.Read())
+                {
+                    cmbSelectYearRevenueAnalysis.Items.Add(dr["Year"].ToString());
+                }
+                dr.Close();
+                conn.Close();
+                cmbSelectYearRevenueAnalysis.Visible = true;
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void cmbSelectYearRevenueAnalysis_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            chtRevenueAnalysis.Visible = true;
-            chtRevenueAnalysis.Series["Revenue"].Points.Clear();
-            chtRevenueAnalysis.Series["Revenue"].Points.AddXY("January", 58000);
-            chtRevenueAnalysis.Series["Revenue"].Points.AddXY("February", 48000);
-            chtRevenueAnalysis.Series["Revenue"].Points.AddXY("March", 63000);
-            chtRevenueAnalysis.Series["Revenue"].Points.AddXY("April", 55000);
-            chtRevenueAnalysis.Series["Revenue"].Points.AddXY("May", 62000);
-            chtRevenueAnalysis.Series["Revenue"].Points.AddXY("June", 61000);
-            chtRevenueAnalysis.Series["Revenue"].Points.AddXY("July", 60000);
-            chtRevenueAnalysis.Series["Revenue"].Points.AddXY("August", 57000);
-            chtRevenueAnalysis.Series["Revenue"].Points.AddXY("September", 68000);
-            chtRevenueAnalysis.Series["Revenue"].Points.AddXY("October", 59000);
-            chtRevenueAnalysis.Series["Revenue"].Points.AddXY("November", 65000);
-            chtRevenueAnalysis.Series["Revenue"].Points.AddXY("December", 70000);
+            int year = int.Parse(cmbSelectYearRevenueAnalysis.Text);
+
+            try
+            {
+                OracleConnection conn = DBConnection.GetConnection();
+                conn.Open();
+                // sum TotalPrice grouped by month for selected year
+                string sql = @"SELECT TO_CHAR(DateOrdered,'MM') AS Month, SUM(TotalPrice) AS Total
+                               FROM Orders
+                               WHERE EXTRACT(YEAR FROM DateOrdered) = :year
+                               GROUP BY TO_CHAR(DateOrdered,'MM')
+                               ORDER BY Month";
+                OracleCommand cmd = new OracleCommand(sql, conn);
+                cmd.Parameters.Add("year", year);
+                OracleDataReader dr = cmd.ExecuteReader();
+
+                // initialise arrays for all 12 months (from using chart objects pdf)
+                string[] months = {"Jan","Feb","Mar","Apr","May","Jun", "Jul","Aug","Sep","Oct","Nov","Dec"};
+                decimal[] amounts = new decimal[12]; // all zero by default
+
+                while (dr.Read())
+                {
+                    int m = int.Parse(dr["Month"].ToString()) - 1; // convert "01" to index 0
+                    amounts[m] = Convert.ToDecimal(dr["Total"]);
+                }
+                dr.Close();
+                conn.Close();
+
+                if (amounts.All(a => a == 0))
+                {
+                    MessageBox.Show("No data found for " + year, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // bind data to chart (from using chart objects pdf)
+                chtRevenueAnalysis.Series["Revenue"].Points.Clear();
+                chtRevenueAnalysis.Series["Revenue"].Points.DataBindXY(months, amounts);
+                chtRevenueAnalysis.Series["Revenue"].Label = "#VALY";
+                chtRevenueAnalysis.ChartAreas[0].AxisX.Interval = 1;
+                chtRevenueAnalysis.Visible = true;
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnAdminLogout_Click(object sender, EventArgs e)
+        {
+            txtAdminLogin.Clear();
+            txtAdminPassword.Clear();
+            cmbSelectYearRevenueAnalysis.Visible = false;
+            chtRevenueAnalysis.Visible = false;
+            cmbSelectYearRevenueAnalysis.Items.Clear();
+            grpSelectYearAnalysis.Visible = false;
         }
     }
 }

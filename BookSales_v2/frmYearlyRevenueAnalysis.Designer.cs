@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.mnuYearlyRevenueAnalysis = new System.Windows.Forms.MenuStrip();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuBackClick = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,8 +50,19 @@
             this.chtRevenueAnalysis = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lblSelectYearRevenueAnalysis = new System.Windows.Forms.Label();
             this.cmbSelectYearRevenueAnalysis = new System.Windows.Forms.ComboBox();
+            this.grpAdminLogin = new System.Windows.Forms.GroupBox();
+            this.btnAdminLogout = new System.Windows.Forms.Button();
+            this.chbAdminHidePassword = new System.Windows.Forms.CheckBox();
+            this.btnAdminLogin = new System.Windows.Forms.Button();
+            this.lblAdminPassword = new System.Windows.Forms.Label();
+            this.lblAdminLogin = new System.Windows.Forms.Label();
+            this.txtAdminPassword = new System.Windows.Forms.TextBox();
+            this.txtAdminLogin = new System.Windows.Forms.TextBox();
+            this.grpSelectYearAnalysis = new System.Windows.Forms.GroupBox();
             this.mnuYearlyRevenueAnalysis.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chtRevenueAnalysis)).BeginInit();
+            this.grpAdminLogin.SuspendLayout();
+            this.grpSelectYearAnalysis.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnuYearlyRevenueAnalysis
@@ -65,7 +76,7 @@
             this.adminToolStripMenuItem});
             this.mnuYearlyRevenueAnalysis.Location = new System.Drawing.Point(0, 0);
             this.mnuYearlyRevenueAnalysis.Name = "mnuYearlyRevenueAnalysis";
-            this.mnuYearlyRevenueAnalysis.Size = new System.Drawing.Size(1089, 24);
+            this.mnuYearlyRevenueAnalysis.Size = new System.Drawing.Size(964, 24);
             this.mnuYearlyRevenueAnalysis.TabIndex = 8;
             this.mnuYearlyRevenueAnalysis.Text = "Yearly Revenue Analysis Menu";
             // 
@@ -178,33 +189,34 @@
             // 
             // chtRevenueAnalysis
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chtRevenueAnalysis.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chtRevenueAnalysis.Legends.Add(legend1);
-            this.chtRevenueAnalysis.Location = new System.Drawing.Point(39, 89);
+            chartArea2.Name = "ChartArea1";
+            this.chtRevenueAnalysis.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chtRevenueAnalysis.Legends.Add(legend2);
+            this.chtRevenueAnalysis.Location = new System.Drawing.Point(32, 233);
             this.chtRevenueAnalysis.Name = "chtRevenueAnalysis";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Revenue";
-            this.chtRevenueAnalysis.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Revenue";
+            this.chtRevenueAnalysis.Series.Add(series2);
             this.chtRevenueAnalysis.Size = new System.Drawing.Size(913, 323);
             this.chtRevenueAnalysis.TabIndex = 30;
             this.chtRevenueAnalysis.Text = "Yearly Genre Analysis";
-            title1.Name = "YearlyRevenueAnalysis";
-            title1.Text = "Yearly Revenue Analysis";
-            this.chtRevenueAnalysis.Titles.Add(title1);
+            title2.Name = "YearlyRevenueAnalysis";
+            title2.Text = "Yearly Revenue Analysis";
+            this.chtRevenueAnalysis.Titles.Add(title2);
             this.chtRevenueAnalysis.Visible = false;
             // 
             // lblSelectYearRevenueAnalysis
             // 
             this.lblSelectYearRevenueAnalysis.AutoSize = true;
             this.lblSelectYearRevenueAnalysis.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelectYearRevenueAnalysis.Location = new System.Drawing.Point(35, 42);
+            this.lblSelectYearRevenueAnalysis.Location = new System.Drawing.Point(6, 22);
             this.lblSelectYearRevenueAnalysis.Name = "lblSelectYearRevenueAnalysis";
             this.lblSelectYearRevenueAnalysis.Size = new System.Drawing.Size(92, 20);
             this.lblSelectYearRevenueAnalysis.TabIndex = 28;
             this.lblSelectYearRevenueAnalysis.Text = "Select Year";
+            this.lblSelectYearRevenueAnalysis.Visible = false;
             // 
             // cmbSelectYearRevenueAnalysis
             // 
@@ -217,26 +229,127 @@
             "2022",
             "2023",
             "2024"});
-            this.cmbSelectYearRevenueAnalysis.Location = new System.Drawing.Point(133, 39);
+            this.cmbSelectYearRevenueAnalysis.Location = new System.Drawing.Point(104, 19);
             this.cmbSelectYearRevenueAnalysis.Name = "cmbSelectYearRevenueAnalysis";
             this.cmbSelectYearRevenueAnalysis.Size = new System.Drawing.Size(156, 28);
             this.cmbSelectYearRevenueAnalysis.TabIndex = 31;
+            this.cmbSelectYearRevenueAnalysis.Visible = false;
             this.cmbSelectYearRevenueAnalysis.SelectedIndexChanged += new System.EventHandler(this.cmbSelectYearRevenueAnalysis_SelectedIndexChanged);
+            // 
+            // grpAdminLogin
+            // 
+            this.grpAdminLogin.Controls.Add(this.btnAdminLogout);
+            this.grpAdminLogin.Controls.Add(this.chbAdminHidePassword);
+            this.grpAdminLogin.Controls.Add(this.btnAdminLogin);
+            this.grpAdminLogin.Controls.Add(this.lblAdminPassword);
+            this.grpAdminLogin.Controls.Add(this.lblAdminLogin);
+            this.grpAdminLogin.Controls.Add(this.txtAdminPassword);
+            this.grpAdminLogin.Controls.Add(this.txtAdminLogin);
+            this.grpAdminLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpAdminLogin.Location = new System.Drawing.Point(12, 27);
+            this.grpAdminLogin.Name = "grpAdminLogin";
+            this.grpAdminLogin.Size = new System.Drawing.Size(419, 138);
+            this.grpAdminLogin.TabIndex = 32;
+            this.grpAdminLogin.TabStop = false;
+            this.grpAdminLogin.Text = "Admin Login";
+            // 
+            // btnAdminLogout
+            // 
+            this.btnAdminLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminLogout.Location = new System.Drawing.Point(235, 99);
+            this.btnAdminLogout.Name = "btnAdminLogout";
+            this.btnAdminLogout.Size = new System.Drawing.Size(79, 28);
+            this.btnAdminLogout.TabIndex = 11;
+            this.btnAdminLogout.Text = "Logout";
+            this.btnAdminLogout.UseVisualStyleBackColor = true;
+            this.btnAdminLogout.Click += new System.EventHandler(this.btnAdminLogout_Click);
+            // 
+            // chbAdminHidePassword
+            // 
+            this.chbAdminHidePassword.AutoSize = true;
+            this.chbAdminHidePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbAdminHidePassword.Location = new System.Drawing.Point(276, 70);
+            this.chbAdminHidePassword.Name = "chbAdminHidePassword";
+            this.chbAdminHidePassword.Size = new System.Drawing.Size(118, 20);
+            this.chbAdminHidePassword.TabIndex = 10;
+            this.chbAdminHidePassword.Text = "Hide Password";
+            this.chbAdminHidePassword.UseVisualStyleBackColor = true;
+            // 
+            // btnAdminLogin
+            // 
+            this.btnAdminLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminLogin.Location = new System.Drawing.Point(134, 99);
+            this.btnAdminLogin.Name = "btnAdminLogin";
+            this.btnAdminLogin.Size = new System.Drawing.Size(79, 28);
+            this.btnAdminLogin.TabIndex = 9;
+            this.btnAdminLogin.Text = "Login";
+            this.btnAdminLogin.UseVisualStyleBackColor = true;
+            this.btnAdminLogin.Click += new System.EventHandler(this.btnAdminLogin_Click);
+            // 
+            // lblAdminPassword
+            // 
+            this.lblAdminPassword.AutoSize = true;
+            this.lblAdminPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminPassword.Location = new System.Drawing.Point(22, 68);
+            this.lblAdminPassword.Name = "lblAdminPassword";
+            this.lblAdminPassword.Size = new System.Drawing.Size(78, 20);
+            this.lblAdminPassword.TabIndex = 8;
+            this.lblAdminPassword.Text = "Password";
+            // 
+            // lblAdminLogin
+            // 
+            this.lblAdminLogin.AutoSize = true;
+            this.lblAdminLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminLogin.Location = new System.Drawing.Point(22, 38);
+            this.lblAdminLogin.Name = "lblAdminLogin";
+            this.lblAdminLogin.Size = new System.Drawing.Size(48, 20);
+            this.lblAdminLogin.TabIndex = 8;
+            this.lblAdminLogin.Text = "Login";
+            // 
+            // txtAdminPassword
+            // 
+            this.txtAdminPassword.Location = new System.Drawing.Point(134, 67);
+            this.txtAdminPassword.Name = "txtAdminPassword";
+            this.txtAdminPassword.Size = new System.Drawing.Size(136, 26);
+            this.txtAdminPassword.TabIndex = 8;
+            // 
+            // txtAdminLogin
+            // 
+            this.txtAdminLogin.Location = new System.Drawing.Point(134, 35);
+            this.txtAdminLogin.Name = "txtAdminLogin";
+            this.txtAdminLogin.Size = new System.Drawing.Size(279, 26);
+            this.txtAdminLogin.TabIndex = 7;
+            // 
+            // grpSelectYearAnalysis
+            // 
+            this.grpSelectYearAnalysis.Controls.Add(this.lblSelectYearRevenueAnalysis);
+            this.grpSelectYearAnalysis.Controls.Add(this.cmbSelectYearRevenueAnalysis);
+            this.grpSelectYearAnalysis.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpSelectYearAnalysis.Location = new System.Drawing.Point(32, 172);
+            this.grpSelectYearAnalysis.Name = "grpSelectYearAnalysis";
+            this.grpSelectYearAnalysis.Size = new System.Drawing.Size(273, 55);
+            this.grpSelectYearAnalysis.TabIndex = 33;
+            this.grpSelectYearAnalysis.TabStop = false;
+            this.grpSelectYearAnalysis.Visible = false;
             // 
             // frmYearlyRevenueAnalysis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1089, 450);
-            this.Controls.Add(this.cmbSelectYearRevenueAnalysis);
+            this.ClientSize = new System.Drawing.Size(964, 617);
+            this.Controls.Add(this.grpSelectYearAnalysis);
+            this.Controls.Add(this.grpAdminLogin);
             this.Controls.Add(this.chtRevenueAnalysis);
-            this.Controls.Add(this.lblSelectYearRevenueAnalysis);
             this.Controls.Add(this.mnuYearlyRevenueAnalysis);
             this.Name = "frmYearlyRevenueAnalysis";
             this.Text = "Book Sales System - [Display Analysis - Yearly Revenue]";
             this.mnuYearlyRevenueAnalysis.ResumeLayout(false);
             this.mnuYearlyRevenueAnalysis.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chtRevenueAnalysis)).EndInit();
+            this.grpAdminLogin.ResumeLayout(false);
+            this.grpAdminLogin.PerformLayout();
+            this.grpSelectYearAnalysis.ResumeLayout(false);
+            this.grpSelectYearAnalysis.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,5 +375,14 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chtRevenueAnalysis;
         private System.Windows.Forms.Label lblSelectYearRevenueAnalysis;
         private System.Windows.Forms.ComboBox cmbSelectYearRevenueAnalysis;
+        private System.Windows.Forms.GroupBox grpAdminLogin;
+        private System.Windows.Forms.Button btnAdminLogout;
+        private System.Windows.Forms.CheckBox chbAdminHidePassword;
+        private System.Windows.Forms.Button btnAdminLogin;
+        private System.Windows.Forms.Label lblAdminPassword;
+        private System.Windows.Forms.Label lblAdminLogin;
+        private System.Windows.Forms.TextBox txtAdminPassword;
+        private System.Windows.Forms.TextBox txtAdminLogin;
+        private System.Windows.Forms.GroupBox grpSelectYearAnalysis;
     }
 }
