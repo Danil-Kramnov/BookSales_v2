@@ -174,7 +174,7 @@ namespace BookSalesSys
                     MessageBox.Show("Cart is empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                decimal totalPrice = decimal.Parse(dgvPlaceOrderTotalPrice.Rows[0].Cells[0].Value.ToString().Substring(1));
+                decimal totalPrice = decimal.Parse(lblTotalPrice.Text.Substring(9));
 
                 string orderSql = @"INSERT INTO Orders (OrderID, AccountID, TotalPrice, DateOrdered)
                                     VALUES(:orderID, :accountID, :totalPrice, SYSDATE)";
@@ -217,7 +217,6 @@ namespace BookSalesSys
 
                 dgvPlaceOrderCart.Rows.Clear();
 
-                dgvPlaceOrderTotalPrice.Rows.Clear();
                 LoadBooks("");
             }
             catch (Exception ex)
@@ -361,7 +360,7 @@ namespace BookSalesSys
             txtOrderPassword.Clear();
             dgvPlaceOrderCart.Rows.Clear();
 
-            dgvPlaceOrderTotalPrice.Rows.Clear();
+            lblTotalPrice.Text = "Total: €0.00";
         }
 
         private void btnOrderSearch_Click(object sender, EventArgs e)
@@ -383,8 +382,7 @@ namespace BookSalesSys
                 int qty = int.Parse(dgvPlaceOrderCart.Rows[i].Cells[3].Value.ToString());
                 total += price * qty;
             }
-            dgvPlaceOrderTotalPrice.Rows.Clear();
-            dgvPlaceOrderTotalPrice.Rows.Add("€" + total);
+            lblTotalPrice.Text = "Total: €" + total;
         }
 
     }

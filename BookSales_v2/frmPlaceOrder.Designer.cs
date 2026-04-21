@@ -49,9 +49,12 @@
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StockAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvPlaceOrderCart = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Remove = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpPlaceOrderCart = new System.Windows.Forms.GroupBox();
-            this.dgvPlaceOrderTotalPrice = new System.Windows.Forms.DataGridView();
-            this.TotalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnPlaceOrderBuy = new System.Windows.Forms.Button();
             this.grpPlaceOrderSelectBook = new System.Windows.Forms.GroupBox();
             this.grpCustomerLogin = new System.Windows.Forms.GroupBox();
@@ -66,16 +69,11 @@
             this.btnOrderSearch = new System.Windows.Forms.Button();
             this.lblOrderSearch = new System.Windows.Forms.Label();
             this.txtOrderSearch = new System.Windows.Forms.TextBox();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Remove = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblTotalPrice = new System.Windows.Forms.Label();
             this.mnuPlaceOrder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderSelectBook)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderCart)).BeginInit();
             this.grpPlaceOrderCart.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderTotalPrice)).BeginInit();
             this.grpPlaceOrderSelectBook.SuspendLayout();
             this.grpCustomerLogin.SuspendLayout();
             this.grpOrderSearch.SuspendLayout();
@@ -263,9 +261,41 @@
             this.dgvPlaceOrderCart.TabIndex = 26;
             this.dgvPlaceOrderCart.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlaceOrderCart_CellClick);
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Book Title";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Author";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Price";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 50;
+            // 
+            // Qty
+            // 
+            this.Qty.HeaderText = "Qty";
+            this.Qty.Name = "Qty";
+            this.Qty.ReadOnly = true;
+            this.Qty.Width = 50;
+            // 
+            // Remove
+            // 
+            this.Remove.HeaderText = " ";
+            this.Remove.Name = "Remove";
+            this.Remove.ReadOnly = true;
+            // 
             // grpPlaceOrderCart
             // 
-            this.grpPlaceOrderCart.Controls.Add(this.dgvPlaceOrderTotalPrice);
+            this.grpPlaceOrderCart.Controls.Add(this.lblTotalPrice);
             this.grpPlaceOrderCart.Controls.Add(this.btnPlaceOrderBuy);
             this.grpPlaceOrderCart.Controls.Add(this.dgvPlaceOrderCart);
             this.grpPlaceOrderCart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -276,25 +306,6 @@
             this.grpPlaceOrderCart.TabStop = false;
             this.grpPlaceOrderCart.Text = "Cart";
             this.grpPlaceOrderCart.Visible = false;
-            // 
-            // dgvPlaceOrderTotalPrice
-            // 
-            this.dgvPlaceOrderTotalPrice.AllowUserToAddRows = false;
-            this.dgvPlaceOrderTotalPrice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPlaceOrderTotalPrice.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.TotalPrice});
-            this.dgvPlaceOrderTotalPrice.Location = new System.Drawing.Point(6, 204);
-            this.dgvPlaceOrderTotalPrice.Name = "dgvPlaceOrderTotalPrice";
-            this.dgvPlaceOrderTotalPrice.ReadOnly = true;
-            this.dgvPlaceOrderTotalPrice.Size = new System.Drawing.Size(109, 76);
-            this.dgvPlaceOrderTotalPrice.TabIndex = 29;
-            // 
-            // TotalPrice
-            // 
-            this.TotalPrice.HeaderText = "Total Price";
-            this.TotalPrice.Name = "TotalPrice";
-            this.TotalPrice.ReadOnly = true;
-            this.TotalPrice.Width = 50;
             // 
             // btnPlaceOrderBuy
             // 
@@ -442,37 +453,14 @@
             this.txtOrderSearch.Size = new System.Drawing.Size(240, 26);
             this.txtOrderSearch.TabIndex = 7;
             // 
-            // dataGridViewTextBoxColumn1
+            // lblTotalPrice
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Book Title";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Author";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Price";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.Width = 50;
-            // 
-            // Qty
-            // 
-            this.Qty.HeaderText = "Qty";
-            this.Qty.Name = "Qty";
-            this.Qty.ReadOnly = true;
-            this.Qty.Width = 50;
-            // 
-            // Remove
-            // 
-            this.Remove.HeaderText = " ";
-            this.Remove.Name = "Remove";
-            this.Remove.ReadOnly = true;
+            this.lblTotalPrice.AutoSize = true;
+            this.lblTotalPrice.Location = new System.Drawing.Point(19, 232);
+            this.lblTotalPrice.Name = "lblTotalPrice";
+            this.lblTotalPrice.Size = new System.Drawing.Size(83, 20);
+            this.lblTotalPrice.TabIndex = 28;
+            this.lblTotalPrice.Text = "Total Price";
             // 
             // frmPlaceOrder
             // 
@@ -491,7 +479,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderSelectBook)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderCart)).EndInit();
             this.grpPlaceOrderCart.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderTotalPrice)).EndInit();
+            this.grpPlaceOrderCart.PerformLayout();
             this.grpPlaceOrderSelectBook.ResumeLayout(false);
             this.grpCustomerLogin.ResumeLayout(false);
             this.grpCustomerLogin.PerformLayout();
@@ -524,8 +512,6 @@
         private System.Windows.Forms.GroupBox grpPlaceOrderCart;
         private System.Windows.Forms.GroupBox grpPlaceOrderSelectBook;
         private System.Windows.Forms.Button btnPlaceOrderBuy;
-        private System.Windows.Forms.DataGridView dgvPlaceOrderTotalPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TotalPrice;
         private System.Windows.Forms.GroupBox grpCustomerLogin;
         private System.Windows.Forms.CheckBox chbOrderHidePassword;
         private System.Windows.Forms.Button btnLoadCustomer;
@@ -547,5 +533,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn Remove;
+        private System.Windows.Forms.Label lblTotalPrice;
     }
 }
