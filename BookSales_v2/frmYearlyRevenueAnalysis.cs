@@ -106,8 +106,6 @@ namespace BookSalesSys
                 MessageBox.Show("Invalid admin credentials.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            grpSelectYearAnalysis.Visible = true;
-            lblSelectYearRevenueAnalysis.Visible = true;
 
             // populate year dropdown from Orders table
             try
@@ -125,7 +123,7 @@ namespace BookSalesSys
                 }
                 dr.Close();
                 conn.Close();
-                cmbSelectYearRevenueAnalysis.Visible = true;
+                grpSelectYearAnalysis.Visible = true;
             }
             catch (OracleException ex)
             {
@@ -152,7 +150,7 @@ namespace BookSalesSys
                 cmd.Parameters.Add("year", year);
                 OracleDataReader dr = cmd.ExecuteReader();
 
-                // initialise arrays for all 12 months (from using chart objects pdf)
+                // initialise arrays for all 12 months (reference from using_chart_objects.pdf)
                 string[] months = {"Jan","Feb","Mar","Apr","May","Jun", "Jul","Aug","Sep","Oct","Nov","Dec"};
                 decimal[] amounts = new decimal[12]; // all zero by default
 
@@ -170,7 +168,7 @@ namespace BookSalesSys
                     return;
                 }
 
-                // bind data to chart (from using chart objects pdf)
+                // bind data to chart (reference from using_chart_objects.pdf)
                 chtRevenueAnalysis.Series["Revenue"].Points.Clear();
                 chtRevenueAnalysis.Series["Revenue"].Points.DataBindXY(months, amounts);
                 chtRevenueAnalysis.Series["Revenue"].Label = "#VALY";

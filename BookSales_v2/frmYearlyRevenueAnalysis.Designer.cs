@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.mnuYearlyRevenueAnalysis = new System.Windows.Forms.MenuStrip();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuBackClick = new System.Windows.Forms.ToolStripMenuItem();
@@ -189,22 +189,22 @@
             // 
             // chtRevenueAnalysis
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chtRevenueAnalysis.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chtRevenueAnalysis.Legends.Add(legend2);
-            this.chtRevenueAnalysis.Location = new System.Drawing.Point(32, 233);
+            chartArea1.Name = "ChartArea1";
+            this.chtRevenueAnalysis.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chtRevenueAnalysis.Legends.Add(legend1);
+            this.chtRevenueAnalysis.Location = new System.Drawing.Point(12, 232);
             this.chtRevenueAnalysis.Name = "chtRevenueAnalysis";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Revenue";
-            this.chtRevenueAnalysis.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Revenue";
+            this.chtRevenueAnalysis.Series.Add(series1);
             this.chtRevenueAnalysis.Size = new System.Drawing.Size(913, 323);
             this.chtRevenueAnalysis.TabIndex = 30;
             this.chtRevenueAnalysis.Text = "Yearly Genre Analysis";
-            title2.Name = "YearlyRevenueAnalysis";
-            title2.Text = "Yearly Revenue Analysis";
-            this.chtRevenueAnalysis.Titles.Add(title2);
+            title1.Name = "YearlyRevenueAnalysis";
+            title1.Text = "Yearly Revenue Analysis";
+            this.chtRevenueAnalysis.Titles.Add(title1);
             this.chtRevenueAnalysis.Visible = false;
             // 
             // lblSelectYearRevenueAnalysis
@@ -216,7 +216,6 @@
             this.lblSelectYearRevenueAnalysis.Size = new System.Drawing.Size(92, 20);
             this.lblSelectYearRevenueAnalysis.TabIndex = 28;
             this.lblSelectYearRevenueAnalysis.Text = "Select Year";
-            this.lblSelectYearRevenueAnalysis.Visible = false;
             // 
             // cmbSelectYearRevenueAnalysis
             // 
@@ -233,7 +232,6 @@
             this.cmbSelectYearRevenueAnalysis.Name = "cmbSelectYearRevenueAnalysis";
             this.cmbSelectYearRevenueAnalysis.Size = new System.Drawing.Size(156, 28);
             this.cmbSelectYearRevenueAnalysis.TabIndex = 31;
-            this.cmbSelectYearRevenueAnalysis.Visible = false;
             this.cmbSelectYearRevenueAnalysis.SelectedIndexChanged += new System.EventHandler(this.cmbSelectYearRevenueAnalysis_SelectedIndexChanged);
             // 
             // grpAdminLogin
@@ -325,7 +323,7 @@
             this.grpSelectYearAnalysis.Controls.Add(this.lblSelectYearRevenueAnalysis);
             this.grpSelectYearAnalysis.Controls.Add(this.cmbSelectYearRevenueAnalysis);
             this.grpSelectYearAnalysis.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpSelectYearAnalysis.Location = new System.Drawing.Point(32, 172);
+            this.grpSelectYearAnalysis.Location = new System.Drawing.Point(12, 171);
             this.grpSelectYearAnalysis.Name = "grpSelectYearAnalysis";
             this.grpSelectYearAnalysis.Size = new System.Drawing.Size(273, 55);
             this.grpSelectYearAnalysis.TabIndex = 33;

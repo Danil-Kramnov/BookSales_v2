@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.mnuYearlyGenreAnalysis = new System.Windows.Forms.MenuStrip();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuBackClick = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,11 +47,22 @@
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yearlyRevenueAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.genreAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblSelectYearGenreAnalysis = new System.Windows.Forms.Label();
             this.chtGenreAnalysis = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.grpAdminLogin = new System.Windows.Forms.GroupBox();
+            this.btnAdminLogout = new System.Windows.Forms.Button();
+            this.chbAdminHidePassword = new System.Windows.Forms.CheckBox();
+            this.btnAdminLogin = new System.Windows.Forms.Button();
+            this.lblAdminPassword = new System.Windows.Forms.Label();
+            this.lblAdminLogin = new System.Windows.Forms.Label();
+            this.txtAdminPassword = new System.Windows.Forms.TextBox();
+            this.txtAdminLogin = new System.Windows.Forms.TextBox();
+            this.grpSelectYearAnalysis = new System.Windows.Forms.GroupBox();
+            this.lblSelectYearRevenueAnalysis = new System.Windows.Forms.Label();
             this.cmbSelectYearGenreAnalysis = new System.Windows.Forms.ComboBox();
             this.mnuYearlyGenreAnalysis.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chtGenreAnalysis)).BeginInit();
+            this.grpAdminLogin.SuspendLayout();
+            this.grpSelectYearAnalysis.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnuYearlyGenreAnalysis
@@ -65,7 +76,7 @@
             this.adminToolStripMenuItem});
             this.mnuYearlyGenreAnalysis.Location = new System.Drawing.Point(0, 0);
             this.mnuYearlyGenreAnalysis.Name = "mnuYearlyGenreAnalysis";
-            this.mnuYearlyGenreAnalysis.Size = new System.Drawing.Size(998, 24);
+            this.mnuYearlyGenreAnalysis.Size = new System.Drawing.Size(961, 24);
             this.mnuYearlyGenreAnalysis.TabIndex = 7;
             this.mnuYearlyGenreAnalysis.Text = "Yearly Genre Analysis Menu";
             // 
@@ -176,35 +187,131 @@
             this.genreAnalysisToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.genreAnalysisToolStripMenuItem.Text = "Genre Analysis";
             // 
-            // lblSelectYearGenreAnalysis
-            // 
-            this.lblSelectYearGenreAnalysis.AutoSize = true;
-            this.lblSelectYearGenreAnalysis.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelectYearGenreAnalysis.Location = new System.Drawing.Point(35, 57);
-            this.lblSelectYearGenreAnalysis.Name = "lblSelectYearGenreAnalysis";
-            this.lblSelectYearGenreAnalysis.Size = new System.Drawing.Size(92, 20);
-            this.lblSelectYearGenreAnalysis.TabIndex = 24;
-            this.lblSelectYearGenreAnalysis.Text = "Select Year";
-            // 
             // chtGenreAnalysis
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chtGenreAnalysis.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chtGenreAnalysis.Legends.Add(legend1);
-            this.chtGenreAnalysis.Location = new System.Drawing.Point(39, 104);
+            chartArea6.Name = "ChartArea1";
+            this.chtGenreAnalysis.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chtGenreAnalysis.Legends.Add(legend6);
+            this.chtGenreAnalysis.Location = new System.Drawing.Point(12, 239);
             this.chtGenreAnalysis.Name = "chtGenreAnalysis";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Quantity";
-            this.chtGenreAnalysis.Series.Add(series1);
-            this.chtGenreAnalysis.Size = new System.Drawing.Size(913, 323);
+            series6.ChartArea = "ChartArea1";
+            series6.Legend = "Legend1";
+            series6.Name = "Quantity";
+            this.chtGenreAnalysis.Series.Add(series6);
+            this.chtGenreAnalysis.Size = new System.Drawing.Size(900, 323);
             this.chtGenreAnalysis.TabIndex = 26;
             this.chtGenreAnalysis.Text = "Yearly Genre Analysis";
-            title1.Name = "YearlyGenreAnalysis";
-            title1.Text = "Yearly Genre Analysis";
-            this.chtGenreAnalysis.Titles.Add(title1);
+            title6.Name = "YearlyGenreAnalysis";
+            title6.Text = "Yearly Genre Analysis";
+            this.chtGenreAnalysis.Titles.Add(title6);
             this.chtGenreAnalysis.Visible = false;
+            // 
+            // grpAdminLogin
+            // 
+            this.grpAdminLogin.Controls.Add(this.btnAdminLogout);
+            this.grpAdminLogin.Controls.Add(this.chbAdminHidePassword);
+            this.grpAdminLogin.Controls.Add(this.btnAdminLogin);
+            this.grpAdminLogin.Controls.Add(this.lblAdminPassword);
+            this.grpAdminLogin.Controls.Add(this.lblAdminLogin);
+            this.grpAdminLogin.Controls.Add(this.txtAdminPassword);
+            this.grpAdminLogin.Controls.Add(this.txtAdminLogin);
+            this.grpAdminLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpAdminLogin.Location = new System.Drawing.Point(12, 27);
+            this.grpAdminLogin.Name = "grpAdminLogin";
+            this.grpAdminLogin.Size = new System.Drawing.Size(419, 138);
+            this.grpAdminLogin.TabIndex = 33;
+            this.grpAdminLogin.TabStop = false;
+            this.grpAdminLogin.Text = "Admin Login";
+            // 
+            // btnAdminLogout
+            // 
+            this.btnAdminLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminLogout.Location = new System.Drawing.Point(235, 99);
+            this.btnAdminLogout.Name = "btnAdminLogout";
+            this.btnAdminLogout.Size = new System.Drawing.Size(79, 28);
+            this.btnAdminLogout.TabIndex = 11;
+            this.btnAdminLogout.Text = "Logout";
+            this.btnAdminLogout.UseVisualStyleBackColor = true;
+            this.btnAdminLogout.Click += new System.EventHandler(this.btnAdminLogout_Click);
+            // 
+            // chbAdminHidePassword
+            // 
+            this.chbAdminHidePassword.AutoSize = true;
+            this.chbAdminHidePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbAdminHidePassword.Location = new System.Drawing.Point(276, 70);
+            this.chbAdminHidePassword.Name = "chbAdminHidePassword";
+            this.chbAdminHidePassword.Size = new System.Drawing.Size(118, 20);
+            this.chbAdminHidePassword.TabIndex = 10;
+            this.chbAdminHidePassword.Text = "Hide Password";
+            this.chbAdminHidePassword.UseVisualStyleBackColor = true;
+            // 
+            // btnAdminLogin
+            // 
+            this.btnAdminLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminLogin.Location = new System.Drawing.Point(134, 99);
+            this.btnAdminLogin.Name = "btnAdminLogin";
+            this.btnAdminLogin.Size = new System.Drawing.Size(79, 28);
+            this.btnAdminLogin.TabIndex = 9;
+            this.btnAdminLogin.Text = "Login";
+            this.btnAdminLogin.UseVisualStyleBackColor = true;
+            this.btnAdminLogin.Click += new System.EventHandler(this.btnAdminLogin_Click);
+            // 
+            // lblAdminPassword
+            // 
+            this.lblAdminPassword.AutoSize = true;
+            this.lblAdminPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminPassword.Location = new System.Drawing.Point(22, 68);
+            this.lblAdminPassword.Name = "lblAdminPassword";
+            this.lblAdminPassword.Size = new System.Drawing.Size(78, 20);
+            this.lblAdminPassword.TabIndex = 8;
+            this.lblAdminPassword.Text = "Password";
+            // 
+            // lblAdminLogin
+            // 
+            this.lblAdminLogin.AutoSize = true;
+            this.lblAdminLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminLogin.Location = new System.Drawing.Point(22, 38);
+            this.lblAdminLogin.Name = "lblAdminLogin";
+            this.lblAdminLogin.Size = new System.Drawing.Size(48, 20);
+            this.lblAdminLogin.TabIndex = 8;
+            this.lblAdminLogin.Text = "Login";
+            // 
+            // txtAdminPassword
+            // 
+            this.txtAdminPassword.Location = new System.Drawing.Point(134, 67);
+            this.txtAdminPassword.Name = "txtAdminPassword";
+            this.txtAdminPassword.Size = new System.Drawing.Size(136, 26);
+            this.txtAdminPassword.TabIndex = 8;
+            // 
+            // txtAdminLogin
+            // 
+            this.txtAdminLogin.Location = new System.Drawing.Point(134, 35);
+            this.txtAdminLogin.Name = "txtAdminLogin";
+            this.txtAdminLogin.Size = new System.Drawing.Size(279, 26);
+            this.txtAdminLogin.TabIndex = 7;
+            // 
+            // grpSelectYearAnalysis
+            // 
+            this.grpSelectYearAnalysis.Controls.Add(this.lblSelectYearRevenueAnalysis);
+            this.grpSelectYearAnalysis.Controls.Add(this.cmbSelectYearGenreAnalysis);
+            this.grpSelectYearAnalysis.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpSelectYearAnalysis.Location = new System.Drawing.Point(21, 178);
+            this.grpSelectYearAnalysis.Name = "grpSelectYearAnalysis";
+            this.grpSelectYearAnalysis.Size = new System.Drawing.Size(273, 55);
+            this.grpSelectYearAnalysis.TabIndex = 34;
+            this.grpSelectYearAnalysis.TabStop = false;
+            this.grpSelectYearAnalysis.Visible = false;
+            // 
+            // lblSelectYearRevenueAnalysis
+            // 
+            this.lblSelectYearRevenueAnalysis.AutoSize = true;
+            this.lblSelectYearRevenueAnalysis.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelectYearRevenueAnalysis.Location = new System.Drawing.Point(6, 22);
+            this.lblSelectYearRevenueAnalysis.Name = "lblSelectYearRevenueAnalysis";
+            this.lblSelectYearRevenueAnalysis.Size = new System.Drawing.Size(92, 20);
+            this.lblSelectYearRevenueAnalysis.TabIndex = 28;
+            this.lblSelectYearRevenueAnalysis.Text = "Select Year";
             // 
             // cmbSelectYearGenreAnalysis
             // 
@@ -217,26 +324,30 @@
             "2022",
             "2023",
             "2024"});
-            this.cmbSelectYearGenreAnalysis.Location = new System.Drawing.Point(133, 52);
+            this.cmbSelectYearGenreAnalysis.Location = new System.Drawing.Point(111, 19);
             this.cmbSelectYearGenreAnalysis.Name = "cmbSelectYearGenreAnalysis";
             this.cmbSelectYearGenreAnalysis.Size = new System.Drawing.Size(156, 28);
-            this.cmbSelectYearGenreAnalysis.TabIndex = 27;
-            this.cmbSelectYearGenreAnalysis.SelectedIndexChanged += new System.EventHandler(this.cmbSelectYearGenreAnalysis_SelectedIndexChanged);
+            this.cmbSelectYearGenreAnalysis.TabIndex = 31;
+            this.cmbSelectYearGenreAnalysis.SelectedIndexChanged += new System.EventHandler(this.cmbSelectYearGenreAnalysis_SelectedIndexChanged_1);
             // 
             // frmYearlyGenreAnalysis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(998, 450);
-            this.Controls.Add(this.cmbSelectYearGenreAnalysis);
+            this.ClientSize = new System.Drawing.Size(961, 585);
+            this.Controls.Add(this.grpSelectYearAnalysis);
+            this.Controls.Add(this.grpAdminLogin);
             this.Controls.Add(this.chtGenreAnalysis);
-            this.Controls.Add(this.lblSelectYearGenreAnalysis);
             this.Controls.Add(this.mnuYearlyGenreAnalysis);
             this.Name = "frmYearlyGenreAnalysis";
             this.Text = "Book Sales System - [Display Analysis - Genre Analysis]";
             this.mnuYearlyGenreAnalysis.ResumeLayout(false);
             this.mnuYearlyGenreAnalysis.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chtGenreAnalysis)).EndInit();
+            this.grpAdminLogin.ResumeLayout(false);
+            this.grpAdminLogin.PerformLayout();
+            this.grpSelectYearAnalysis.ResumeLayout(false);
+            this.grpSelectYearAnalysis.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -259,8 +370,17 @@
         private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem yearlyRevenueAnalysisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem genreAnalysisToolStripMenuItem;
-        private System.Windows.Forms.Label lblSelectYearGenreAnalysis;
         private System.Windows.Forms.DataVisualization.Charting.Chart chtGenreAnalysis;
+        private System.Windows.Forms.GroupBox grpAdminLogin;
+        private System.Windows.Forms.Button btnAdminLogout;
+        private System.Windows.Forms.CheckBox chbAdminHidePassword;
+        private System.Windows.Forms.Button btnAdminLogin;
+        private System.Windows.Forms.Label lblAdminPassword;
+        private System.Windows.Forms.Label lblAdminLogin;
+        private System.Windows.Forms.TextBox txtAdminPassword;
+        private System.Windows.Forms.TextBox txtAdminLogin;
+        private System.Windows.Forms.GroupBox grpSelectYearAnalysis;
+        private System.Windows.Forms.Label lblSelectYearRevenueAnalysis;
         private System.Windows.Forms.ComboBox cmbSelectYearGenreAnalysis;
     }
 }

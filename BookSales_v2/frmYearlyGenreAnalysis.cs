@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Oracle.ManagedDataAccess.Client;
 
 namespace BookSalesSys
 {
@@ -88,18 +89,96 @@ namespace BookSalesSys
             Application.Exit();
         }
 
-        private void cmbSelectYearGenreAnalysis_SelectedIndexChanged(object sender, EventArgs e)
+        
+
+        private void btnAdminLogin_Click(object sender, EventArgs e)
         {
-            chtGenreAnalysis.Visible = true;
-            chtGenreAnalysis.Series["Quantity"].Points.Clear();
-            chtGenreAnalysis.Series["Quantity"].Points.AddXY("Detective", 97);
-            chtGenreAnalysis.Series["Quantity"].Points.AddXY("Sci-fi", 51);
-            chtGenreAnalysis.Series["Quantity"].Points.AddXY("History", 65);
-            chtGenreAnalysis.Series["Quantity"].Points.AddXY("Fantasy", 33);
-            chtGenreAnalysis.Series["Quantity"].Points.AddXY("Romance", 60);
-            chtGenreAnalysis.Series["Quantity"].Points.AddXY("Poems", 28);
-            chtGenreAnalysis.Series["Quantity"].Points.AddXY("Biography", 69);
-            chtGenreAnalysis.Series["Quantity"].Points.AddXY("Non-fiction", 62);
+            if (txtAdminLogin.Text != "admin" || txtAdminPassword.Text != "admin")
+            {
+                MessageBox.Show("Invalid admin credentials.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                OracleConnection conn = DBConnection.GetConnection();
+                conn.Open();
+                string sql = "SELECT DISTINCT EXTRACT(YEAR FROM DateOrdered) AS Year " +
+                             "FROM Orders ORDER BY Year";
+                OracleCommand cmd = new OracleCommand(sql, conn);
+                OracleDataReader dr = cmd.ExecuteReader();
+                cmbSelectYearGenreAnalysis.Items.Clear();
+                while (dr.Read())
+                {
+                    cmbSelectYearGenreAnalysis.Items.Add(dr["Year"].ToString());
+                }
+                dr.Close();
+                conn.Close();
+                grpSelectYearAnalysis.Visible = true;
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnAdminLogout_Click(object sender, EventArgs e)
+        {
+            txtAdminLogin.Clear();
+            txtAdminPassword.Clear();
+            grpSelectYearAnalysis.Visible = false;
+            chtGenreAnalysis.Visible = false;
+            cmbSelectYearGenreAnalysis.Items.Clear();
+        }
+
+        private void cmbSelectYearGenreAnalysis_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            int year = int.Parse(cmbSelectYearGenreAnalysis.Text);
+
+            try
+            {
+                OracleConnection conn = DBConnection.GetConnection();
+                conn.Open();
+                // sum QtyOrdered grouped by genre for selected year (reference from using_chart_objects.pdf)
+                string sql = @"SELECT genres.Description, SUM(orderedbooks.QtyOrdered) AS Total
+                               FROM Orders orders
+                               JOIN OrderedBooks orderedbooks ON orders.OrderID = orderedbooks.OrderID
+                               JOIN Books books ON orderedbooks.BookTitle = books.BookTitle
+                               JOIN Genres genres ON books.GenreCode = genres.GenreCode
+                               WHERE EXTRACT(YEAR FROM orders.DateOrdered) = :year
+                               GROUP BY genres.Description";
+                OracleCommand cmd = new OracleCommand(sql, conn);
+                cmd.Parameters.Add("year", year);
+                OracleDataReader dr = cmd.ExecuteReader();
+
+                chtGenreAnalysis.Series["Quantity"].Points.Clear();
+                bool hasData = false;
+
+                while (dr.Read())
+                {
+                    string genre = dr["Description"].ToString();
+                    double total = Convert.ToDouble(dr["Total"]);
+                    chtGenreAnalysis.Series["Quantity"].Points.AddXY(genre, total);
+                    hasData = true;
+                }
+                dr.Close();
+                conn.Close();
+
+                if (!hasData)
+                {
+                    MessageBox.Show("No data found for " + year, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // chart settings (reference from using_chart_objects.pdf)
+                chtGenreAnalysis.Series["Quantity"].Label = "#VALY";
+                chtGenreAnalysis.ChartAreas[0].AxisX.Interval = 1;
+                chtGenreAnalysis.Visible = true;
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
