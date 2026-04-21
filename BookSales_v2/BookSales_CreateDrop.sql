@@ -148,17 +148,17 @@ INSERT INTO Books VALUES('Normal People','Sally Rooney','RO',11,62,'A');
 PROMPT
 PROMPT POPULATING Table Orders and OrderedBooks
 PROMPT
-INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,30,TO_DATE('15-01-2025','DD-MM-YYYY'));
+INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,30,SYSDATE);
 INSERT INTO OrderedBooks VALUES(1,'Running Grave',1,18);
 INSERT INTO OrderedBooks VALUES(1,'American Gods',1,12);
 
-INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,14,TO_DATE('20-03-2025','DD-MM-YYYY'));
+INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,14,SYSDATE-5);
 INSERT INTO OrderedBooks VALUES(2,'Sapiens',1,14);
 
-INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,16,TO_DATE('10-06-2025','DD-MM-YYYY'));
+INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,16,SYSDATE-10);
 INSERT INTO OrderedBooks VALUES(3,'Project Hail Mary',1,16);
 
-INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,22,TO_DATE('05-09-2025','DD-MM-YYYY'));
+INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,22,SYSDATE-13);
 INSERT INTO OrderedBooks VALUES(4,'Normal People',2,11);
 
 COMMIT;

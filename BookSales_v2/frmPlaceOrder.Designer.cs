@@ -179,13 +179,13 @@
             // placeOrderToolStripMenuItem
             // 
             this.placeOrderToolStripMenuItem.Name = "placeOrderToolStripMenuItem";
-            this.placeOrderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.placeOrderToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.placeOrderToolStripMenuItem.Text = "Place Order";
             // 
             // returnBookToolStripMenuItem
             // 
             this.returnBookToolStripMenuItem.Name = "returnBookToolStripMenuItem";
-            this.returnBookToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.returnBookToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.returnBookToolStripMenuItem.Text = "Return Book";
             this.returnBookToolStripMenuItem.Click += new System.EventHandler(this.returnBookToolStripMenuItem_Click);
             // 
@@ -332,12 +332,12 @@
             // 
             this.grpPlaceOrderSelectBook.Controls.Add(this.dgvPlaceOrderSelectBook);
             this.grpPlaceOrderSelectBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpPlaceOrderSelectBook.Location = new System.Drawing.Point(494, 105);
+            this.grpPlaceOrderSelectBook.Location = new System.Drawing.Point(12, 100);
             this.grpPlaceOrderSelectBook.Name = "grpPlaceOrderSelectBook";
-            this.grpPlaceOrderSelectBook.Size = new System.Drawing.Size(419, 178);
+            this.grpPlaceOrderSelectBook.Size = new System.Drawing.Size(465, 178);
             this.grpPlaceOrderSelectBook.TabIndex = 28;
             this.grpPlaceOrderSelectBook.TabStop = false;
-            this.grpPlaceOrderSelectBook.Text = "Select Book";
+            this.grpPlaceOrderSelectBook.Text = "Select Book to Add to Cart";
             this.grpPlaceOrderSelectBook.Visible = false;
             // 
             // grpPlaceOrderCheckout
@@ -435,16 +435,16 @@
             this.grpCustomerLogin.Controls.Add(this.txtOrderPassword);
             this.grpCustomerLogin.Controls.Add(this.txtOrderEmail);
             this.grpCustomerLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpCustomerLogin.Location = new System.Drawing.Point(12, 27);
+            this.grpCustomerLogin.Location = new System.Drawing.Point(500, 100);
             this.grpCustomerLogin.Name = "grpCustomerLogin";
-            this.grpCustomerLogin.Size = new System.Drawing.Size(458, 156);
+            this.grpCustomerLogin.Size = new System.Drawing.Size(413, 156);
             this.grpCustomerLogin.TabIndex = 30;
             this.grpCustomerLogin.TabStop = false;
             this.grpCustomerLogin.Text = "Customer Login";
             // 
             // btnLogout
             // 
-            this.btnLogout.Location = new System.Drawing.Point(238, 99);
+            this.btnLogout.Location = new System.Drawing.Point(204, 101);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(79, 28);
             this.btnLogout.TabIndex = 11;
@@ -456,7 +456,7 @@
             // 
             this.chbOrderHidePassword.AutoSize = true;
             this.chbOrderHidePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chbOrderHidePassword.Location = new System.Drawing.Point(323, 70);
+            this.chbOrderHidePassword.Location = new System.Drawing.Point(289, 72);
             this.chbOrderHidePassword.Name = "chbOrderHidePassword";
             this.chbOrderHidePassword.Size = new System.Drawing.Size(118, 20);
             this.chbOrderHidePassword.TabIndex = 10;
@@ -465,7 +465,7 @@
             // 
             // btnLoadCustomer
             // 
-            this.btnLoadCustomer.Location = new System.Drawing.Point(134, 99);
+            this.btnLoadCustomer.Location = new System.Drawing.Point(100, 101);
             this.btnLoadCustomer.Name = "btnLoadCustomer";
             this.btnLoadCustomer.Size = new System.Drawing.Size(79, 28);
             this.btnLoadCustomer.TabIndex = 9;
@@ -477,7 +477,7 @@
             // 
             this.lblLoginPassword.AutoSize = true;
             this.lblLoginPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLoginPassword.Location = new System.Drawing.Point(22, 70);
+            this.lblLoginPassword.Location = new System.Drawing.Point(12, 71);
             this.lblLoginPassword.Name = "lblLoginPassword";
             this.lblLoginPassword.Size = new System.Drawing.Size(78, 20);
             this.lblLoginPassword.TabIndex = 8;
@@ -487,7 +487,7 @@
             // 
             this.lblLoginEmail.AutoSize = true;
             this.lblLoginEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLoginEmail.Location = new System.Drawing.Point(22, 38);
+            this.lblLoginEmail.Location = new System.Drawing.Point(12, 39);
             this.lblLoginEmail.Name = "lblLoginEmail";
             this.lblLoginEmail.Size = new System.Drawing.Size(48, 20);
             this.lblLoginEmail.TabIndex = 8;
@@ -495,14 +495,14 @@
             // 
             // txtOrderPassword
             // 
-            this.txtOrderPassword.Location = new System.Drawing.Point(134, 67);
+            this.txtOrderPassword.Location = new System.Drawing.Point(100, 69);
             this.txtOrderPassword.Name = "txtOrderPassword";
             this.txtOrderPassword.Size = new System.Drawing.Size(183, 26);
             this.txtOrderPassword.TabIndex = 8;
             // 
             // txtOrderEmail
             // 
-            this.txtOrderEmail.Location = new System.Drawing.Point(134, 35);
+            this.txtOrderEmail.Location = new System.Drawing.Point(100, 37);
             this.txtOrderEmail.Name = "txtOrderEmail";
             this.txtOrderEmail.Size = new System.Drawing.Size(275, 26);
             this.txtOrderEmail.TabIndex = 7;
@@ -513,9 +513,9 @@
             this.grpOrderSearch.Controls.Add(this.lblOrderSearch);
             this.grpOrderSearch.Controls.Add(this.txtOrderSearch);
             this.grpOrderSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpOrderSearch.Location = new System.Drawing.Point(494, 27);
+            this.grpOrderSearch.Location = new System.Drawing.Point(12, 27);
             this.grpOrderSearch.Name = "grpOrderSearch";
-            this.grpOrderSearch.Size = new System.Drawing.Size(419, 67);
+            this.grpOrderSearch.Size = new System.Drawing.Size(465, 67);
             this.grpOrderSearch.TabIndex = 31;
             this.grpOrderSearch.TabStop = false;
             this.grpOrderSearch.Visible = false;
@@ -523,7 +523,7 @@
             // btnOrderSearch
             // 
             this.btnOrderSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOrderSearch.Location = new System.Drawing.Point(326, 25);
+            this.btnOrderSearch.Location = new System.Drawing.Point(377, 25);
             this.btnOrderSearch.Name = "btnOrderSearch";
             this.btnOrderSearch.Size = new System.Drawing.Size(79, 28);
             this.btnOrderSearch.TabIndex = 9;
@@ -545,7 +545,7 @@
             // 
             this.txtOrderSearch.Location = new System.Drawing.Point(131, 25);
             this.txtOrderSearch.Name = "txtOrderSearch";
-            this.txtOrderSearch.Size = new System.Drawing.Size(175, 26);
+            this.txtOrderSearch.Size = new System.Drawing.Size(240, 26);
             this.txtOrderSearch.TabIndex = 7;
             // 
             // frmPlaceOrder
