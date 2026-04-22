@@ -33,6 +33,15 @@ namespace BookSalesSys
 
         }
 
+        public frmPlaceOrder(frmMainMenu parent, string email, string password)
+        {
+            InitializeComponent();
+            this.CenterToScreen();
+            this.Parent = parent;
+            txtOrderEmail.Text = email;
+            txtOrderPassword.Text = password;
+        }
+
         private void openAccountToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();

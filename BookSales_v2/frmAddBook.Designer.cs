@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mnuAddBook = new System.Windows.Forms.MenuStrip();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuBackClick = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,9 +65,16 @@
             this.lblAdminLogin = new System.Windows.Forms.Label();
             this.txtAdminPassword = new System.Windows.Forms.TextBox();
             this.txtAdminLogin = new System.Windows.Forms.TextBox();
+            this.dgvAddedBooks = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StockAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Genre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnuAddBook.SuspendLayout();
             this.grpAddBook.SuspendLayout();
             this.grpAdminLogin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAddedBooks)).BeginInit();
             this.SuspendLayout();
             // 
             // mnuAddBook
@@ -204,7 +213,7 @@
             this.grpAddBook.Controls.Add(this.lblAuthor);
             this.grpAddBook.Controls.Add(this.lblBookTitle);
             this.grpAddBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpAddBook.Location = new System.Drawing.Point(12, 223);
+            this.grpAddBook.Location = new System.Drawing.Point(12, 188);
             this.grpAddBook.Name = "grpAddBook";
             this.grpAddBook.Size = new System.Drawing.Size(419, 231);
             this.grpAddBook.TabIndex = 7;
@@ -403,11 +412,73 @@
             this.txtAdminLogin.Size = new System.Drawing.Size(279, 26);
             this.txtAdminLogin.TabIndex = 7;
             // 
+            // dgvAddedBooks
+            // 
+            this.dgvAddedBooks.AllowDrop = true;
+            this.dgvAddedBooks.AllowUserToAddRows = false;
+            this.dgvAddedBooks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAddedBooks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.Author,
+            this.Price,
+            this.StockAmount,
+            this.Genre});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAddedBooks.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvAddedBooks.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.dgvAddedBooks.Location = new System.Drawing.Point(12, 453);
+            this.dgvAddedBooks.Name = "dgvAddedBooks";
+            this.dgvAddedBooks.ReadOnly = true;
+            this.dgvAddedBooks.Size = new System.Drawing.Size(419, 115);
+            this.dgvAddedBooks.TabIndex = 23;
+            this.dgvAddedBooks.Visible = false;
+            // 
+            // ID
+            // 
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ID.DefaultCellStyle = dataGridViewCellStyle1;
+            this.ID.HeaderText = "Book Title";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // Author
+            // 
+            this.Author.HeaderText = "Author";
+            this.Author.Name = "Author";
+            this.Author.ReadOnly = true;
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            this.Price.Width = 50;
+            // 
+            // StockAmount
+            // 
+            this.StockAmount.HeaderText = "Stock";
+            this.StockAmount.Name = "StockAmount";
+            this.StockAmount.ReadOnly = true;
+            this.StockAmount.Visible = false;
+            // 
+            // Genre
+            // 
+            this.Genre.HeaderText = "Genre";
+            this.Genre.Name = "Genre";
+            this.Genre.ReadOnly = true;
+            // 
             // frmAddBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(488, 500);
+            this.ClientSize = new System.Drawing.Size(488, 619);
+            this.Controls.Add(this.dgvAddedBooks);
             this.Controls.Add(this.grpAdminLogin);
             this.Controls.Add(this.grpAddBook);
             this.Controls.Add(this.mnuAddBook);
@@ -419,6 +490,7 @@
             this.grpAddBook.PerformLayout();
             this.grpAdminLogin.ResumeLayout(false);
             this.grpAdminLogin.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAddedBooks)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -460,5 +532,11 @@
         private System.Windows.Forms.TextBox txtAdminPassword;
         private System.Windows.Forms.TextBox txtAdminLogin;
         private System.Windows.Forms.Button btnAdminLogout;
+        private System.Windows.Forms.DataGridView dgvAddedBooks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Author;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StockAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Genre;
     }
 }

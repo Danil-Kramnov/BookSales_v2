@@ -254,16 +254,10 @@ namespace BookSalesSys
             // Confirmation Message
             MessageBox.Show("Account Created", "Confirm", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            // Reset UI
-            txtForename.Clear();
-            txtSurname.Clear();
-            txtEmail.Clear();
-            txtPassword.Clear();
-            txtPhone.Clear();
-            txtStreet.Clear();
-            txtTown.Clear();
-            txtCounty.Clear();
-            txtEircode.Clear();
+            // navigate to PlaceOrder form after creating new account
+            this.Close();
+            frmPlaceOrder nextForm = new frmPlaceOrder(Parent, txtEmail.Text, txtPassword.Text);
+            nextForm.Show();
 
         }
 

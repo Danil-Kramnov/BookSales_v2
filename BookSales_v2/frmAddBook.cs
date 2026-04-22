@@ -169,6 +169,10 @@ namespace BookSalesSys
 
             // confirmation message
             MessageBox.Show("Book Added", "Confirm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+            // show added book in grid
+            dgvAddedBooks.Visible = true;
+            dgvAddedBooks.Rows.Add(txtBookTitle.Text, txtAuthor.Text, cmbGenre.Text, txtPrice.Text, txtStockAmount.Text);
 
             // reset UI
             txtAuthor.Clear();
@@ -200,6 +204,7 @@ namespace BookSalesSys
             dr.Close();
             conn.Close();
             grpAddBook.Visible = true;
+            LoadBooks();
         }
 
         private void chbAdminHidePassword_CheckedChanged(object sender, EventArgs e)
@@ -219,6 +224,35 @@ namespace BookSalesSys
             grpAddBook.Visible = false;
             txtAdminLogin.Clear();
             txtAdminPassword.Clear();
+        }
+
+        private void LoadBooks()
+        {
+            try
+            {
+                OracleConnection conn = DBConnection.GetConnection();
+                conn.Open();
+                string sql = "SELECT BookTitle, Author, GenreCode, Price, StockAmount FROM Books WHERE BookStatus='A'";
+                OracleCommand cmd = new OracleCommand(sql, conn);
+                OracleDataReader dr = cmd.ExecuteReader();
+                dgvAddedBooks.Rows.Clear();
+                dgvAddedBooks.Visible = true;
+                while (dr.Read())
+                {
+                    dgvAddedBooks.Rows.Add(dr["BookTitle"].ToString(),
+                                           dr["Author"].ToString(),
+                                           dr["GenreCode"].ToString(),
+                                           dr["Price"].ToString(),
+                                           dr["StockAmount"].ToString());
+                }
+                    
+                dr.Close();
+                conn.Close();
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
