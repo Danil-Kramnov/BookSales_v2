@@ -18,12 +18,14 @@ namespace BookSalesSys
         {
             InitializeComponent();
             this.CenterToScreen();
+            DBConnection.ApplyStyling(this);
         }
         public frmYearlyGenreAnalysis(frmMainMenu parent)
         {
             InitializeComponent();
             this.CenterToScreen();
             this.Parent = parent;
+            DBConnection.ApplyStyling(this);
         }
 
         private void openAccountToolStripMenuItem_Click(object sender, EventArgs e)

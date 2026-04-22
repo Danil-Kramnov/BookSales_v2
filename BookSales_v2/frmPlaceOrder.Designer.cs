@@ -55,6 +55,7 @@
             this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Remove = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpPlaceOrderCart = new System.Windows.Forms.GroupBox();
+            this.lblTotalPrice = new System.Windows.Forms.Label();
             this.btnPlaceOrderBuy = new System.Windows.Forms.Button();
             this.grpPlaceOrderSelectBook = new System.Windows.Forms.GroupBox();
             this.grpCustomerLogin = new System.Windows.Forms.GroupBox();
@@ -69,7 +70,7 @@
             this.btnOrderSearch = new System.Windows.Forms.Button();
             this.lblOrderSearch = new System.Windows.Forms.Label();
             this.txtOrderSearch = new System.Windows.Forms.TextBox();
-            this.lblTotalPrice = new System.Windows.Forms.Label();
+            this.lblWelcome = new System.Windows.Forms.Label();
             this.mnuPlaceOrder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderSelectBook)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderCart)).BeginInit();
@@ -307,6 +308,15 @@
             this.grpPlaceOrderCart.Text = "Cart";
             this.grpPlaceOrderCart.Visible = false;
             // 
+            // lblTotalPrice
+            // 
+            this.lblTotalPrice.AutoSize = true;
+            this.lblTotalPrice.Location = new System.Drawing.Point(19, 232);
+            this.lblTotalPrice.Name = "lblTotalPrice";
+            this.lblTotalPrice.Size = new System.Drawing.Size(83, 20);
+            this.lblTotalPrice.TabIndex = 28;
+            this.lblTotalPrice.Text = "Total Price";
+            // 
             // btnPlaceOrderBuy
             // 
             this.btnPlaceOrderBuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -453,20 +463,23 @@
             this.txtOrderSearch.Size = new System.Drawing.Size(240, 26);
             this.txtOrderSearch.TabIndex = 7;
             // 
-            // lblTotalPrice
+            // lblWelcome
             // 
-            this.lblTotalPrice.AutoSize = true;
-            this.lblTotalPrice.Location = new System.Drawing.Point(19, 232);
-            this.lblTotalPrice.Name = "lblTotalPrice";
-            this.lblTotalPrice.Size = new System.Drawing.Size(83, 20);
-            this.lblTotalPrice.TabIndex = 28;
-            this.lblTotalPrice.Text = "Total Price";
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.Location = new System.Drawing.Point(785, 51);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(91, 24);
+            this.lblWelcome.TabIndex = 32;
+            this.lblWelcome.Text = "Welcome";
+            this.lblWelcome.Visible = false;
             // 
             // frmPlaceOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(941, 672);
+            this.Controls.Add(this.lblWelcome);
             this.Controls.Add(this.grpOrderSearch);
             this.Controls.Add(this.grpCustomerLogin);
             this.Controls.Add(this.grpPlaceOrderSelectBook);
@@ -534,5 +547,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn Remove;
         private System.Windows.Forms.Label lblTotalPrice;
+        private System.Windows.Forms.Label lblWelcome;
     }
 }

@@ -55,7 +55,7 @@
             this.adminToolStripMenuItem1});
             this.mnuMainMenu.Location = new System.Drawing.Point(0, 0);
             this.mnuMainMenu.Name = "mnuMainMenu";
-            this.mnuMainMenu.Size = new System.Drawing.Size(793, 24);
+            this.mnuMainMenu.Size = new System.Drawing.Size(884, 24);
             this.mnuMainMenu.TabIndex = 3;
             this.mnuMainMenu.Text = "Main Menu Strip";
             // 
@@ -117,14 +117,14 @@
             // placeSaleToolStripMenuItem
             // 
             this.placeSaleToolStripMenuItem.Name = "placeSaleToolStripMenuItem";
-            this.placeSaleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.placeSaleToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.placeSaleToolStripMenuItem.Text = "Place Order";
             this.placeSaleToolStripMenuItem.Click += new System.EventHandler(this.placeSaleToolStripMenuItem_Click);
             // 
             // returnBookToolStripMenuItem
             // 
             this.returnBookToolStripMenuItem.Name = "returnBookToolStripMenuItem";
-            this.returnBookToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.returnBookToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.returnBookToolStripMenuItem.Text = "Return Book";
             this.returnBookToolStripMenuItem.Click += new System.EventHandler(this.returnBookToolStripMenuItem_Click);
             // 
@@ -140,14 +140,14 @@
             // produceYearlyRevenueAnalysisToolStripMenuItem
             // 
             this.produceYearlyRevenueAnalysisToolStripMenuItem.Name = "produceYearlyRevenueAnalysisToolStripMenuItem";
-            this.produceYearlyRevenueAnalysisToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.produceYearlyRevenueAnalysisToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.produceYearlyRevenueAnalysisToolStripMenuItem.Text = "Yearly Revenue";
             this.produceYearlyRevenueAnalysisToolStripMenuItem.Click += new System.EventHandler(this.produceYearlyRevenueAnalysisToolStripMenuItem_Click);
             // 
             // produceToolStripMenuItem
             // 
             this.produceToolStripMenuItem.Name = "produceToolStripMenuItem";
-            this.produceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.produceToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.produceToolStripMenuItem.Text = "Genre Analysis";
             this.produceToolStripMenuItem.Click += new System.EventHandler(this.produceToolStripMenuItem_Click);
             // 
@@ -157,7 +157,7 @@
             this.picMainMenu.Image = global::BookSales_v2.Properties.Resources.Books;
             this.picMainMenu.Location = new System.Drawing.Point(12, 27);
             this.picMainMenu.Name = "picMainMenu";
-            this.picMainMenu.Size = new System.Drawing.Size(776, 411);
+            this.picMainMenu.Size = new System.Drawing.Size(860, 572);
             this.picMainMenu.TabIndex = 2;
             this.picMainMenu.TabStop = false;
             // 
@@ -165,7 +165,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(793, 450);
+            this.ClientSize = new System.Drawing.Size(884, 510);
             this.Controls.Add(this.picMainMenu);
             this.Controls.Add(this.mnuMainMenu);
             this.MainMenuStrip = this.mnuMainMenu;

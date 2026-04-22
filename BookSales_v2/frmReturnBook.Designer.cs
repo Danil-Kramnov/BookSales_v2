@@ -69,6 +69,7 @@
             this.QtyRetuned = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrderIDCart = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblWelcome = new System.Windows.Forms.Label();
             this.mnuReturnBook.SuspendLayout();
             this.grpReturnBookSelectBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReturnBookSelectBook)).BeginInit();
@@ -452,11 +453,23 @@
             this.OrderIDCart.ReadOnly = true;
             this.OrderIDCart.Width = 50;
             // 
+            // lblWelcome
+            // 
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.Location = new System.Drawing.Point(784, 51);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(91, 24);
+            this.lblWelcome.TabIndex = 35;
+            this.lblWelcome.Text = "Welcome";
+            this.lblWelcome.Visible = false;
+            // 
             // frmReturnBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(942, 611);
+            this.Controls.Add(this.lblWelcome);
             this.Controls.Add(this.grpReturnCart);
             this.Controls.Add(this.grpOrderSearch);
             this.Controls.Add(this.grpCustomerLogin);
@@ -523,5 +536,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RefundAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderIDCart;
         private System.Windows.Forms.Label lblRefundTotal;
+        private System.Windows.Forms.Label lblWelcome;
     }
 }

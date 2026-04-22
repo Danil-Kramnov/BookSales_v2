@@ -20,12 +20,15 @@ namespace BookSalesSys
         {
             InitializeComponent();
             this.CenterToScreen();
+            dgvAddedBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         public frmAddBook(frmMainMenu parent)
         {
             InitializeComponent();
             this.Parent = parent;
             this.CenterToScreen();
+            dgvAddedBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DBConnection.ApplyStyling(this);
 
         }
 
@@ -224,6 +227,7 @@ namespace BookSalesSys
             grpAddBook.Visible = false;
             txtAdminLogin.Clear();
             txtAdminPassword.Clear();
+            dgvAddedBooks.Visible = false;
         }
 
         private void LoadBooks()

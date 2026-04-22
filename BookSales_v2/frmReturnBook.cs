@@ -22,12 +22,18 @@ namespace BookSalesSys
         {
             InitializeComponent();
             this.CenterToScreen();
+            dgvReturnBookSelectBook.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvReturnCart.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DBConnection.ApplyStyling(this);
         }
         public frmReturnBook(frmMainMenu parent)
         {
             InitializeComponent();
             this.CenterToScreen();
+            dgvReturnBookSelectBook.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvReturnCart.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.Parent = parent;
+            DBConnection.ApplyStyling(this);
 
         }
 
@@ -110,7 +116,7 @@ namespace BookSalesSys
             {
                 OracleConnection conn = DBConnection.GetConnection();
                 conn.Open();
-                string sql = @"SELECT AccountID FROM Accounts 
+                string sql = @"SELECT AccountID, Forename FROM Accounts 
                                WHERE Email=:email 
                                AND Password=:pwd 
                                AND Status='A'";
@@ -122,6 +128,9 @@ namespace BookSalesSys
                 if (dr.Read())
                 {
                     _customerID = Convert.ToInt32(dr["AccountID"]);
+                    string forename = dr["Forename"].ToString();
+                    lblWelcome.Visible = true;
+                    lblWelcome.Text = "Hello, " + forename + "!";
                     dr.Close();
                     conn.Close();
                     grpOrderSearch.Visible = true;
@@ -164,7 +173,7 @@ namespace BookSalesSys
 
             // ask how many to return
             // (taken from https://stackoverflow.com/questions/16463599/popup-window-in-winform-c-sharp)
-            string prompt = Interaction.InputBox("How many books do you want to return?", "Quantity", "1", 0, 0);
+            string prompt = Interaction.InputBox("How many books do you want to return?", "Quantity", "1", -1, -1);
 
             if (!int.TryParse(prompt, out int result) || result <= 0 || result > qty)
             {
@@ -211,6 +220,7 @@ namespace BookSalesSys
             txtReturnPassword.Clear();
             dgvReturnBookSelectBook.Rows.Clear();
             dgvReturnCart.Rows.Clear();
+            lblWelcome.Text = "";
         }
 
         private void LoadOrders(string searchTerm)

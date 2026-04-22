@@ -21,12 +21,16 @@ namespace BookSalesSys
         {
             InitializeComponent();
             this.CenterToScreen();
+            dgvBookListUpdate.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DBConnection.ApplyStyling(this);
         }
         public frmUpdateBookDetails(frmMainMenu parent)
         {
             InitializeComponent();
             this.CenterToScreen();
+            dgvBookListUpdate.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.Parent = parent;
+            DBConnection.ApplyStyling(this);
         }
 
         private void openAccountToolStripMenuItem_Click(object sender, EventArgs e)

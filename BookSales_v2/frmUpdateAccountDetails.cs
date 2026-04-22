@@ -35,6 +35,7 @@ namespace BookSalesSys
             this.CenterToScreen();
             dtpDOB.Value = dtpDOB.Value.AddYears(-18);
             captureOriginalValues();
+            DBConnection.ApplyStyling(this);
 
         }
 
@@ -46,6 +47,8 @@ namespace BookSalesSys
 
             dtpDOB.Value = dtpDOB.Value.AddYears(-18);
             captureOriginalValues();
+
+            DBConnection.ApplyStyling(this);
         }
 
         private void captureOriginalValues()

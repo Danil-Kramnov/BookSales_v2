@@ -16,6 +16,7 @@ namespace BookSalesSys
         {
             InitializeComponent();
             this.CenterToScreen();
+            DBConnection.ApplyStyling(this);
         }
 
         private void createAccountToolStripMenuItem_Click(object sender, EventArgs e)

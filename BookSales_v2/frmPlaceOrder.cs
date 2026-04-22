@@ -19,17 +19,23 @@ namespace BookSalesSys
         frmMainMenu Parent;
 
         private int _customerID;
-
+       
         public frmPlaceOrder()
         {
             InitializeComponent();
             this.CenterToScreen();
+            dgvPlaceOrderSelectBook.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPlaceOrderCart.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DBConnection.ApplyStyling(this);
         }
         public frmPlaceOrder(frmMainMenu parent)
         {
             InitializeComponent();
             this.CenterToScreen();
+            dgvPlaceOrderSelectBook.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPlaceOrderCart.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.Parent = parent;
+            DBConnection.ApplyStyling(this);
 
         }
 
@@ -113,7 +119,7 @@ namespace BookSalesSys
 
             // Pops up window to ask about how many of this book you want to order
             // (taken from https://stackoverflow.com/questions/16463599/popup-window-in-winform-c-sharp)
-            string prompt = Interaction.InputBox("How many books you want to order?", "Quantity", "1", 0, 0);
+            string prompt = Interaction.InputBox("How many books you want to order?", "Quantity", "1", -1, -1);
 
             if (int.TryParse(prompt, out int numericPrompt) && numericPrompt > 0)
             {
@@ -251,7 +257,7 @@ namespace BookSalesSys
 
             if (colIndex == 4)
             {
-                string prompt = Interaction.InputBox("How many books you want to remove?", "Quantity", "1", 0, 0);
+                string prompt = Interaction.InputBox("How many books you want to remove?", "Quantity", "1", -1, -1);
                 int.TryParse(dgvPlaceOrderCart.Rows[rowIndex].Cells[3].Value.ToString(), out int qty);
 
                 if (!int.TryParse(prompt, out int numericPrompt) || numericPrompt <= 0 || numericPrompt > qty)
@@ -289,12 +295,12 @@ namespace BookSalesSys
                 MessageBox.Show("Please enter email and password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            
             try
             {
                 OracleConnection conn = DBConnection.GetConnection();
                 conn.Open();
-                string sql = @"SELECT AccountID FROM Accounts 
+                string sql = @"SELECT AccountID, Forename FROM Accounts 
                                WHERE Email=:email
                                AND Password=:pwd 
                                AND Status='A'";
@@ -306,6 +312,9 @@ namespace BookSalesSys
                 if (dr.Read())
                 {
                     _customerID = Convert.ToInt32(dr["AccountID"]);
+                    string forename = dr["Forename"].ToString();
+                    lblWelcome.Visible = true;
+                    lblWelcome.Text = "Hello, " + forename + "!";
                     dr.Close();
                     conn.Close();
                     grpOrderSearch.Visible = true;
@@ -315,8 +324,7 @@ namespace BookSalesSys
                 {
                     dr.Close();
                     conn.Close();
-                    MessageBox.Show("Account not found or already closed.", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Account not found or already closed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (OracleException ex)
@@ -368,6 +376,8 @@ namespace BookSalesSys
             txtOrderEmail.Clear();
             txtOrderPassword.Clear();
             dgvPlaceOrderCart.Rows.Clear();
+
+            lblWelcome.Text = "";
 
             lblTotalPrice.Text = "Total: €0.00";
         }

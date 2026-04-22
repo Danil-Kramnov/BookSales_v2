@@ -20,6 +20,7 @@ namespace BookSalesSys
         {
             InitializeComponent();
             this.CenterToScreen();
+            DBConnection.ApplyStyling(this);
         }
 
         public frmOpenAccount(frmMainMenu parent)
@@ -27,6 +28,7 @@ namespace BookSalesSys
             InitializeComponent();
             this.CenterToScreen();
             this.Parent = parent;
+            DBConnection.ApplyStyling(this);
 
             dtpDOB.Value = dtpDOB.Value.AddYears(-18);
 
