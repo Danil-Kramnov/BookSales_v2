@@ -221,7 +221,7 @@ namespace BookSalesSys
                 OracleConnection conn = DBConnection.GetConnection();
                 conn.Open();
                 string sql = @"INSERT INTO Accounts (AccountID,Forename,Surname,DOB,Email,Password,Phone,Street,Town,County,Eircode,Status)
-                               VALUES (accounts_seq.NEXTVAL,:fn,:sn,:dob,:email,:pwd,:phone,:street,:towm,:county,:eircode,'A')";
+                               VALUES (accounts_seq.NEXTVAL,:fn,:sn,:dob,:email,:pwd,:phone,:street,:town,:county,:eircode,'A')";
                 OracleCommand cmd = new OracleCommand(sql,conn);
                 cmd.Parameters.Add(":fn", txtForename.Text);
                 cmd.Parameters.Add(":sn", txtSurname.Text);

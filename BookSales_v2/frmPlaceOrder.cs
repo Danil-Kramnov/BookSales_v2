@@ -126,10 +126,11 @@ namespace BookSalesSys
                 int rowIndex = e.RowIndex;
                 string title = dgvPlaceOrderSelectBook.Rows[rowIndex].Cells[0].Value.ToString();
                 string author = dgvPlaceOrderSelectBook.Rows[rowIndex].Cells[1].Value.ToString();
-                string price = dgvPlaceOrderSelectBook.Rows[rowIndex].Cells[2].Value.ToString();
+                string genre = dgvPlaceOrderSelectBook.Rows[rowIndex].Cells[2].Value.ToString();
+                string price = dgvPlaceOrderSelectBook.Rows[rowIndex].Cells[3].Value.ToString();
+                int stock = int.Parse(dgvPlaceOrderSelectBook.Rows[rowIndex].Cells[4].Value.ToString());
 
                 // validate quantity against stock
-                int stock = int.Parse(dgvPlaceOrderSelectBook.Rows[rowIndex].Cells[3].Value.ToString());
                 if (numericPrompt > stock)
                 {
                     MessageBox.Show("Insufficient stock. Only " + stock + " available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -157,7 +158,7 @@ namespace BookSalesSys
                 }
                 if (!found)
                 {
-                    dgvPlaceOrderCart.Rows.Add(title, author, price, numericPrompt, "X");
+                    dgvPlaceOrderCart.Rows.Add(title, author, genre, price, numericPrompt, "X");
                 }
                 grpPlaceOrderCart.Visible = true;
                 UpdateTotal();
@@ -203,8 +204,8 @@ namespace BookSalesSys
                 for (int i = 0; i < dgvPlaceOrderCart.Rows.Count; i++)
                 {
                     string title = dgvPlaceOrderCart.Rows[i].Cells[0].Value.ToString();
-                    decimal price = decimal.Parse(dgvPlaceOrderCart.Rows[i].Cells[2].Value.ToString().Substring(1));
-                    int qty = int.Parse(dgvPlaceOrderCart.Rows[i].Cells[3].Value.ToString());
+                    decimal price = decimal.Parse(dgvPlaceOrderCart.Rows[i].Cells[3].Value.ToString().Substring(1));
+                    int qty = int.Parse(dgvPlaceOrderCart.Rows[i].Cells[4].Value.ToString());
 
                     string obSql = @"INSERT INTO OrderedBooks (OrderID, BookTitle, QtyOrdered, OrderPrice)
                                      VALUES(:orderID, :title, :qty, :price)";
@@ -255,10 +256,10 @@ namespace BookSalesSys
             decimal price;
 
 
-            if (colIndex == 4)
+            if (colIndex == 5)
             {
                 string prompt = Interaction.InputBox("How many books you want to remove?", "Quantity", "1", -1, -1);
-                int.TryParse(dgvPlaceOrderCart.Rows[rowIndex].Cells[3].Value.ToString(), out int qty);
+                int.TryParse(dgvPlaceOrderCart.Rows[rowIndex].Cells[4].Value.ToString(), out int qty);
 
                 if (!int.TryParse(prompt, out int numericPrompt) || numericPrompt <= 0 || numericPrompt > qty)
                 {
@@ -278,8 +279,9 @@ namespace BookSalesSys
                     {
                         title = dgvPlaceOrderCart.Rows[rowIndex].Cells[0].Value.ToString();
                         author = dgvPlaceOrderCart.Rows[rowIndex].Cells[1].Value.ToString();
-                        price = decimal.Parse(dgvPlaceOrderCart.Rows[rowIndex].Cells[2].Value.ToString().Substring(1));
-                        dgvPlaceOrderCart.Rows[rowIndex].SetValues(title, author, "€" + price, qty);
+                        price = decimal.Parse(dgvPlaceOrderCart.Rows[rowIndex].Cells[3].Value.ToString().Substring(1));
+                        string genre = dgvPlaceOrderCart.Rows[rowIndex].Cells[2].Value.ToString();
+                        dgvPlaceOrderCart.Rows[rowIndex].SetValues(title, author, genre, "€" + price, qty, "X");
                     }
                     UpdateTotal();
                 }
@@ -318,6 +320,7 @@ namespace BookSalesSys
                     dr.Close();
                     conn.Close();
                     grpOrderSearch.Visible = true;
+                    btnLoadCustomer.Visible = false;
                     LoadBooks("");
                 }
                 else
@@ -341,9 +344,11 @@ namespace BookSalesSys
                 OracleConnection conn = DBConnection.GetConnection();
                 conn.Open();
                 // retrieve active books matching search
-                string sql = @"SELECT BookTitle, Author, Price, StockAmount 
-                               FROM Books WHERE UPPER(BookTitle) LIKE '%' || UPPER(:search) || '%'
-                               AND BookStatus='A'";
+                string sql = @"SELECT books.BookTitle, books.Author, genres.Description, books.Price, books.StockAmount 
+                               FROM Books books
+                               JOIN Genres genres ON books.GenreCode = genres.GenreCode
+                               WHERE UPPER(books.BookTitle) LIKE '%' || UPPER(:search) || '%'
+                               AND books.BookStatus='A' AND books.StockAmount > 0";
                 OracleCommand cmd = new OracleCommand(sql, conn);
                 cmd.Parameters.Add("search", search);
                 OracleDataReader dr = cmd.ExecuteReader();
@@ -353,6 +358,7 @@ namespace BookSalesSys
                 {
                     dgvPlaceOrderSelectBook.Rows.Add(dr["BookTitle"].ToString(),
                                                      dr["Author"].ToString(),
+                                                     dr["Description"].ToString(),
                                                      "€" + dr["Price"].ToString(),
                                                      dr["StockAmount"].ToString());
                 }
@@ -380,6 +386,8 @@ namespace BookSalesSys
             lblWelcome.Text = "";
 
             lblTotalPrice.Text = "Total: €0.00";
+            btnLoadCustomer.Visible = true;
+
         }
 
         private void btnOrderSearch_Click(object sender, EventArgs e)

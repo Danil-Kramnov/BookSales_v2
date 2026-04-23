@@ -135,6 +135,7 @@ namespace BookSalesSys
                     conn.Close();
                     grpOrderSearch.Visible = true;
                     grpReturnBookSelectBook.Visible = true;
+                    btnLoadCustomer.Visible = false;
                     LoadOrders("");
                 }
                 else
@@ -169,7 +170,7 @@ namespace BookSalesSys
             string title = dgvReturnBookSelectBook.Rows[rowIndex].Cells[0].Value.ToString();
             int qty = int.Parse(dgvReturnBookSelectBook.Rows[rowIndex].Cells[1].Value.ToString());
             decimal price = decimal.Parse(dgvReturnBookSelectBook.Rows[rowIndex].Cells[2].Value.ToString().Substring(1));
-            int orderID = int.Parse(dgvReturnBookSelectBook.Rows[rowIndex].Cells[3].Value.ToString());
+            int orderID = int.Parse(dgvReturnBookSelectBook.Rows[rowIndex].Cells[4].Value.ToString());
 
             // ask how many to return
             // (taken from https://stackoverflow.com/questions/16463599/popup-window-in-winform-c-sharp)
@@ -222,6 +223,7 @@ namespace BookSalesSys
             dgvReturnBookSelectBook.Rows.Clear();
             dgvReturnCart.Rows.Clear();
             lblWelcome.Text = "";
+            btnLoadCustomer.Visible = true;
         }
 
         private void LoadOrders(string searchTerm)
@@ -231,7 +233,8 @@ namespace BookSalesSys
                 OracleConnection conn = DBConnection.GetConnection();
                 conn.Open();
                 // retrieve books ordered within 14 days
-                string sql = @"SELECT orderedbooks.BookTitle, orderedbooks.QtyOrdered, orderedbooks.OrderPrice, orders.OrderID
+                string sql = @"SELECT orderedbooks.BookTitle, orderedbooks.QtyOrdered, 
+                                        orderedbooks.OrderPrice, orders.DateOrdered, orders.OrderID
                                FROM Orders orders
                                JOIN OrderedBooks orderedbooks ON orders.OrderID = orderedbooks.OrderID
                                WHERE orders.AccountID = :accountID
@@ -248,6 +251,7 @@ namespace BookSalesSys
                     dgvReturnBookSelectBook.Rows.Add(dr["BookTitle"].ToString(),
                                                      dr["QtyOrdered"].ToString(),
                                                      "€" + dr["OrderPrice"].ToString(),
+                                                     Convert.ToDateTime(dr["DateOrdered"]).ToString("dd-MMM-yy"),
                                                      dr["OrderID"].ToString());
                 }
                 if (dgvReturnBookSelectBook.Rows.Count == 0)
@@ -312,8 +316,8 @@ namespace BookSalesSys
                     int orderID = int.Parse(dgvReturnCart.Rows[i].Cells[3].Value.ToString());
 
                     // insert into ReturnedBooks
-                    string retSql = @"INSERT INTO ReturnedBooks (OrderID, BookTitle, QtyReturned, RefundAmount)
-                                      VALUES(:orderID, :title, :qty, :refundAmount)";
+                    string retSql = @"INSERT INTO ReturnedBooks(OrderID, BookTitle, QtyReturned, RefundAmount, ReturnedDate)
+                                      VALUES(:orderID, :title, :qty, :refundAmount, SYSDATE)";
                     OracleCommand retCmd = new OracleCommand(retSql, conn);
                     retCmd.Parameters.Add("orderID", orderID);
                     retCmd.Parameters.Add("title", title);
