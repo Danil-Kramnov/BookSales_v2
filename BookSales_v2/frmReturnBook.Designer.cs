@@ -66,11 +66,12 @@
             this.lblRefundTotal = new System.Windows.Forms.Label();
             this.btnRefund = new System.Windows.Forms.Button();
             this.dgvReturnCart = new System.Windows.Forms.DataGridView();
+            this.lblWelcome = new System.Windows.Forms.Label();
             this.BookTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QtyRetuned = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrderIDCart = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblWelcome = new System.Windows.Forms.Label();
+            this.X = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnuReturnBook.SuspendLayout();
             this.grpReturnBookSelectBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReturnBookSelectBook)).BeginInit();
@@ -427,13 +428,25 @@
             this.BookTitle,
             this.QtyRetuned,
             this.RefundAmount,
-            this.OrderIDCart});
+            this.OrderIDCart,
+            this.X});
             this.dgvReturnCart.Location = new System.Drawing.Point(6, 25);
             this.dgvReturnCart.Name = "dgvReturnCart";
             this.dgvReturnCart.ReadOnly = true;
             this.dgvReturnCart.Size = new System.Drawing.Size(450, 161);
             this.dgvReturnCart.TabIndex = 26;
             this.dgvReturnCart.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReturnCart_CellClick);
+            // 
+            // lblWelcome
+            // 
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.Location = new System.Drawing.Point(784, 51);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(91, 24);
+            this.lblWelcome.TabIndex = 35;
+            this.lblWelcome.Text = "Welcome";
+            this.lblWelcome.Visible = false;
             // 
             // BookTitle
             // 
@@ -461,16 +474,11 @@
             this.OrderIDCart.ReadOnly = true;
             this.OrderIDCart.Width = 50;
             // 
-            // lblWelcome
+            // X
             // 
-            this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWelcome.Location = new System.Drawing.Point(784, 51);
-            this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(91, 24);
-            this.lblWelcome.TabIndex = 35;
-            this.lblWelcome.Text = "Welcome";
-            this.lblWelcome.Visible = false;
+            this.X.HeaderText = "X";
+            this.X.Name = "X";
+            this.X.ReadOnly = true;
             // 
             // frmReturnBook
             // 
@@ -535,10 +543,6 @@
         private System.Windows.Forms.GroupBox grpReturnCart;
         private System.Windows.Forms.Button btnRefund;
         private System.Windows.Forms.DataGridView dgvReturnCart;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BookTitle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QtyRetuned;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RefundAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OrderIDCart;
         private System.Windows.Forms.Label lblRefundTotal;
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
@@ -546,5 +550,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BookTitle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QtyRetuned;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RefundAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrderIDCart;
+        private System.Windows.Forms.DataGridViewTextBoxColumn X;
     }
 }

@@ -104,12 +104,13 @@ PROMPT
 PROMPT CREATING Table ReturnedBooks
 PROMPT
 CREATE TABLE ReturnedBooks
-(OrderID INT,
- BookTitle VARCHAR2(50),
+(ReturnID INT,
+ OrderID INT NOT NULL,
+ BookTitle VARCHAR2(50) NOT NULL,
  QtyReturned INT NOT NULL,
  RefundAmount DECIMAL(10,2) NOT NULL,
  ReturnedDate DATE NOT NULL,
- CONSTRAINT pk_ReturnedBooks PRIMARY KEY (OrderID, BookTitle),
+ CONSTRAINT pk_ReturnedBooks PRIMARY KEY (ReturnID),
  CONSTRAINT fk_ReturnedBooks_Orders FOREIGN KEY (OrderID) REFERENCES Orders,
  CONSTRAINT fk_ReturnedBooks_Books FOREIGN KEY (BookTitle) REFERENCES Books,
  CONSTRAINT ck_ReturnedBooks_Qty CHECK (QtyReturned > 0),
@@ -120,6 +121,7 @@ PROMPT CREATING Sequences
 PROMPT
 CREATE SEQUENCE accounts_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE orders_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE returns_seq START WITH 1 INCREMENT BY 1;
 
 PROMPT
 PROMPT POPULATING Table Genres

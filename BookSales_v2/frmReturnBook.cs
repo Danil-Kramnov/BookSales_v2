@@ -315,8 +315,8 @@ namespace BookSalesSys
                     int orderID = int.Parse(dgvReturnCart.Rows[i].Cells[3].Value.ToString());
 
                     // insert into ReturnedBooks
-                    string retSql = @"INSERT INTO ReturnedBooks(OrderID, BookTitle, QtyReturned, RefundAmount, ReturnedDate)
-                                      VALUES(:orderID, :title, :qty, :refundAmount, SYSDATE)";
+                    string retSql = @"INSERT INTO ReturnedBooks(ReturnID, OrderID, BookTitle, QtyReturned, RefundAmount, ReturnedDate)
+                                      VALUES(returns_seq.NEXTVAL, :orderID, :title, :qty, :refundAmount, SYSDATE)";
                     OracleCommand retCmd = new OracleCommand(retSql, conn);
                     retCmd.Parameters.Add("orderID", orderID);
                     retCmd.Parameters.Add("title", title);
@@ -331,6 +331,40 @@ namespace BookSalesSys
                     stockCmd.Parameters.Add("qty", qtyReturned);
                     stockCmd.Parameters.Add("title", title);
                     stockCmd.ExecuteNonQuery();
+
+                    // check current qty from grid to decide delete or update
+                    int currentQty = 0;
+                    foreach (DataGridViewRow row in dgvReturnBookSelectBook.Rows)
+                    {
+                        if (row.Cells[0].Value.ToString() == title &&
+                            int.Parse(row.Cells[4].Value.ToString()) == orderID)
+                        {
+                            currentQty = int.Parse(row.Cells[1].Value.ToString());
+                            break;
+                        }
+                    }
+
+                    if (qtyReturned >= currentQty)
+                    {
+                        // all books returned
+                        string deleteObSql = "DELETE FROM OrderedBooks WHERE OrderID=:orderID AND BookTitle=:title";
+                        OracleCommand deleteObCmd = new OracleCommand(deleteObSql, conn);
+                        deleteObCmd.Parameters.Add("orderID", orderID);
+                        deleteObCmd.Parameters.Add("title", title);
+                        deleteObCmd.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        // partial return
+                        string obSql = @"UPDATE OrderedBooks SET QtyOrdered=QtyOrdered-:qty, OrderPrice=OrderPrice-:refundAmount
+                                         WHERE OrderID=:orderID AND BookTitle=:title";
+                        OracleCommand obCmd = new OracleCommand(obSql, conn);
+                        obCmd.Parameters.Add("qty", qtyReturned);
+                        obCmd.Parameters.Add("refundAmount", refund);
+                        obCmd.Parameters.Add("orderID", orderID);
+                        obCmd.Parameters.Add("title", title);
+                        obCmd.ExecuteNonQuery();
+                    }
 
                     // reduce order total
                     string orderSql = "UPDATE Orders SET TotalPrice = TotalPrice - :refundAmount " +
