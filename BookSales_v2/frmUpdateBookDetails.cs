@@ -269,40 +269,6 @@ namespace BookSalesSys
                 return;
             }
             LoadBooks(txtSearchBook.Text);
-            // Adding rows to my data grid (taken from https://stackoverflow.com/questions/15965043/how-to-add-rows-to-datagridview-winforms)
-            try
-            {
-                OracleConnection conn = DBConnection.GetConnection();
-                conn.Open();
-                // retrieve active books matching search title
-                string sql = @"SELECT BookTitle, Author, GenreCode, Price, StockAmount 
-                               FROM Books WHERE UPPER(BookTitle) LIKE '%' || UPPER(:searchTitle) || '%' 
-                               AND BookStatus='A'";
-                OracleCommand cmd = new OracleCommand(sql, conn);
-                cmd.Parameters.Add("searchTitle", txtSearchBook.Text);
-                OracleDataReader dr = cmd.ExecuteReader();
-                dgvBookListUpdate.Rows.Clear();
-                dgvBookListUpdate.Visible = true;
-                while (dr.Read())
-                {
-                    dgvBookListUpdate.Rows.Add(dr["BookTitle"].ToString(),
-                                               dr["Author"].ToString(),
-                                               dr["GenreCode"].ToString(),
-                                               dr["Price"].ToString(),
-                                               dr["StockAmount"].ToString());
-                }
-                    
-                if (dgvBookListUpdate.Rows.Count == 0)
-                {
-                    MessageBox.Show("Book not found.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                dr.Close();
-                conn.Close();
-            }
-            catch (OracleException ex)
-            {
-                MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void dgvBookListUpdate_CellClick(object sender, DataGridViewCellEventArgs e)

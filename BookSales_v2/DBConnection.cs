@@ -9,30 +9,9 @@ namespace BookSalesSys
 {
     public static class DBConnection
     {
-        private static string connStr = 
-                              "Data Source=localhost:1521/orcl;User Id=c##user1;Password=Oracle123456;";
+        private static string connStr = "Data Source=localhost:1521/orcl;User Id=c##user1;Password=Oracle123456;";
 
         public static bool IsConnected { get; set; } = false;
-
-        // connection test
-        public static bool TestConnection()
-        {
-            // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using
-            try
-            {
-                using (OracleConnection conn = new OracleConnection(connStr))
-                {
-                    conn.Open();
-                    IsConnected = true;
-                    return true;
-                }
-            }
-            catch
-            {
-                IsConnected = false;
-                return false;
-            }
-        }
 
         // get a connection
         public static OracleConnection GetConnection()
@@ -45,15 +24,16 @@ namespace BookSalesSys
         // https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.control.backcolor
         public static void ApplyStyling(Form form)
         {
-            form.BackColor = Color.FromArgb(235, 240, 245);
+            // // reference: https://learn.microsoft.com/en-us/dotnet/api/system.drawing.color.fromargb
+            form.BackColor = Color.FromArgb(235, 240, 245); // light blue grey
 
             foreach (Control ctrl in GetAllControls(form))
             {
                 if (ctrl is Button btn)
                 {
-                    btn.BackColor = Color.FromArgb(30, 58, 95);
+                    btn.BackColor = Color.FromArgb(30, 58, 95); // oxford blue
                     btn.ForeColor = Color.White;
-                    btn.FlatStyle = FlatStyle.Flat;
+                    btn.FlatStyle = FlatStyle.Flat; // new style of the button https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.flatstyle?view=windowsdesktop-10.0
                     btn.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
                 }
                 else if (ctrl is GroupBox grp)

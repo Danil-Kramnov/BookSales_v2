@@ -170,6 +170,10 @@ namespace BookSalesSys
                 }
 
                 // bind data to chart (reference from using_chart_objects.pdf)
+                // AddXY adds a data point to the chart with X (category) and Y (value)
+                // #VALY is a keyword that displays the Y value as a label on each bar
+                // reference: https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.datavisualization.charting.datapoint
+
                 chtRevenueAnalysis.Series["Revenue"].Points.Clear();
                 chtRevenueAnalysis.Series["Revenue"].Points.DataBindXY(months, amounts);
                 chtRevenueAnalysis.Series["Revenue"].Label = "#VALY";

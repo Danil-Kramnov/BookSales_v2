@@ -20,15 +20,18 @@ namespace BookSalesSys
         {
             InitializeComponent();
             this.CenterToScreen();
+            DBConnection.ApplyStyling(this);
             dgvAddedBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            
         }
         public frmAddBook(frmMainMenu parent)
         {
             InitializeComponent();
             this.Parent = parent;
             this.CenterToScreen();
-            dgvAddedBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DBConnection.ApplyStyling(this);
+            dgvAddedBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            
 
         }
 

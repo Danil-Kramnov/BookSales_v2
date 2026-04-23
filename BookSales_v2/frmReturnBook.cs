@@ -187,7 +187,8 @@ namespace BookSalesSys
             bool found = false;
             for (int i = 0; i < dgvReturnCart.Rows.Count; i++)
             {
-                if (dgvReturnCart.Rows[i].Cells[0].Value.ToString() == title)
+                if (dgvReturnCart.Rows[i].Cells[0].Value.ToString() == title && 
+                    int.Parse(dgvReturnCart.Rows[i].Cells[3].Value.ToString()) == orderID)
                 {
                     int existingQty = int.Parse(dgvReturnCart.Rows[i].Cells[1].Value.ToString());
                     int newQty = existingQty + result;
