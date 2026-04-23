@@ -14,7 +14,7 @@ namespace BookSalesSys
 {
     public partial class frmOpenAccount : Form
     {
-        frmMainMenu Parent { get; set; }
+        new frmMainMenu Parent { get; set; }
 
         public frmOpenAccount()
         {
@@ -46,7 +46,7 @@ namespace BookSalesSys
         private void updateAccountDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmUpdateAccountDetails nextForm = new frmUpdateAccountDetails();
+            frmUpdateAccountDetails nextForm = new frmUpdateAccountDetails(Parent);
             nextForm.Show();
         }
 
@@ -54,14 +54,14 @@ namespace BookSalesSys
         private void addBookToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmAddBook nextForm = new frmAddBook();
+            frmAddBook nextForm = new frmAddBook(Parent);
             nextForm.Show();
         }
 
         private void updateBookDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmUpdateBookDetails nextForm = new frmUpdateBookDetails();
+            frmUpdateBookDetails nextForm = new frmUpdateBookDetails(Parent);
             nextForm.Show();
         }
 
@@ -69,28 +69,28 @@ namespace BookSalesSys
         private void placeOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmPlaceOrder nextForm = new frmPlaceOrder();
+            frmPlaceOrder nextForm = new frmPlaceOrder(Parent);
             nextForm.Show();
         }
 
         private void returnBookToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmReturnBook nextForm = new frmReturnBook();
+            frmReturnBook nextForm = new frmReturnBook(Parent);
             nextForm.Show();
         }
 
         private void yearlyRevenueAnalysisToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmYearlyRevenueAnalysis nextForm = new frmYearlyRevenueAnalysis();
+            frmYearlyRevenueAnalysis nextForm = new frmYearlyRevenueAnalysis(Parent);
             nextForm.Show();
         }
 
         private void genreAnalysisToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmYearlyGenreAnalysis nextForm = new frmYearlyGenreAnalysis();
+            frmYearlyGenreAnalysis nextForm = new frmYearlyGenreAnalysis(Parent);
             nextForm.Show();
         }
 
@@ -154,6 +154,24 @@ namespace BookSalesSys
                 return;
             }
 
+            // age validation
+            // referencing: https://learn.microsoft.com/en-us/dotnet/api/system.datetime?view=net-10.0
+            DateTime dob = dtpDOB.Value.Date;
+            DateTime today = DateTime.Today;
+            int age = today.Year - dob.Year;
+
+            // subtract 1 if birthday didn't happened yet this year
+            if (dob.Month > today.Month || (dob.Month == today.Month && dob.Day > today.Day))
+            {
+                age--;
+            }
+                
+            if (age < 18)
+            {
+                MessageBox.Show("You must be over 18 to open an account.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
 
             // Email Validation
             if (txtEmail.Text.Length > 30 || !Regex.IsMatch(txtEmail.Text, @"^[^@\s]+@[^@\s]+\.(com|ie|net|org|edu)$"))
@@ -173,7 +191,7 @@ namespace BookSalesSys
             // Phone Validation
             if (txtPhone.Text.Length > 10 || !Regex.IsMatch(txtPhone.Text, @"^\d+$"))
             {
-                MessageBox.Show("Phone must be up to 10 digits and contain only digits.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Phone must contain only digits.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -205,13 +223,7 @@ namespace BookSalesSys
                 return;
             }
 
-            // age validation
-            if ((DateTime.Today - dtpDOB.Value.Date).TotalDays < 365.25 * 18)
-            {
-                MessageBox.Show("You must be over 18 to open an account.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            
 
             // Save Data
             try
@@ -259,6 +271,7 @@ namespace BookSalesSys
             // navigate to PlaceOrder form after creating new account
             this.Close();
             frmPlaceOrder nextForm = new frmPlaceOrder(Parent, txtEmail.Text, txtPassword.Text);
+            DBConnection.ApplyStyling(nextForm);
             nextForm.Show();
 
         }

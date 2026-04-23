@@ -16,7 +16,7 @@ namespace BookSalesSys
 {
     public partial class frmPlaceOrder : Form
     {
-        frmMainMenu Parent;
+        new frmMainMenu Parent;
 
         private int _customerID;
        
@@ -46,19 +46,20 @@ namespace BookSalesSys
             this.Parent = parent;
             txtOrderEmail.Text = email;
             txtOrderPassword.Text = password;
+            DBConnection.ApplyStyling(this);
         }
 
         private void openAccountToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmOpenAccount frm = new frmOpenAccount();
+            frmOpenAccount frm = new frmOpenAccount(Parent);
             frm.Show();
         }
 
         private void updateAccountDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmUpdateAccountDetails nextForm = new frmUpdateAccountDetails();
+            frmUpdateAccountDetails nextForm = new frmUpdateAccountDetails(Parent);
             nextForm.Show();
         }
 
@@ -66,14 +67,14 @@ namespace BookSalesSys
         private void addBookToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmAddBook nextForm = new frmAddBook();
+            frmAddBook nextForm = new frmAddBook(Parent);
             nextForm.Show();
         }
 
         private void updateBookDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmUpdateBookDetails nextForm = new frmUpdateBookDetails();
+            frmUpdateBookDetails nextForm = new frmUpdateBookDetails(Parent);
             nextForm.Show();
         }
 
@@ -81,21 +82,21 @@ namespace BookSalesSys
         private void returnBookToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmReturnBook nextForm = new frmReturnBook();
+            frmReturnBook nextForm = new frmReturnBook(Parent);
             nextForm.Show();
         }
 
         private void yearlyRevenueAnalysisToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmYearlyRevenueAnalysis nextForm = new frmYearlyRevenueAnalysis();
+            frmYearlyRevenueAnalysis nextForm = new frmYearlyRevenueAnalysis(Parent);
             nextForm.Show();
         }
 
         private void genreAnalysisToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmYearlyGenreAnalysis nextForm = new frmYearlyGenreAnalysis();
+            frmYearlyGenreAnalysis nextForm = new frmYearlyGenreAnalysis(Parent);
             nextForm.Show();
         }
 
@@ -144,14 +145,14 @@ namespace BookSalesSys
                     if (dgvPlaceOrderCart.Rows[i].Cells[0].Value.ToString() == title)
                     {
                         // book already in cart
-                        int existingQty = int.Parse(dgvPlaceOrderCart.Rows[i].Cells[3].Value.ToString());
+                        int existingQty = int.Parse(dgvPlaceOrderCart.Rows[i].Cells[4].Value.ToString());
                         int newQty = existingQty + numericPrompt;
                         if (newQty > stock)
                         {
                             MessageBox.Show("Insufficient stock. Only " + stock + " available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
-                        dgvPlaceOrderCart.Rows[i].SetValues(title, author, price, newQty, "X");
+                        dgvPlaceOrderCart.Rows[i].SetValues(title, author, genre, price, newQty, "X");
                         found = true;
                         break;
                     }
@@ -190,7 +191,7 @@ namespace BookSalesSys
                     MessageBox.Show("Cart is empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                decimal totalPrice = decimal.Parse(lblTotalPrice.Text.Substring(9));
+                decimal totalPrice = decimal.Parse(lblTotalPrice.Text.Substring(8));
 
                 string orderSql = @"INSERT INTO Orders (OrderID, AccountID, TotalPrice, DateOrdered)
                                     VALUES(:orderID, :accountID, :totalPrice, SYSDATE)";
@@ -405,8 +406,8 @@ namespace BookSalesSys
             decimal total = 0;
             for (int i = 0; i < dgvPlaceOrderCart.Rows.Count; i++)
             {
-                decimal price = decimal.Parse(dgvPlaceOrderCart.Rows[i].Cells[2].Value.ToString().Substring(1));
-                int qty = int.Parse(dgvPlaceOrderCart.Rows[i].Cells[3].Value.ToString());
+                decimal price = decimal.Parse(dgvPlaceOrderCart.Rows[i].Cells[3].Value.ToString().Substring(1));
+                int qty = int.Parse(dgvPlaceOrderCart.Rows[i].Cells[4].Value.ToString());
                 total += price * qty;
             }
             lblTotalPrice.Text = "Total: €" + total;

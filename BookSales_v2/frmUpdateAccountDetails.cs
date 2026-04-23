@@ -14,13 +14,14 @@ namespace BookSalesSys
 {
     public partial class frmUpdateAccountDetails : Form
     {
-        frmMainMenu Parent;
+        new frmMainMenu Parent;
 
         private int _accountID;
 
         // Variable to hold original values
         private string originalForename;
         private string originalSurname;
+        private DateTime originalDOB;
         private string originalEmail;
         private string originalPassword;
         private string originalPhone;
@@ -55,6 +56,7 @@ namespace BookSalesSys
         {
             originalForename = txtForename.Text;
             originalSurname = txtSurname.Text;
+            originalDOB = dtpDOB.Value.Date;
             originalEmail = txtEmail.Text;
             originalPassword = txtPassword.Text;
             originalPhone = txtPhone.Text;
@@ -68,7 +70,7 @@ namespace BookSalesSys
         private void openAccountToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmOpenAccount nextForm = new frmOpenAccount();
+            frmOpenAccount nextForm = new frmOpenAccount(Parent);
             nextForm.Show();
         }
 
@@ -76,7 +78,7 @@ namespace BookSalesSys
         private void updateBookDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmUpdateBookDetails nextForm = new frmUpdateBookDetails();
+            frmUpdateBookDetails nextForm = new frmUpdateBookDetails(Parent);
             nextForm.Show();
         }
 
@@ -84,28 +86,28 @@ namespace BookSalesSys
         private void placeOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmPlaceOrder nextForm = new frmPlaceOrder();
+            frmPlaceOrder nextForm = new frmPlaceOrder(Parent);
             nextForm.Show();
         }
 
         private void returnBookToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmReturnBook nextForm = new frmReturnBook();
+            frmReturnBook nextForm = new frmReturnBook(Parent);
             nextForm.Show();
         }
 
         private void yearlyRevenueAnalysisToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmYearlyRevenueAnalysis nextForm = new frmYearlyRevenueAnalysis();
+            frmYearlyRevenueAnalysis nextForm = new frmYearlyRevenueAnalysis(Parent);
             nextForm.Show();
         }
 
         private void genreAnalysisToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmYearlyGenreAnalysis nextForm = new frmYearlyGenreAnalysis();
+            frmYearlyGenreAnalysis nextForm = new frmYearlyGenreAnalysis(Parent);
             nextForm.Show();
         }
 
@@ -126,6 +128,7 @@ namespace BookSalesSys
             // Check if any details have changed
             if (txtForename.Text == originalForename &&
                 txtSurname.Text == originalSurname &&
+                dtpDOB.Value.Date == originalDOB &&
                 txtEmail.Text == originalEmail &&
                 txtPassword.Text == originalPassword &&
                 txtPhone.Text == originalPhone &&
@@ -152,6 +155,22 @@ namespace BookSalesSys
                 return;
             }
 
+            // age validation
+            DateTime dob = dtpDOB.Value.Date;
+            DateTime today = DateTime.Today;
+            int age = today.Year - dob.Year;
+
+            // subtract 1 if birthday didn't happened yet this year
+            if (dob.Month > today.Month || (dob.Month == today.Month && dob.Day > today.Day))
+            {
+                age--;
+            }
+
+            if (age < 18)
+            {
+                MessageBox.Show("You must be over 18 to open an account.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             // Email Validation
             if (txtEmail.Text.Length > 30 || !Regex.IsMatch(txtEmail.Text, @"^[^@\s]+@[^@\s]+\.(com|ie|net|org|edu)$"))
@@ -200,14 +219,6 @@ namespace BookSalesSys
             if (txtEircode.Text.Length > 7 || !Regex.IsMatch(txtEircode.Text, "^[a-zA-Z0-9]*$"))
             {
                 MessageBox.Show("Eircode must be up to 7 characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            // age validation
-            if ((DateTime.Today - dtpDOB.Value.Date).TotalDays < 365.25 * 18)
-            {
-                MessageBox.Show("You must be over 18 to open an account.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

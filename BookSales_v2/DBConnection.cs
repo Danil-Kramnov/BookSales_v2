@@ -25,6 +25,8 @@ namespace BookSalesSys
         public static void ApplyStyling(Form form)
         {
             // // reference: https://learn.microsoft.com/en-us/dotnet/api/system.drawing.color.fromargb
+            Console.WriteLine(form.ToString());
+
             form.BackColor = Color.FromArgb(235, 240, 245); // light blue grey
 
             foreach (Control ctrl in GetAllControls(form))
@@ -54,6 +56,7 @@ namespace BookSalesSys
                     dgv.EnableHeadersVisualStyles = false;
                 }
             }
+
         }
 
         // to get all controls recursively including inside groupboxes

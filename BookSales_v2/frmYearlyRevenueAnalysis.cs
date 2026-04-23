@@ -13,7 +13,7 @@ namespace BookSalesSys
 {
     public partial class frmYearlyRevenueAnalysis : Form
     {
-        frmMainMenu Parent;
+        new frmMainMenu Parent;
         public frmYearlyRevenueAnalysis()
         {
             InitializeComponent();
@@ -31,14 +31,14 @@ namespace BookSalesSys
         private void openAccountToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmOpenAccount nextForm = new frmOpenAccount();
+            frmOpenAccount nextForm = new frmOpenAccount(Parent);
             nextForm.Show();
         }
 
         private void updateAccountDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmUpdateAccountDetails nextForm = new frmUpdateAccountDetails();
+            frmUpdateAccountDetails nextForm = new frmUpdateAccountDetails(Parent);
             nextForm.Show();
         }
 
@@ -46,42 +46,42 @@ namespace BookSalesSys
         private void addBookToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmAddBook nextForm = new frmAddBook();
+            frmAddBook nextForm = new frmAddBook(Parent);
             nextForm.Show();
         }
 
         private void updateBookDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmUpdateBookDetails nextForm = new frmUpdateBookDetails();
+            frmUpdateBookDetails nextForm = new frmUpdateBookDetails(Parent);
             nextForm.Show();
         }
 
         private void placeOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmPlaceOrder nextForm = new frmPlaceOrder();
+            frmPlaceOrder nextForm = new frmPlaceOrder(Parent);
             nextForm.Show();
         }
 
         private void returnBookToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmReturnBook nextForm = new frmReturnBook();
+            frmReturnBook nextForm = new frmReturnBook(Parent);
             nextForm.Show();
         }
 
         private void yearlyRevenueAnalysisToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmYearlyRevenueAnalysis nextForm = new frmYearlyRevenueAnalysis();
+            frmYearlyRevenueAnalysis nextForm = new frmYearlyRevenueAnalysis(Parent);
             nextForm.Show();
         }
 
         private void genreAnalysisToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            frmYearlyGenreAnalysis nextForm = new frmYearlyGenreAnalysis();
+            frmYearlyGenreAnalysis nextForm = new frmYearlyGenreAnalysis(Parent);
             nextForm.Show();
         }
 
