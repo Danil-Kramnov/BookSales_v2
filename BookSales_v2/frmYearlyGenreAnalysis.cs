@@ -182,5 +182,17 @@ namespace BookSalesSys
                 MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void chbAdminHidePassword_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chbAdminHidePassword.CheckState == CheckState.Checked)
+            {
+                txtAdminPassword.UseSystemPasswordChar = true;
+            }
+            else
+            {
+                txtAdminPassword.UseSystemPasswordChar = false;
+            }
+        }
     }
 }

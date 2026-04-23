@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.grpUpdateAccountDetails = new System.Windows.Forms.GroupBox();
+            this.chbUpdateDetailsHidePassword = new System.Windows.Forms.CheckBox();
             this.btnCloseAccount = new System.Windows.Forms.Button();
             this.dtpDOB = new System.Windows.Forms.DateTimePicker();
             this.txtEircode = new System.Windows.Forms.TextBox();
@@ -67,13 +68,13 @@
             this.yearlyRevenueAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.genreAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grpCredentials = new System.Windows.Forms.GroupBox();
+            this.btnLogout = new System.Windows.Forms.Button();
             this.chbLoginHidePassword = new System.Windows.Forms.CheckBox();
             this.btnLoadAccountDetails = new System.Windows.Forms.Button();
             this.lblLoginPassword = new System.Windows.Forms.Label();
             this.lblLoginEmail = new System.Windows.Forms.Label();
             this.txtLoginPassword = new System.Windows.Forms.TextBox();
             this.txtLoginEmail = new System.Windows.Forms.TextBox();
-            this.btnLogout = new System.Windows.Forms.Button();
             this.grpUpdateAccountDetails.SuspendLayout();
             this.mnuUpdateAccountDetails.SuspendLayout();
             this.grpCredentials.SuspendLayout();
@@ -81,6 +82,7 @@
             // 
             // grpUpdateAccountDetails
             // 
+            this.grpUpdateAccountDetails.Controls.Add(this.chbUpdateDetailsHidePassword);
             this.grpUpdateAccountDetails.Controls.Add(this.btnCloseAccount);
             this.grpUpdateAccountDetails.Controls.Add(this.dtpDOB);
             this.grpUpdateAccountDetails.Controls.Add(this.txtEircode);
@@ -111,6 +113,18 @@
             this.grpUpdateAccountDetails.TabStop = false;
             this.grpUpdateAccountDetails.Text = "Update Details";
             this.grpUpdateAccountDetails.Visible = false;
+            // 
+            // chbUpdateDetailsHidePassword
+            // 
+            this.chbUpdateDetailsHidePassword.AutoSize = true;
+            this.chbUpdateDetailsHidePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbUpdateDetailsHidePassword.Location = new System.Drawing.Point(291, 142);
+            this.chbUpdateDetailsHidePassword.Name = "chbUpdateDetailsHidePassword";
+            this.chbUpdateDetailsHidePassword.Size = new System.Drawing.Size(118, 20);
+            this.chbUpdateDetailsHidePassword.TabIndex = 23;
+            this.chbUpdateDetailsHidePassword.Text = "Hide Password";
+            this.chbUpdateDetailsHidePassword.UseVisualStyleBackColor = true;
+            this.chbUpdateDetailsHidePassword.CheckedChanged += new System.EventHandler(this.chbUpdateDetailsHidePassword_CheckedChanged_1);
             // 
             // btnCloseAccount
             // 
@@ -220,10 +234,9 @@
             this.txtPassword.Location = new System.Drawing.Point(134, 138);
             this.txtPassword.MaxLength = 30;
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(275, 26);
+            this.txtPassword.Size = new System.Drawing.Size(151, 26);
             this.txtPassword.TabIndex = 11;
             this.txtPassword.Text = "123";
-            this.txtPassword.UseSystemPasswordChar = true;
             // 
             // txtEmail
             // 
@@ -382,6 +395,7 @@
             this.addBookToolStripMenuItem.Name = "addBookToolStripMenuItem";
             this.addBookToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addBookToolStripMenuItem.Text = "Add Book";
+            this.addBookToolStripMenuItem.Click += new System.EventHandler(this.addBookToolStripMenuItem_Click);
             // 
             // updateBookDetailsToolStripMenuItem
             // 
@@ -453,6 +467,16 @@
             this.grpCredentials.TabStop = false;
             this.grpCredentials.Text = "Customer Login";
             // 
+            // btnLogout
+            // 
+            this.btnLogout.Location = new System.Drawing.Point(238, 99);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(79, 28);
+            this.btnLogout.TabIndex = 11;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
             // chbLoginHidePassword
             // 
             this.chbLoginHidePassword.AutoSize = true;
@@ -508,16 +532,6 @@
             this.txtLoginEmail.Name = "txtLoginEmail";
             this.txtLoginEmail.Size = new System.Drawing.Size(275, 26);
             this.txtLoginEmail.TabIndex = 7;
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.Location = new System.Drawing.Point(238, 99);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(79, 28);
-            this.btnLogout.TabIndex = 11;
-            this.btnLogout.Text = "Logout";
-            this.btnLogout.UseVisualStyleBackColor = true;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // frmUpdateAccountDetails
             // 
@@ -588,5 +602,6 @@
         private System.Windows.Forms.Button btnLoadAccountDetails;
         private System.Windows.Forms.CheckBox chbLoginHidePassword;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.CheckBox chbUpdateDetailsHidePassword;
     }
 }

@@ -45,6 +45,11 @@
             this.genreAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grpReturnBookSelectBook = new System.Windows.Forms.GroupBox();
             this.dgvReturnBookSelectBook = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QtyOrdered = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrderPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpCustomerLogin = new System.Windows.Forms.GroupBox();
             this.btnLogout = new System.Windows.Forms.Button();
             this.chbOrderHidePassword = new System.Windows.Forms.CheckBox();
@@ -66,11 +71,6 @@
             this.RefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrderIDCart = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblWelcome = new System.Windows.Forms.Label();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QtyOrdered = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrderPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnuReturnBook.SuspendLayout();
             this.grpReturnBookSelectBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReturnBookSelectBook)).BeginInit();
@@ -231,6 +231,36 @@
             this.dgvReturnBookSelectBook.TabIndex = 23;
             this.dgvReturnBookSelectBook.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReturnBookSelectBook_CellClick);
             // 
+            // ID
+            // 
+            this.ID.HeaderText = "Book Title";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // QtyOrdered
+            // 
+            this.QtyOrdered.HeaderText = "QtyOrdered";
+            this.QtyOrdered.Name = "QtyOrdered";
+            this.QtyOrdered.ReadOnly = true;
+            // 
+            // OrderPrice
+            // 
+            this.OrderPrice.HeaderText = "OrderPrice";
+            this.OrderPrice.Name = "OrderPrice";
+            this.OrderPrice.ReadOnly = true;
+            // 
+            // OrderDate
+            // 
+            this.OrderDate.HeaderText = "OrderDate";
+            this.OrderDate.Name = "OrderDate";
+            this.OrderDate.ReadOnly = true;
+            // 
+            // OrderID
+            // 
+            this.OrderID.HeaderText = "OrderID";
+            this.OrderID.Name = "OrderID";
+            this.OrderID.ReadOnly = true;
+            // 
             // grpCustomerLogin
             // 
             this.grpCustomerLogin.Controls.Add(this.btnLogout);
@@ -268,6 +298,7 @@
             this.chbOrderHidePassword.TabIndex = 10;
             this.chbOrderHidePassword.Text = "Hide Password";
             this.chbOrderHidePassword.UseVisualStyleBackColor = true;
+            this.chbOrderHidePassword.CheckedChanged += new System.EventHandler(this.chbOrderHidePassword_CheckedChanged);
             // 
             // btnLoadCustomer
             // 
@@ -440,36 +471,6 @@
             this.lblWelcome.TabIndex = 35;
             this.lblWelcome.Text = "Welcome";
             this.lblWelcome.Visible = false;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "Book Title";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            // 
-            // QtyOrdered
-            // 
-            this.QtyOrdered.HeaderText = "QtyOrdered";
-            this.QtyOrdered.Name = "QtyOrdered";
-            this.QtyOrdered.ReadOnly = true;
-            // 
-            // OrderPrice
-            // 
-            this.OrderPrice.HeaderText = "OrderPrice";
-            this.OrderPrice.Name = "OrderPrice";
-            this.OrderPrice.ReadOnly = true;
-            // 
-            // OrderDate
-            // 
-            this.OrderDate.HeaderText = "OrderDate";
-            this.OrderDate.Name = "OrderDate";
-            this.OrderDate.ReadOnly = true;
-            // 
-            // OrderID
-            // 
-            this.OrderID.HeaderText = "OrderID";
-            this.OrderID.Name = "OrderID";
-            this.OrderID.ReadOnly = true;
             // 
             // frmReturnBook
             // 

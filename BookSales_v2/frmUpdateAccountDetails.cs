@@ -82,6 +82,13 @@ namespace BookSalesSys
             nextForm.Show();
         }
 
+        private void addBookToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+            frmAddBook nextForm = new frmAddBook(Parent);
+            nextForm.Show();
+        }
+
 
         private void placeOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -343,5 +350,21 @@ namespace BookSalesSys
         {
             grpUpdateAccountDetails.Visible = false;
         }
+
+
+        private void chbUpdateDetailsHidePassword_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (chbUpdateDetailsHidePassword.CheckState == CheckState.Checked)
+            {
+                txtPassword.UseSystemPasswordChar = true;
+            }
+            else
+            {
+                txtPassword.UseSystemPasswordChar = false;
+            }
+            
+        }
+
+        
     }
 }

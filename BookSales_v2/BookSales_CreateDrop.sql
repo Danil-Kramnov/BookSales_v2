@@ -163,7 +163,7 @@ INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,16,SYSDATE-10);
 INSERT INTO OrderedBooks VALUES(3,'Project Hail Mary',1,16);
 
 INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,22,SYSDATE-13);
-INSERT INTO OrderedBooks VALUES(4,'Normal People',2,11);
+INSERT INTO OrderedBooks VALUES(4,'Normal People',2,22);
 
 COMMIT;
 

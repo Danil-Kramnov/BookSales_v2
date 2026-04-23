@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.mnuYearlyGenreAnalysis = new System.Windows.Forms.MenuStrip();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuBackClick = new System.Windows.Forms.ToolStripMenuItem();
@@ -154,14 +154,14 @@
             // placeOrderToolStripMenuItem
             // 
             this.placeOrderToolStripMenuItem.Name = "placeOrderToolStripMenuItem";
-            this.placeOrderToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.placeOrderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.placeOrderToolStripMenuItem.Text = "Place Order";
             this.placeOrderToolStripMenuItem.Click += new System.EventHandler(this.placeOrderToolStripMenuItem_Click);
             // 
             // returnBookToolStripMenuItem
             // 
             this.returnBookToolStripMenuItem.Name = "returnBookToolStripMenuItem";
-            this.returnBookToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.returnBookToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.returnBookToolStripMenuItem.Text = "Return Book";
             this.returnBookToolStripMenuItem.Click += new System.EventHandler(this.returnBookToolStripMenuItem_Click);
             // 
@@ -189,22 +189,22 @@
             // 
             // chtGenreAnalysis
             // 
-            chartArea6.Name = "ChartArea1";
-            this.chtGenreAnalysis.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.chtGenreAnalysis.Legends.Add(legend6);
+            chartArea1.Name = "ChartArea1";
+            this.chtGenreAnalysis.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chtGenreAnalysis.Legends.Add(legend1);
             this.chtGenreAnalysis.Location = new System.Drawing.Point(12, 239);
             this.chtGenreAnalysis.Name = "chtGenreAnalysis";
-            series6.ChartArea = "ChartArea1";
-            series6.Legend = "Legend1";
-            series6.Name = "Quantity";
-            this.chtGenreAnalysis.Series.Add(series6);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Quantity";
+            this.chtGenreAnalysis.Series.Add(series1);
             this.chtGenreAnalysis.Size = new System.Drawing.Size(900, 323);
             this.chtGenreAnalysis.TabIndex = 26;
             this.chtGenreAnalysis.Text = "Yearly Genre Analysis";
-            title6.Name = "YearlyGenreAnalysis";
-            title6.Text = "Yearly Genre Analysis";
-            this.chtGenreAnalysis.Titles.Add(title6);
+            title1.Name = "YearlyGenreAnalysis";
+            title1.Text = "Yearly Genre Analysis";
+            this.chtGenreAnalysis.Titles.Add(title1);
             this.chtGenreAnalysis.Visible = false;
             // 
             // grpAdminLogin
@@ -245,6 +245,7 @@
             this.chbAdminHidePassword.TabIndex = 10;
             this.chbAdminHidePassword.Text = "Hide Password";
             this.chbAdminHidePassword.UseVisualStyleBackColor = true;
+            this.chbAdminHidePassword.CheckedChanged += new System.EventHandler(this.chbAdminHidePassword_CheckedChanged);
             // 
             // btnAdminLogin
             // 

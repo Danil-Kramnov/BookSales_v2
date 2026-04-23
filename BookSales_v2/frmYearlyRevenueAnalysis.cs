@@ -195,5 +195,17 @@ namespace BookSalesSys
             cmbSelectYearRevenueAnalysis.Items.Clear();
             grpSelectYearAnalysis.Visible = false;
         }
+
+        private void chbAdminHidePassword_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chbAdminHidePassword.CheckState == CheckState.Checked)
+            {
+                txtAdminPassword.UseSystemPasswordChar = true;
+            }
+            else
+            {
+                txtAdminPassword.UseSystemPasswordChar = false;
+            }
+        }
     }
 }

@@ -273,8 +273,7 @@ namespace BookSalesSys
             decimal total = 0;
             for (int i = 0; i < dgvReturnCart.Rows.Count; i++)
             {
-                decimal refund = decimal.Parse(
-                    dgvReturnCart.Rows[i].Cells[2].Value.ToString().Substring(1));
+                decimal refund = decimal.Parse(dgvReturnCart.Rows[i].Cells[2].Value.ToString().Substring(1));
                 total += refund;
             }
             lblRefundTotal.Text = "Total Refund: €" + total;
@@ -353,6 +352,18 @@ namespace BookSalesSys
             catch (OracleException ex)
             {
                 MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void chbOrderHidePassword_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chbOrderHidePassword.CheckState == CheckState.Checked)
+            {
+                txtReturnPassword.UseSystemPasswordChar = true;
+            }
+            else
+            {
+                txtReturnPassword.UseSystemPasswordChar = false;
             }
         }
     }

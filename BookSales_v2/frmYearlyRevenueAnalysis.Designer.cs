@@ -272,6 +272,7 @@
             this.chbAdminHidePassword.TabIndex = 10;
             this.chbAdminHidePassword.Text = "Hide Password";
             this.chbAdminHidePassword.UseVisualStyleBackColor = true;
+            this.chbAdminHidePassword.CheckedChanged += new System.EventHandler(this.chbAdminHidePassword_CheckedChanged);
             // 
             // btnAdminLogin
             // 

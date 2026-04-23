@@ -44,7 +44,18 @@
             this.yearlyRevenueAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.genreAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dgvPlaceOrderSelectBook = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Genre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StockAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvPlaceOrderCart = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GenreCart = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Remove = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpPlaceOrderCart = new System.Windows.Forms.GroupBox();
             this.lblTotalPrice = new System.Windows.Forms.Label();
             this.btnPlaceOrderBuy = new System.Windows.Forms.Button();
@@ -62,17 +73,6 @@
             this.lblOrderSearch = new System.Windows.Forms.Label();
             this.txtOrderSearch = new System.Windows.Forms.TextBox();
             this.lblWelcome = new System.Windows.Forms.Label();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Genre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StockAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GenreCart = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Remove = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnuPlaceOrder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderSelectBook)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaceOrderCart)).BeginInit();
@@ -222,6 +222,37 @@
             this.dgvPlaceOrderSelectBook.TabIndex = 23;
             this.dgvPlaceOrderSelectBook.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlaceOrderSelectBook_CellContentClick);
             // 
+            // ID
+            // 
+            this.ID.HeaderText = "Book Title";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // Author
+            // 
+            this.Author.HeaderText = "Author";
+            this.Author.Name = "Author";
+            this.Author.ReadOnly = true;
+            // 
+            // Genre
+            // 
+            this.Genre.HeaderText = "Genre";
+            this.Genre.Name = "Genre";
+            this.Genre.ReadOnly = true;
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            this.Price.Width = 50;
+            // 
+            // StockAmount
+            // 
+            this.StockAmount.HeaderText = "Stock Amount";
+            this.StockAmount.Name = "StockAmount";
+            this.StockAmount.ReadOnly = true;
+            // 
             // dgvPlaceOrderCart
             // 
             this.dgvPlaceOrderCart.AllowUserToAddRows = false;
@@ -239,6 +270,44 @@
             this.dgvPlaceOrderCart.Size = new System.Drawing.Size(450, 161);
             this.dgvPlaceOrderCart.TabIndex = 26;
             this.dgvPlaceOrderCart.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlaceOrderCart_CellClick);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Book Title";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Author";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // GenreCart
+            // 
+            this.GenreCart.HeaderText = "Genre";
+            this.GenreCart.Name = "GenreCart";
+            this.GenreCart.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Price";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 50;
+            // 
+            // Qty
+            // 
+            this.Qty.HeaderText = "Qty";
+            this.Qty.Name = "Qty";
+            this.Qty.ReadOnly = true;
+            this.Qty.Width = 50;
+            // 
+            // Remove
+            // 
+            this.Remove.HeaderText = " X";
+            this.Remove.Name = "Remove";
+            this.Remove.ReadOnly = true;
             // 
             // grpPlaceOrderCart
             // 
@@ -323,6 +392,7 @@
             this.chbOrderHidePassword.TabIndex = 10;
             this.chbOrderHidePassword.Text = "Hide Password";
             this.chbOrderHidePassword.UseVisualStyleBackColor = true;
+            this.chbOrderHidePassword.CheckedChanged += new System.EventHandler(this.chbOrderHidePassword_CheckedChanged);
             // 
             // btnLoadCustomer
             // 
@@ -419,75 +489,6 @@
             this.lblWelcome.TabIndex = 32;
             this.lblWelcome.Text = "Welcome";
             this.lblWelcome.Visible = false;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "Book Title";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            // 
-            // Author
-            // 
-            this.Author.HeaderText = "Author";
-            this.Author.Name = "Author";
-            this.Author.ReadOnly = true;
-            // 
-            // Genre
-            // 
-            this.Genre.HeaderText = "Genre";
-            this.Genre.Name = "Genre";
-            this.Genre.ReadOnly = true;
-            // 
-            // Price
-            // 
-            this.Price.HeaderText = "Price";
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
-            this.Price.Width = 50;
-            // 
-            // StockAmount
-            // 
-            this.StockAmount.HeaderText = "Stock Amount";
-            this.StockAmount.Name = "StockAmount";
-            this.StockAmount.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Book Title";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Author";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // GenreCart
-            // 
-            this.GenreCart.HeaderText = "Genre";
-            this.GenreCart.Name = "GenreCart";
-            this.GenreCart.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Price";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.Width = 50;
-            // 
-            // Qty
-            // 
-            this.Qty.HeaderText = "Qty";
-            this.Qty.Name = "Qty";
-            this.Qty.ReadOnly = true;
-            this.Qty.Width = 50;
-            // 
-            // Remove
-            // 
-            this.Remove.HeaderText = " X";
-            this.Remove.Name = "Remove";
-            this.Remove.ReadOnly = true;
             // 
             // frmPlaceOrder
             // 

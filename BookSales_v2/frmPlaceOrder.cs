@@ -413,5 +413,16 @@ namespace BookSalesSys
             lblTotalPrice.Text = "Total: €" + total;
         }
 
+        private void chbOrderHidePassword_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chbOrderHidePassword.CheckState == CheckState.Checked)
+            {
+                txtOrderPassword.UseSystemPasswordChar = true;
+            }
+            else
+            {
+                txtOrderPassword.UseSystemPasswordChar = false;
+            }
+        }
     }
 }
