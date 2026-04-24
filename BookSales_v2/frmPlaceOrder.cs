@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -130,6 +131,7 @@ namespace BookSalesSys
                 string genre = dgvPlaceOrderSelectBook.Rows[rowIndex].Cells[2].Value.ToString();
                 string price = dgvPlaceOrderSelectBook.Rows[rowIndex].Cells[3].Value.ToString();
                 int stock = int.Parse(dgvPlaceOrderSelectBook.Rows[rowIndex].Cells[4].Value.ToString());
+                string bookID = dgvPlaceOrderSelectBook.Rows[rowIndex].Cells[5].Value.ToString();
 
                 // validate quantity against stock
                 if (numericPrompt > stock)
@@ -142,7 +144,8 @@ namespace BookSalesSys
                 bool found = false;
                 for (int i = 0; i < dgvPlaceOrderCart.Rows.Count; i++)
                 {
-                    if (dgvPlaceOrderCart.Rows[i].Cells[0].Value.ToString() == title)
+                    if (dgvPlaceOrderCart.Rows[i].Cells[0].Value.ToString() == title &&
+                        dgvPlaceOrderCart.Rows[i].Cells[6].Value.ToString() == bookID)
                     {
                         // book already in cart
                         int existingQty = int.Parse(dgvPlaceOrderCart.Rows[i].Cells[4].Value.ToString());
@@ -159,7 +162,7 @@ namespace BookSalesSys
                 }
                 if (!found)
                 {
-                    dgvPlaceOrderCart.Rows.Add(title, author, genre, price, numericPrompt, "X");
+                    dgvPlaceOrderCart.Rows.Add(title, author, genre, price, numericPrompt, "X", bookID);
                 }
                 grpPlaceOrderCart.Visible = true;
                 UpdateTotal();
@@ -207,12 +210,13 @@ namespace BookSalesSys
                     string title = dgvPlaceOrderCart.Rows[i].Cells[0].Value.ToString();
                     decimal price = decimal.Parse(dgvPlaceOrderCart.Rows[i].Cells[3].Value.ToString().Substring(1));
                     int qty = int.Parse(dgvPlaceOrderCart.Rows[i].Cells[4].Value.ToString());
+                    int bookID = int.Parse(dgvPlaceOrderCart.Rows[i].Cells[6].Value.ToString());
 
-                    string obSql = @"INSERT INTO OrderedBooks (OrderID, BookTitle, QtyOrdered, OrderPrice)
-                                     VALUES(:orderID, :title, :qty, :price)";
+                    string obSql = @"INSERT INTO OrderedBooks (OrderID, BookID, QtyOrdered, OrderPrice)
+                                    VALUES(:orderID, :bookID, :qty, :price)";
                     OracleCommand orderedbooksCmd = new OracleCommand(obSql, conn);
                     orderedbooksCmd.Parameters.Add("orderID", orderID);
-                    orderedbooksCmd.Parameters.Add("title", title);
+                    orderedbooksCmd.Parameters.Add("bookID", bookID);
                     orderedbooksCmd.Parameters.Add("qty", qty);
                     orderedbooksCmd.Parameters.Add("price", price * qty);
                     orderedbooksCmd.ExecuteNonQuery();
@@ -345,11 +349,11 @@ namespace BookSalesSys
                 OracleConnection conn = DBConnection.GetConnection();
                 conn.Open();
                 // retrieve active books matching search
-                string sql = @"SELECT books.BookTitle, books.Author, genres.Description, books.Price, books.StockAmount 
-                               FROM Books books
-                               JOIN Genres genres ON books.GenreCode = genres.GenreCode
-                               WHERE UPPER(books.BookTitle) LIKE '%' || UPPER(:search) || '%'
-                               AND books.BookStatus='A' AND books.StockAmount > 0";
+                string sql = @"SELECT books.BookID, books.BookTitle, books.Author, genres.Description, books.Price, books.StockAmount 
+                                FROM Books books
+                                JOIN Genres genres ON books.GenreCode = genres.GenreCode
+                                WHERE UPPER(books.BookTitle) LIKE '%' || UPPER(:search) || '%'
+                                AND books.BookStatus='A' AND books.StockAmount > 0";
                 OracleCommand cmd = new OracleCommand(sql, conn);
                 cmd.Parameters.Add("search", search);
                 OracleDataReader dr = cmd.ExecuteReader();
@@ -361,7 +365,8 @@ namespace BookSalesSys
                                                      dr["Author"].ToString(),
                                                      dr["Description"].ToString(),
                                                      "€" + dr["Price"].ToString(),
-                                                     dr["StockAmount"].ToString());
+                                                     dr["StockAmount"].ToString(),
+                                                     dr["BookID"].ToString());
                 }
                     
                 dr.Close();

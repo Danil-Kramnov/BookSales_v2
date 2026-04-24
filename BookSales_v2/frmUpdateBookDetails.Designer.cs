@@ -57,6 +57,12 @@
             this.lblAuthor = new System.Windows.Forms.Label();
             this.lblBookTitle = new System.Windows.Forms.Label();
             this.dgvBookListUpdate = new System.Windows.Forms.DataGridView();
+            this.BookID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Genre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StockAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpAdminLogin = new System.Windows.Forms.GroupBox();
             this.btnAdminLogout = new System.Windows.Forms.Button();
             this.chbAdminHidePassword = new System.Windows.Forms.CheckBox();
@@ -69,12 +75,6 @@
             this.btnSearchBook = new System.Windows.Forms.Button();
             this.lblSearchBook = new System.Windows.Forms.Label();
             this.txtSearchBook = new System.Windows.Forms.TextBox();
-            this.BookID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Genre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StockAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnuUpdateBookDetails.SuspendLayout();
             this.grpUpdateBookDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBookListUpdate)).BeginInit();
@@ -259,7 +259,7 @@
             // txtStockAmount
             // 
             this.txtStockAmount.Location = new System.Drawing.Point(134, 158);
-            this.txtStockAmount.MaxLength = 30;
+            this.txtStockAmount.MaxLength = 6;
             this.txtStockAmount.Name = "txtStockAmount";
             this.txtStockAmount.Size = new System.Drawing.Size(34, 26);
             this.txtStockAmount.TabIndex = 18;
@@ -297,7 +297,7 @@
             // txtPrice
             // 
             this.txtPrice.Location = new System.Drawing.Point(134, 124);
-            this.txtPrice.MaxLength = 30;
+            this.txtPrice.MaxLength = 6;
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(53, 26);
             this.txtPrice.TabIndex = 10;
@@ -367,6 +367,43 @@
             this.dgvBookListUpdate.TabIndex = 19;
             this.dgvBookListUpdate.Visible = false;
             this.dgvBookListUpdate.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBookListUpdate_CellClick);
+            // 
+            // BookID
+            // 
+            this.BookID.HeaderText = "BookID";
+            this.BookID.Name = "BookID";
+            this.BookID.ReadOnly = true;
+            this.BookID.Visible = false;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "Book Title";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // Author
+            // 
+            this.Author.HeaderText = "Author";
+            this.Author.Name = "Author";
+            this.Author.ReadOnly = true;
+            // 
+            // Genre
+            // 
+            this.Genre.HeaderText = "Genre";
+            this.Genre.Name = "Genre";
+            this.Genre.ReadOnly = true;
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            // 
+            // StockAmount
+            // 
+            this.StockAmount.HeaderText = "StockAmount";
+            this.StockAmount.Name = "StockAmount";
+            this.StockAmount.ReadOnly = true;
             // 
             // grpAdminLogin
             // 
@@ -493,43 +530,6 @@
             this.txtSearchBook.Name = "txtSearchBook";
             this.txtSearchBook.Size = new System.Drawing.Size(175, 26);
             this.txtSearchBook.TabIndex = 7;
-            // 
-            // BookID
-            // 
-            this.BookID.HeaderText = "BookID";
-            this.BookID.Name = "BookID";
-            this.BookID.ReadOnly = true;
-            this.BookID.Visible = false;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "Book Title";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            // 
-            // Author
-            // 
-            this.Author.HeaderText = "Author";
-            this.Author.Name = "Author";
-            this.Author.ReadOnly = true;
-            // 
-            // Genre
-            // 
-            this.Genre.HeaderText = "Genre";
-            this.Genre.Name = "Genre";
-            this.Genre.ReadOnly = true;
-            // 
-            // Price
-            // 
-            this.Price.HeaderText = "Price";
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
-            // 
-            // StockAmount
-            // 
-            this.StockAmount.HeaderText = "StockAmount";
-            this.StockAmount.Name = "StockAmount";
-            this.StockAmount.ReadOnly = true;
             // 
             // frmUpdateBookDetails
             // 

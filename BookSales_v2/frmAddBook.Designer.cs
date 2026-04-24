@@ -255,7 +255,7 @@
             // txtStockAmount
             // 
             this.txtStockAmount.Location = new System.Drawing.Point(134, 152);
-            this.txtStockAmount.MaxLength = 30;
+            this.txtStockAmount.MaxLength = 6;
             this.txtStockAmount.Name = "txtStockAmount";
             this.txtStockAmount.Size = new System.Drawing.Size(68, 26);
             this.txtStockAmount.TabIndex = 11;
@@ -263,7 +263,7 @@
             // txtPrice
             // 
             this.txtPrice.Location = new System.Drawing.Point(134, 121);
-            this.txtPrice.MaxLength = 30;
+            this.txtPrice.MaxLength = 6;
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(68, 26);
             this.txtPrice.TabIndex = 10;
