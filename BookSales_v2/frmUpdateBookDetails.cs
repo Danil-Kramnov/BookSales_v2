@@ -15,7 +15,7 @@ namespace BookSalesSys
     {
         new frmMainMenu Parent;
 
-        private string _originalTitle;
+        private int _bookID;
 
         public frmUpdateBookDetails()
         {
@@ -177,19 +177,21 @@ namespace BookSalesSys
 
             // save updated book details to Books table
             string genreCode = cmbGenre.Text.Substring(0, 2);
+            //MessageBox.Show("Genre text: '" + cmbGenre.Text + "' GenreCode: '" + genreCode + "'"); // temporary
 
             try
             {
                 OracleConnection conn = DBConnection.GetConnection();
                 conn.Open();
-                string sql = @"UPDATE Books SET Author=:author, GenreCode=:genre,Price=:price, StockAmount=:stock
-                                            WHERE BookTitle=:title";
+                string sql = @"UPDATE Books SET BookTitle=:title, Author=:author, GenreCode=:genre, Price=:price, StockAmount=:stock
+                                                WHERE BookID=:id";
                 OracleCommand cmd = new OracleCommand(sql, conn);
+                cmd.Parameters.Add("title", txtBookTitle.Text);
                 cmd.Parameters.Add("author", txtAuthor.Text);
                 cmd.Parameters.Add("genre", genreCode);
                 cmd.Parameters.Add("price", price);
                 cmd.Parameters.Add("stock", stockAmount);
-                cmd.Parameters.Add("title", _originalTitle);
+                cmd.Parameters.Add("id", _bookID);
                 cmd.ExecuteNonQuery();
                 conn.Close();
             }
@@ -200,7 +202,8 @@ namespace BookSalesSys
             }
 
             // update the row in the grid to show changes
-            dgvBookListUpdate.Rows[dgvBookListUpdate.CurrentCell.RowIndex].SetValues(txtBookTitle.Text,
+            dgvBookListUpdate.Rows[dgvBookListUpdate.CurrentCell.RowIndex].SetValues(_bookID.ToString(),
+                                                                                     txtBookTitle.Text,
                                                                                      txtAuthor.Text,
                                                                                      genreCode,
                                                                                      txtPrice.Text,
@@ -232,7 +235,7 @@ namespace BookSalesSys
                 OracleConnection conn = DBConnection.GetConnection();
                 conn.Open();
                 // retrieve active books matching search
-                string sql = @"SELECT BookTitle, Author, GenreCode, Price, StockAmount 
+                string sql = @"SELECT BookID, BookTitle, Author, GenreCode, Price, StockAmount 
                                FROM Books WHERE UPPER(BookTitle) LIKE '%' || UPPER(:search) || '%' 
                                AND BookStatus='A'";
                 OracleCommand cmd = new OracleCommand(sql, conn);
@@ -242,7 +245,8 @@ namespace BookSalesSys
                 dgvBookListUpdate.Visible = true;
                 while (dr.Read())
                 {
-                    dgvBookListUpdate.Rows.Add(dr["BookTitle"].ToString(),
+                    dgvBookListUpdate.Rows.Add(dr["BookID"].ToString(),
+                                               dr["BookTitle"].ToString(),
                                                dr["Author"].ToString(),
                                                dr["GenreCode"].ToString(),
                                                dr["Price"].ToString(),
@@ -278,10 +282,13 @@ namespace BookSalesSys
             grpUpdateBookDetails.Visible = true;
 
             int rowIndex = e.RowIndex;
-            txtBookTitle.Text = dgvBookListUpdate.Rows[rowIndex].Cells[0].Value.ToString();
-            txtAuthor.Text = dgvBookListUpdate.Rows[rowIndex].Cells[1].Value.ToString();
-            txtPrice.Text = dgvBookListUpdate.Rows[rowIndex].Cells[3].Value.ToString();
-            txtStockAmount.Text = dgvBookListUpdate.Rows[rowIndex].Cells[4].Value.ToString();
+            _bookID = int.Parse(dgvBookListUpdate.Rows[rowIndex].Cells[0].Value.ToString());
+            txtBookTitle.Text = dgvBookListUpdate.Rows[rowIndex].Cells[1].Value.ToString();
+            txtAuthor.Text = dgvBookListUpdate.Rows[rowIndex].Cells[2].Value.ToString();
+            txtPrice.Text = dgvBookListUpdate.Rows[rowIndex].Cells[4].Value.ToString();
+            txtStockAmount.Text = dgvBookListUpdate.Rows[rowIndex].Cells[5].Value.ToString();
+
+            string currentGenre = dgvBookListUpdate.Rows[rowIndex].Cells[3].Value.ToString();
 
             // load genres from db and set current genre
             OracleConnection conn = DBConnection.GetConnection();
@@ -290,7 +297,6 @@ namespace BookSalesSys
             OracleCommand cmd = new OracleCommand(sql, conn);
             OracleDataReader dr = cmd.ExecuteReader();
             cmbGenre.Items.Clear();
-            string currentGenre = dgvBookListUpdate.Rows[rowIndex].Cells[2].Value.ToString();
             while (dr.Read())
             {
                 string item = dr["GenreCode"].ToString() + " - " + dr["Description"].ToString();
@@ -303,7 +309,6 @@ namespace BookSalesSys
             dr.Close();
             conn.Close();
 
-            _originalTitle = txtBookTitle.Text;
             captureOriginalValues();
         }
 
@@ -330,9 +335,9 @@ namespace BookSalesSys
                 {
                     OracleConnection conn = DBConnection.GetConnection();
                     conn.Open();
-                    string sql = "UPDATE Books SET BookStatus='D' WHERE BookTitle=:title";
+                    string sql = "UPDATE Books SET BookStatus='D' WHERE BookID=:id";
                     OracleCommand cmd = new OracleCommand(sql, conn);
-                    cmd.Parameters.Add("title", _originalTitle);
+                    cmd.Parameters.Add("id", _bookID);
                     cmd.ExecuteNonQuery();
                     conn.Close();
                     MessageBox.Show("Book Discontinued.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);

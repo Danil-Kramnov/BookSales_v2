@@ -179,7 +179,6 @@ namespace BookSalesSys
             
             // show added book in grid
             dgvAddedBooks.Visible = true;
-            dgvAddedBooks.Rows.Add("", txtBookTitle.Text, txtAuthor.Text, cmbGenre.Text, txtPrice.Text, txtStockAmount.Text);
 
             // reset UI
             txtAuthor.Clear();

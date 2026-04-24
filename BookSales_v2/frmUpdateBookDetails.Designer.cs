@@ -57,11 +57,6 @@
             this.lblAuthor = new System.Windows.Forms.Label();
             this.lblBookTitle = new System.Windows.Forms.Label();
             this.dgvBookListUpdate = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Genre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StockAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpAdminLogin = new System.Windows.Forms.GroupBox();
             this.btnAdminLogout = new System.Windows.Forms.Button();
             this.chbAdminHidePassword = new System.Windows.Forms.CheckBox();
@@ -74,6 +69,12 @@
             this.btnSearchBook = new System.Windows.Forms.Button();
             this.lblSearchBook = new System.Windows.Forms.Label();
             this.txtSearchBook = new System.Windows.Forms.TextBox();
+            this.BookID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Genre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StockAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnuUpdateBookDetails.SuspendLayout();
             this.grpUpdateBookDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBookListUpdate)).BeginInit();
@@ -316,7 +317,6 @@
             this.txtBookTitle.Location = new System.Drawing.Point(134, 34);
             this.txtBookTitle.MaxLength = 30;
             this.txtBookTitle.Name = "txtBookTitle";
-            this.txtBookTitle.ReadOnly = true;
             this.txtBookTitle.Size = new System.Drawing.Size(279, 26);
             this.txtBookTitle.TabIndex = 7;
             this.txtBookTitle.Tag = "";
@@ -354,6 +354,7 @@
             this.dgvBookListUpdate.AllowUserToAddRows = false;
             this.dgvBookListUpdate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBookListUpdate.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.BookID,
             this.ID,
             this.Author,
             this.Genre,
@@ -366,36 +367,6 @@
             this.dgvBookListUpdate.TabIndex = 19;
             this.dgvBookListUpdate.Visible = false;
             this.dgvBookListUpdate.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBookListUpdate_CellClick);
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "Book Title";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            // 
-            // Author
-            // 
-            this.Author.HeaderText = "Author";
-            this.Author.Name = "Author";
-            this.Author.ReadOnly = true;
-            // 
-            // Genre
-            // 
-            this.Genre.HeaderText = "Genre";
-            this.Genre.Name = "Genre";
-            this.Genre.ReadOnly = true;
-            // 
-            // Price
-            // 
-            this.Price.HeaderText = "Price";
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
-            // 
-            // StockAmount
-            // 
-            this.StockAmount.HeaderText = "StockAmount";
-            this.StockAmount.Name = "StockAmount";
-            this.StockAmount.ReadOnly = true;
             // 
             // grpAdminLogin
             // 
@@ -523,6 +494,43 @@
             this.txtSearchBook.Size = new System.Drawing.Size(175, 26);
             this.txtSearchBook.TabIndex = 7;
             // 
+            // BookID
+            // 
+            this.BookID.HeaderText = "BookID";
+            this.BookID.Name = "BookID";
+            this.BookID.ReadOnly = true;
+            this.BookID.Visible = false;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "Book Title";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // Author
+            // 
+            this.Author.HeaderText = "Author";
+            this.Author.Name = "Author";
+            this.Author.ReadOnly = true;
+            // 
+            // Genre
+            // 
+            this.Genre.HeaderText = "Genre";
+            this.Genre.Name = "Genre";
+            this.Genre.ReadOnly = true;
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            // 
+            // StockAmount
+            // 
+            this.StockAmount.HeaderText = "StockAmount";
+            this.StockAmount.Name = "StockAmount";
+            this.StockAmount.ReadOnly = true;
+            // 
             // frmUpdateBookDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -579,11 +587,6 @@
         private System.Windows.Forms.TextBox txtStockAmount;
         private System.Windows.Forms.Label lblStockAmount;
         private System.Windows.Forms.Label lblGenre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Author;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Genre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StockAmount;
         private System.Windows.Forms.Button btnDiscontinueBook;
         private System.Windows.Forms.GroupBox grpAdminLogin;
         private System.Windows.Forms.Button btnAdminLogout;
@@ -597,5 +600,11 @@
         private System.Windows.Forms.Button btnSearchBook;
         private System.Windows.Forms.Label lblSearchBook;
         private System.Windows.Forms.TextBox txtSearchBook;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BookID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Author;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Genre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StockAmount;
     }
 }
