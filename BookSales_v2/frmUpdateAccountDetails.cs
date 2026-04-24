@@ -306,6 +306,7 @@ namespace BookSalesSys
                     txtEircode.Text = dr["Eircode"].ToString();
                     captureOriginalValues();
                     grpUpdateAccountDetails.Visible = true;
+                    btnLoadAccountDetails.Visible = false;
                 }
                 else
                 {
@@ -349,6 +350,7 @@ namespace BookSalesSys
         private void btnLogout_Click(object sender, EventArgs e)
         {
             grpUpdateAccountDetails.Visible = false;
+            btnLoadAccountDetails.Visible = true;
         }
 
 

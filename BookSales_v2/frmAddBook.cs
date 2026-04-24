@@ -210,6 +210,7 @@ namespace BookSalesSys
             dr.Close();
             conn.Close();
             grpAddBook.Visible = true;
+            btnAdminLogin.Visible = false;
             LoadBooks();
         }
 
@@ -231,6 +232,7 @@ namespace BookSalesSys
             txtAdminLogin.Clear();
             txtAdminPassword.Clear();
             dgvAddedBooks.Visible = false;
+            btnAdminLogin.Visible = true;
         }
 
         private void LoadBooks()

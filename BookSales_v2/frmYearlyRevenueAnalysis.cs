@@ -118,6 +118,7 @@ namespace BookSalesSys
                 OracleCommand cmd = new OracleCommand(sql, conn);
                 OracleDataReader dr = cmd.ExecuteReader();
                 cmbSelectYearRevenueAnalysis.Items.Clear();
+                btnAdminLogin.Visible = false;
                 while (dr.Read())
                 {
                     cmbSelectYearRevenueAnalysis.Items.Add(dr["Year"].ToString());
@@ -194,6 +195,7 @@ namespace BookSalesSys
             chtRevenueAnalysis.Visible = false;
             cmbSelectYearRevenueAnalysis.Items.Clear();
             grpSelectYearAnalysis.Visible = false;
+            btnAdminLogin.Visible = true;
         }
 
         private void chbAdminHidePassword_CheckedChanged(object sender, EventArgs e)

@@ -220,6 +220,7 @@ namespace BookSalesSys
                 return;
             }
             grpSearchBook.Visible = true;
+            btnAdminLogin.Visible = false;
             LoadBooks("");
         }
 
@@ -313,6 +314,8 @@ namespace BookSalesSys
             txtAdminLogin.Clear();
             txtAdminPassword.Clear();
             dgvBookListUpdate.Rows.Clear();
+            btnAdminLogin.Visible = true;
+            dgvBookListUpdate.Visible = false;
         }
 
         private void btnDiscontinueBook_Click(object sender, EventArgs e)

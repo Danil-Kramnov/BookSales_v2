@@ -110,6 +110,7 @@ namespace BookSalesSys
                 OracleCommand cmd = new OracleCommand(sql, conn);
                 OracleDataReader dr = cmd.ExecuteReader();
                 cmbSelectYearGenreAnalysis.Items.Clear();
+                btnAdminLogin.Visible = false;
                 while (dr.Read())
                 {
                     cmbSelectYearGenreAnalysis.Items.Add(dr["Year"].ToString());
@@ -130,6 +131,7 @@ namespace BookSalesSys
             txtAdminPassword.Clear();
             grpSelectYearAnalysis.Visible = false;
             chtGenreAnalysis.Visible = false;
+            btnAdminLogin.Visible = true;
             cmbSelectYearGenreAnalysis.Items.Clear();
         }
 
