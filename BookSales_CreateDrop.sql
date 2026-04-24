@@ -63,13 +63,15 @@ PROMPT
 PROMPT CREATING Table Books
 PROMPT
 CREATE TABLE Books
-(BookTitle VARCHAR2(50),
+(BookID INT,
+ BookTitle VARCHAR2(50) NOT NULL,
  Author VARCHAR2(50) NOT NULL,
  GenreCode CHAR(2) NOT NULL,
  Price DECIMAL(10,2) NOT NULL,
  StockAmount INT NOT NULL,
  BookStatus CHAR(1) DEFAULT 'A' NOT NULL,
- CONSTRAINT pk_Books PRIMARY KEY (BookTitle),
+ CONSTRAINT pk_Books PRIMARY KEY (BookID),
+ CONSTRAINT uq_Books_Title UNIQUE (BookTitle),
  CONSTRAINT fk_Books_Genres FOREIGN KEY (GenreCode) REFERENCES Genres,
  CONSTRAINT ck_Books_Price CHECK (Price > 0),
  CONSTRAINT ck_Books_Stock CHECK (StockAmount >= 0));
@@ -91,12 +93,12 @@ PROMPT CREATING Table OrderedBooks
 PROMPT
 CREATE TABLE OrderedBooks
 (OrderID INT,
- BookTitle VARCHAR2(50),
+ BookID INT,
  QtyOrdered INT NOT NULL,
  OrderPrice DECIMAL(10,2) NOT NULL,
- CONSTRAINT pk_OrderedBooks PRIMARY KEY (OrderID, BookTitle),
+ CONSTRAINT pk_OrderedBooks PRIMARY KEY (OrderID, BookID),
  CONSTRAINT fk_OrderedBooks_Orders FOREIGN KEY (OrderID) REFERENCES Orders,
- CONSTRAINT fk_OrderedBooks_Books FOREIGN KEY (BookTitle) REFERENCES Books,
+ CONSTRAINT fk_OrderedBooks_Books FOREIGN KEY (BookID) REFERENCES Books,
  CONSTRAINT ck_OrderedBooks_Qty CHECK (QtyOrdered > 0),
  CONSTRAINT ck_OrderedBooks_Price CHECK (OrderPrice >= 0));
 
@@ -106,13 +108,13 @@ PROMPT
 CREATE TABLE ReturnedBooks
 (ReturnID INT,
  OrderID INT NOT NULL,
- BookTitle VARCHAR2(50) NOT NULL,
+ BookID INT NOT NULL,
  QtyReturned INT NOT NULL,
  RefundAmount DECIMAL(10,2) NOT NULL,
  ReturnedDate DATE NOT NULL,
  CONSTRAINT pk_ReturnedBooks PRIMARY KEY (ReturnID),
  CONSTRAINT fk_ReturnedBooks_Orders FOREIGN KEY (OrderID) REFERENCES Orders,
- CONSTRAINT fk_ReturnedBooks_Books FOREIGN KEY (BookTitle) REFERENCES Books,
+ CONSTRAINT fk_ReturnedBooks_Books FOREIGN KEY (BookID) REFERENCES Books,
  CONSTRAINT ck_ReturnedBooks_Qty CHECK (QtyReturned > 0),
  CONSTRAINT ck_ReturnedBooks_Refund CHECK (RefundAmount >= 0));
 
@@ -122,6 +124,7 @@ PROMPT
 CREATE SEQUENCE accounts_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE orders_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE returns_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE books_seq START WITH 1 INCREMENT BY 1;
 
 PROMPT
 PROMPT POPULATING Table Genres
@@ -166,54 +169,54 @@ INSERT INTO Accounts VALUES(accounts_seq.NEXTVAL,'Sean','Byrne',
 PROMPT
 PROMPT POPULATING Table Books
 PROMPT
-INSERT INTO Books VALUES('Running Grave','R. Galbraith','DE',18,97,'A');
-INSERT INTO Books VALUES('American Gods','N. Gaiman','FA',12,101,'A');
-INSERT INTO Books VALUES('Sapiens','Y. N. Harari','HI',14,55,'A');
-INSERT INTO Books VALUES('Project Hail Mary','A. Weir','SF',16,43,'A');
-INSERT INTO Books VALUES('Normal People','S. Rooney','RO',11,62,'A');
-INSERT INTO Books VALUES('Gone Girl','G. Flynn','DE',13,78,'A');
-INSERT INTO Books VALUES('Dune','F. Herbert','SF',15,89,'A');
-INSERT INTO Books VALUES('Yellow Face','R.F. Kuang','BI',14,45,'A');
-INSERT INTO Books VALUES('Stormlight Archive','B. Sanderson','FA',12,67,'A');
-INSERT INTO Books VALUES('Atomic Habits','J. Clear','NF',16,92,'A');
+INSERT INTO Books VALUES(books_seq.NEXTVAL,'Running Grave','R. Galbraith','DE',18,97,'A');
+INSERT INTO Books VALUES(books_seq.NEXTVAL,'American Gods','N. Gaiman','FA',12,101,'A');
+INSERT INTO Books VALUES(books_seq.NEXTVAL,'Sapiens','Y. N. Harari','HI',14,55,'A');
+INSERT INTO Books VALUES(books_seq.NEXTVAL,'Project Hail Mary','A. Weir','SF',16,43,'A');
+INSERT INTO Books VALUES(books_seq.NEXTVAL,'Normal People','S. Rooney','RO',11,62,'A');
+INSERT INTO Books VALUES(books_seq.NEXTVAL,'Gone Girl','G. Flynn','DE',13,78,'A');
+INSERT INTO Books VALUES(books_seq.NEXTVAL,'Dune','F. Herbert','SF',15,89,'A');
+INSERT INTO Books VALUES(books_seq.NEXTVAL,'Yellow Face','R.F. Kuang','BI',14,45,'A');
+INSERT INTO Books VALUES(books_seq.NEXTVAL,'Stormlight Archive','B. Sanderson','FA',12,67,'A');
+INSERT INTO Books VALUES(books_seq.NEXTVAL,'Atomic Habits','J. Clear','NF',16,92,'A');
 
 PROMPT
 PROMPT POPULATING Table Orders and OrderedBooks
 PROMPT
 INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,30,SYSDATE);
-INSERT INTO OrderedBooks VALUES(1,'Running Grave',1,18);
-INSERT INTO OrderedBooks VALUES(1,'American Gods',1,12);
+INSERT INTO OrderedBooks VALUES(1,1,1,18);
+INSERT INTO OrderedBooks VALUES(1,2,1,12);
 
 INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,14,SYSDATE-5);
-INSERT INTO OrderedBooks VALUES(2,'Sapiens',1,14);
+INSERT INTO OrderedBooks VALUES(2,3,1,14);
 
 INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,16,SYSDATE-10);
-INSERT INTO OrderedBooks VALUES(3,'Project Hail Mary',1,16);
+INSERT INTO OrderedBooks VALUES(3,4,1,16);
 
 INSERT INTO Orders VALUES(orders_seq.NEXTVAL,1,22,SYSDATE-13);
-INSERT INTO OrderedBooks VALUES(4,'Normal People',2,22);
+INSERT INTO OrderedBooks VALUES(4,5,2,22);
 
 INSERT INTO Orders VALUES(orders_seq.NEXTVAL,2,28,SYSDATE-2);
-INSERT INTO OrderedBooks VALUES(5,'Gone Girl',1,13);
-INSERT INTO OrderedBooks VALUES(5,'Dune',1,15);
+INSERT INTO OrderedBooks VALUES(5,6,1,13);
+INSERT INTO OrderedBooks VALUES(5,7,1,15);
 
 INSERT INTO Orders VALUES(orders_seq.NEXTVAL,3,28,SYSDATE-7);
-INSERT INTO OrderedBooks VALUES(6,'Educated',2,28);
+INSERT INTO OrderedBooks VALUES(6,8,2,28);
 
 INSERT INTO Orders VALUES(orders_seq.NEXTVAL,4,40,SYSDATE-3);
-INSERT INTO OrderedBooks VALUES(7,'The Midnight Library',2,24);
-INSERT INTO OrderedBooks VALUES(7,'Atomic Habits',1,16);
+INSERT INTO OrderedBooks VALUES(7,9,2,24);
+INSERT INTO OrderedBooks VALUES(7,10,1,16);
 
 INSERT INTO Orders VALUES(orders_seq.NEXTVAL,5,31,SYSDATE-15);
-INSERT INTO OrderedBooks VALUES(8,'Running Grave',1,18);
-INSERT INTO OrderedBooks VALUES(8,'Sapiens',1,13);
+INSERT INTO OrderedBooks VALUES(8,1,1,18);
+INSERT INTO OrderedBooks VALUES(8,3,1,13);
 
 INSERT INTO Orders VALUES(orders_seq.NEXTVAL,6,23,SYSDATE-20);
-INSERT INTO OrderedBooks VALUES(9,'American Gods',1,12);
-INSERT INTO OrderedBooks VALUES(9,'Normal People',1,11);
+INSERT INTO OrderedBooks VALUES(9,2,1,12);
+INSERT INTO OrderedBooks VALUES(9,5,1,11);
 
 INSERT INTO Orders VALUES(orders_seq.NEXTVAL,7,15,SYSDATE-30);
-INSERT INTO OrderedBooks VALUES(10,'Dune',1,15);
+INSERT INTO OrderedBooks VALUES(10,7,1,15);
 
 COMMIT;
 
