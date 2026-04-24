@@ -29,9 +29,11 @@ namespace BookSalesSys
             InitializeComponent();
             this.Parent = parent;
             this.CenterToScreen();
-            DBConnection.ApplyStyling(this);
-            dgvAddedBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             
+            dgvAddedBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            DBConnection.ApplyStyling(this);
+
 
         }
 
@@ -241,7 +243,7 @@ namespace BookSalesSys
             {
                 OracleConnection conn = DBConnection.GetConnection();
                 conn.Open();
-                string sql = "SELECT BookID, BookTitle, Author, GenreCode, Price, StockAmount FROM Books WHERE BookStatus='A'";
+                string sql = "SELECT BookID, BookTitle, Author, Price, StockAmount, GenreCode FROM Books WHERE BookStatus='A'";
                 OracleCommand cmd = new OracleCommand(sql, conn);
                 OracleDataReader dr = cmd.ExecuteReader();
                 dgvAddedBooks.Rows.Clear();
@@ -251,9 +253,9 @@ namespace BookSalesSys
                     dgvAddedBooks.Rows.Add(dr["BookID"].ToString(),
                                            dr["BookTitle"].ToString(),
                                            dr["Author"].ToString(),
-                                           dr["GenreCode"].ToString(),
                                            dr["Price"].ToString(),
-                                           dr["StockAmount"].ToString());
+                                           dr["StockAmount"].ToString(),
+                                           dr["GenreCode"].ToString());
                 }
                     
                 dr.Close();

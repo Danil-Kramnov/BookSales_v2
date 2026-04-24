@@ -483,7 +483,6 @@
             this.StockAmount.HeaderText = "Stock";
             this.StockAmount.Name = "StockAmount";
             this.StockAmount.ReadOnly = true;
-            this.StockAmount.Visible = false;
             // 
             // Genre
             // 

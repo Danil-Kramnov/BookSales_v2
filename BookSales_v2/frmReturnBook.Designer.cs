@@ -50,6 +50,7 @@
             this.OrderPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BookIDReturn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpCustomerLogin = new System.Windows.Forms.GroupBox();
             this.btnLogout = new System.Windows.Forms.Button();
             this.chbOrderHidePassword = new System.Windows.Forms.CheckBox();
@@ -72,6 +73,7 @@
             this.RefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrderIDCart = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.X = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BookIDCart = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnuReturnBook.SuspendLayout();
             this.grpReturnBookSelectBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReturnBookSelectBook)).BeginInit();
@@ -224,7 +226,8 @@
             this.QtyOrdered,
             this.OrderPrice,
             this.OrderDate,
-            this.OrderID});
+            this.OrderID,
+            this.BookIDReturn});
             this.dgvReturnBookSelectBook.Location = new System.Drawing.Point(6, 38);
             this.dgvReturnBookSelectBook.Name = "dgvReturnBookSelectBook";
             this.dgvReturnBookSelectBook.ReadOnly = true;
@@ -261,6 +264,13 @@
             this.OrderID.HeaderText = "OrderID";
             this.OrderID.Name = "OrderID";
             this.OrderID.ReadOnly = true;
+            // 
+            // BookIDReturn
+            // 
+            this.BookIDReturn.HeaderText = "BookIDReturn";
+            this.BookIDReturn.Name = "BookIDReturn";
+            this.BookIDReturn.ReadOnly = true;
+            this.BookIDReturn.Visible = false;
             // 
             // grpCustomerLogin
             // 
@@ -429,7 +439,8 @@
             this.QtyRetuned,
             this.RefundAmount,
             this.OrderIDCart,
-            this.X});
+            this.X,
+            this.BookIDCart});
             this.dgvReturnCart.Location = new System.Drawing.Point(6, 25);
             this.dgvReturnCart.Name = "dgvReturnCart";
             this.dgvReturnCart.ReadOnly = true;
@@ -479,6 +490,13 @@
             this.X.HeaderText = "X";
             this.X.Name = "X";
             this.X.ReadOnly = true;
+            // 
+            // BookIDCart
+            // 
+            this.BookIDCart.HeaderText = "BookIDCart";
+            this.BookIDCart.Name = "BookIDCart";
+            this.BookIDCart.ReadOnly = true;
+            this.BookIDCart.Visible = false;
             // 
             // frmReturnBook
             // 
@@ -550,10 +568,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BookIDReturn;
         private System.Windows.Forms.DataGridViewTextBoxColumn BookTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn QtyRetuned;
         private System.Windows.Forms.DataGridViewTextBoxColumn RefundAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderIDCart;
         private System.Windows.Forms.DataGridViewTextBoxColumn X;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BookIDCart;
     }
 }

@@ -25,7 +25,6 @@ namespace BookSalesSys
         public static void ApplyStyling(Form form)
         {
             // // reference: https://learn.microsoft.com/en-us/dotnet/api/system.drawing.color.fromargb
-            Console.WriteLine(form.ToString());
 
             form.BackColor = Color.FromArgb(235, 240, 245); // light blue grey
 

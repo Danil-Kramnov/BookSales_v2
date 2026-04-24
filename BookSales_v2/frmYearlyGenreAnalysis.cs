@@ -147,7 +147,7 @@ namespace BookSalesSys
                 string sql = @"SELECT genres.Description, SUM(orderedbooks.QtyOrdered) AS Total
                                FROM Orders orders
                                JOIN OrderedBooks orderedbooks ON orders.OrderID = orderedbooks.OrderID
-                               JOIN Books books ON orderedbooks.BookTitle = books.BookTitle
+                               JOIN Books books ON orderedbooks.BookID = books.BookID
                                JOIN Genres genres ON books.GenreCode = genres.GenreCode
                                WHERE EXTRACT(YEAR FROM orders.DateOrdered) = :year
                                GROUP BY genres.Description";

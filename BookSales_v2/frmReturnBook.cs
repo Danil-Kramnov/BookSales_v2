@@ -171,6 +171,7 @@ namespace BookSalesSys
             int qty = int.Parse(dgvReturnBookSelectBook.Rows[rowIndex].Cells[1].Value.ToString());
             decimal price = decimal.Parse(dgvReturnBookSelectBook.Rows[rowIndex].Cells[2].Value.ToString().Substring(1));
             int orderID = int.Parse(dgvReturnBookSelectBook.Rows[rowIndex].Cells[4].Value.ToString());
+            int bookID = int.Parse(dgvReturnBookSelectBook.Rows[rowIndex].Cells[5].Value.ToString());
 
             // ask how many to return
             // (taken from https://stackoverflow.com/questions/16463599/popup-window-in-winform-c-sharp)
@@ -189,7 +190,8 @@ namespace BookSalesSys
             for (int i = 0; i < dgvReturnCart.Rows.Count; i++)
             {
                 if (dgvReturnCart.Rows[i].Cells[0].Value.ToString() == title && 
-                    int.Parse(dgvReturnCart.Rows[i].Cells[3].Value.ToString()) == orderID)
+                    int.Parse(dgvReturnCart.Rows[i].Cells[3].Value.ToString()) == orderID &&
+                    int.Parse(dgvReturnCart.Rows[i].Cells[5].Value.ToString()) == bookID)
                 {
                     int existingQty = int.Parse(dgvReturnCart.Rows[i].Cells[1].Value.ToString());
                     int newQty = existingQty + result;
@@ -206,7 +208,7 @@ namespace BookSalesSys
             }
             if (!found)
             {
-                dgvReturnCart.Rows.Add(title, result, "€" + refundAmount, orderID, "X");
+                dgvReturnCart.Rows.Add(title, result, "€" + refundAmount, orderID, "X", bookID);
             }
             grpReturnCart.Visible = true;
             UpdateRefundTotal();
@@ -233,13 +235,14 @@ namespace BookSalesSys
                 OracleConnection conn = DBConnection.GetConnection();
                 conn.Open();
                 // retrieve books ordered within 14 days
-                string sql = @"SELECT orderedbooks.BookTitle, orderedbooks.QtyOrdered, 
-                                        orderedbooks.OrderPrice, orders.DateOrdered, orders.OrderID
-                               FROM Orders orders
-                               JOIN OrderedBooks orderedbooks ON orders.OrderID = orderedbooks.OrderID
-                               WHERE orders.AccountID = :accountID
-                               AND UPPER(orderedbooks.BookTitle) LIKE '%' || UPPER(:search) || '%'
-                               AND orders.DateOrdered >= SYSDATE - 14";
+                string sql = @"SELECT orderedbooks.BookID, orderedbooks.QtyOrdered, orderedbooks.OrderPrice, 
+                                      orders.DateOrdered, orders.OrderID, books.BookTitle
+                                FROM Orders orders
+                                JOIN OrderedBooks orderedbooks ON orders.OrderID = orderedbooks.OrderID
+                                JOIN Books books ON orderedbooks.BookID = books.BookID
+                                WHERE orders.AccountID = :accountID
+                                AND UPPER(books.BookTitle) LIKE '%' || UPPER(:search) || '%'
+                                AND orders.DateOrdered >= SYSDATE - 14";
                 OracleCommand cmd = new OracleCommand(sql, conn);
                 cmd.Parameters.Add("accountID", _customerID);
                 cmd.Parameters.Add("search", searchTerm);
@@ -249,10 +252,11 @@ namespace BookSalesSys
                 while (dr.Read())
                 {
                     dgvReturnBookSelectBook.Rows.Add(dr["BookTitle"].ToString(),
-                                                     dr["QtyOrdered"].ToString(),
-                                                     "€" + dr["OrderPrice"].ToString(),
-                                                     Convert.ToDateTime(dr["DateOrdered"]).ToString("dd-MMM-yy"),
-                                                     dr["OrderID"].ToString());
+                                                    dr["QtyOrdered"].ToString(),
+                                                    "€" + dr["OrderPrice"].ToString(),
+                                                    Convert.ToDateTime(dr["DateOrdered"]).ToString("dd-MMM-yy"),
+                                                    dr["OrderID"].ToString(),
+                                                    dr["BookID"].ToString());
                 }
                 if (dgvReturnBookSelectBook.Rows.Count == 0)
                 {
@@ -313,31 +317,30 @@ namespace BookSalesSys
                     int qtyReturned = int.Parse(dgvReturnCart.Rows[i].Cells[1].Value.ToString());
                     decimal refund = decimal.Parse(dgvReturnCart.Rows[i].Cells[2].Value.ToString().Substring(1));
                     int orderID = int.Parse(dgvReturnCart.Rows[i].Cells[3].Value.ToString());
+                    int bookID = int.Parse(dgvReturnCart.Rows[i].Cells[5].Value.ToString());
 
                     // insert into ReturnedBooks
-                    string retSql = @"INSERT INTO ReturnedBooks(ReturnID, OrderID, BookTitle, QtyReturned, RefundAmount, ReturnedDate)
-                                      VALUES(returns_seq.NEXTVAL, :orderID, :title, :qty, :refundAmount, SYSDATE)";
+                    string retSql = @"INSERT INTO ReturnedBooks(ReturnID, OrderID, BookID, QtyReturned, RefundAmount, ReturnedDate)
+                                    VALUES(returns_seq.NEXTVAL, :orderID, :bookID, :qty, :refundAmount, SYSDATE)";
                     OracleCommand retCmd = new OracleCommand(retSql, conn);
                     retCmd.Parameters.Add("orderID", orderID);
-                    retCmd.Parameters.Add("title", title);
+                    retCmd.Parameters.Add("bookID", bookID);
                     retCmd.Parameters.Add("qty", qtyReturned);
                     retCmd.Parameters.Add("refundAmount", refund);
                     retCmd.ExecuteNonQuery();
 
                     // restore stock
-                    string stockSql = "UPDATE Books SET StockAmount = StockAmount + :qty " +
-                                      "WHERE BookTitle = :title";
+                    string stockSql = "UPDATE Books SET StockAmount = StockAmount + :qty WHERE BookID = :bookID";
                     OracleCommand stockCmd = new OracleCommand(stockSql, conn);
                     stockCmd.Parameters.Add("qty", qtyReturned);
-                    stockCmd.Parameters.Add("title", title);
+                    stockCmd.Parameters.Add("bookID", bookID);
                     stockCmd.ExecuteNonQuery();
 
                     // check current qty from grid to decide delete or update
                     int currentQty = 0;
                     foreach (DataGridViewRow row in dgvReturnBookSelectBook.Rows)
                     {
-                        if (row.Cells[0].Value.ToString() == title &&
-                            int.Parse(row.Cells[4].Value.ToString()) == orderID)
+                        if (row.Cells[0].Value.ToString() == title && int.Parse(row.Cells[4].Value.ToString()) == orderID)
                         {
                             currentQty = int.Parse(row.Cells[1].Value.ToString());
                             break;
@@ -346,23 +349,21 @@ namespace BookSalesSys
 
                     if (qtyReturned >= currentQty)
                     {
-                        // all books returned
-                        string deleteObSql = "DELETE FROM OrderedBooks WHERE OrderID=:orderID AND BookTitle=:title";
+                        string deleteObSql = "DELETE FROM OrderedBooks WHERE OrderID=:orderID AND BookID=:bookID";
                         OracleCommand deleteObCmd = new OracleCommand(deleteObSql, conn);
                         deleteObCmd.Parameters.Add("orderID", orderID);
-                        deleteObCmd.Parameters.Add("title", title);
+                        deleteObCmd.Parameters.Add("bookID", bookID);
                         deleteObCmd.ExecuteNonQuery();
                     }
                     else
                     {
-                        // partial return
                         string obSql = @"UPDATE OrderedBooks SET QtyOrdered=QtyOrdered-:qty, OrderPrice=OrderPrice-:refundAmount
-                                         WHERE OrderID=:orderID AND BookTitle=:title";
+                                        WHERE OrderID=:orderID AND BookID=:bookID";
                         OracleCommand obCmd = new OracleCommand(obSql, conn);
                         obCmd.Parameters.Add("qty", qtyReturned);
                         obCmd.Parameters.Add("refundAmount", refund);
                         obCmd.Parameters.Add("orderID", orderID);
-                        obCmd.Parameters.Add("title", title);
+                        obCmd.Parameters.Add("bookID", bookID);
                         obCmd.ExecuteNonQuery();
                     }
 
