@@ -67,6 +67,7 @@
             this.txtAdminPassword = new System.Windows.Forms.TextBox();
             this.txtAdminLogin = new System.Windows.Forms.TextBox();
             this.dgvAddedBooks = new System.Windows.Forms.DataGridView();
+            this.BookID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -427,6 +428,7 @@
             this.dgvAddedBooks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvAddedBooks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAddedBooks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.BookID,
             this.ID,
             this.Author,
             this.Price,
@@ -447,6 +449,13 @@
             this.dgvAddedBooks.Size = new System.Drawing.Size(419, 162);
             this.dgvAddedBooks.TabIndex = 23;
             this.dgvAddedBooks.Visible = false;
+            // 
+            // BookID
+            // 
+            this.BookID.HeaderText = "BookID";
+            this.BookID.Name = "BookID";
+            this.BookID.ReadOnly = true;
+            this.BookID.Visible = false;
             // 
             // ID
             // 
@@ -542,6 +551,7 @@
         private System.Windows.Forms.TextBox txtAdminLogin;
         private System.Windows.Forms.Button btnAdminLogout;
         private System.Windows.Forms.DataGridView dgvAddedBooks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BookID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Author;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;

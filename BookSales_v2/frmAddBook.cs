@@ -149,8 +149,8 @@ namespace BookSalesSys
             {
                 OracleConnection conn = DBConnection.GetConnection();
                 conn.Open();
-                string sql = @"INSERT INTO Books (BookTitle, Author, GenreCode, Price, StockAmount, BookStatus)
-                                           VALUES(:title, :author, :genre, :price, :stock, 'A')";
+                string sql = @"INSERT INTO Books (BookID, BookTitle, Author, GenreCode, Price, StockAmount, BookStatus)
+                                           VALUES(books_seq.NEXTVAL, :title, :author, :genre, :price, :stock, 'A')";
                 OracleCommand cmd = new OracleCommand(sql, conn);
                 cmd.Parameters.Add("title", txtBookTitle.Text);
                 cmd.Parameters.Add("author", txtAuthor.Text);
@@ -175,10 +175,11 @@ namespace BookSalesSys
 
             // confirmation message
             MessageBox.Show("Book Added", "Confirm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LoadBooks();
             
             // show added book in grid
             dgvAddedBooks.Visible = true;
-            dgvAddedBooks.Rows.Add(txtBookTitle.Text, txtAuthor.Text, cmbGenre.Text, txtPrice.Text, txtStockAmount.Text);
+            dgvAddedBooks.Rows.Add("", txtBookTitle.Text, txtAuthor.Text, cmbGenre.Text, txtPrice.Text, txtStockAmount.Text);
 
             // reset UI
             txtAuthor.Clear();
@@ -241,14 +242,15 @@ namespace BookSalesSys
             {
                 OracleConnection conn = DBConnection.GetConnection();
                 conn.Open();
-                string sql = "SELECT BookTitle, Author, GenreCode, Price, StockAmount FROM Books WHERE BookStatus='A'";
+                string sql = "SELECT BookID, BookTitle, Author, GenreCode, Price, StockAmount FROM Books WHERE BookStatus='A'";
                 OracleCommand cmd = new OracleCommand(sql, conn);
                 OracleDataReader dr = cmd.ExecuteReader();
                 dgvAddedBooks.Rows.Clear();
                 dgvAddedBooks.Visible = true;
                 while (dr.Read())
                 {
-                    dgvAddedBooks.Rows.Add(dr["BookTitle"].ToString(),
+                    dgvAddedBooks.Rows.Add(dr["BookID"].ToString(),
+                                           dr["BookTitle"].ToString(),
                                            dr["Author"].ToString(),
                                            dr["GenreCode"].ToString(),
                                            dr["Price"].ToString(),
